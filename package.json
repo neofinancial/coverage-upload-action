@@ -1,0 +1,45 @@
+{
+  "name": "coverage-upload-action",
+  "version": "1.0.0",
+  "description": "Parses coverage file and uploads to remote endpoint",
+  "author": "Neo Financial Engineering",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/neofinancial/coverage-upload-action"
+  },
+  "private": true,
+  "main": "build/main.js",
+  "keywords": [
+    "actions",
+    "coverage",
+    "code coverage"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "format": "prettier --write **/*.ts",
+    "format:check": "prettier --check **/*.ts",
+    "lint": "eslint \"**/*.{ts,js}\"",
+    "test": "jest",
+    "clean": "rimraf build",
+    "clean:modules": "rimraf node_modules"
+  },
+  "dependencies": {
+    "@actions/core": "^1.6.0",
+    "@actions/github": "^5.0.0",
+    "@octokit/action": "^3.18.0",
+    "axios": "^0.25.0",
+    "is-plain-object": "^5.0.0",
+    "lcov-parse": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.4.0",
+    "eslint": "^7.17.0",
+    "eslint-config-neo": "^0.6.3",
+    "jest": "^27.5.0",
+    "prettier": "^2.5.1",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^27.1.3",
+    "typescript": "^4.5.5"
+  }
+}

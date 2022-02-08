@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "es2020",
+    "lib": ["es2020"],
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "useUnknownInCatchVariables": false,
+    "outDir": "build",
+    "baseUrl": ".",
+    "paths": {
+      "*": ["*", "./node_modules/*", "./src/*"]
+    },
+  },
+  "include": ["src/**/*"]
+}
