@@ -25,20 +25,20 @@ const getData = async (): Promise<PRData> => {
   const info = context.payload;
 
   if (info.pull_request) {
-    prData.ref = `${info.pull_request.head.ref}`;
-    prData.baseRef = `${info.pull_request.base.ref}`;
-    prData.sha = `${info.pull_request.merge_commit_sha}`;
-    prData.timestamp = `${info.pull_request.created_at}`;
+    prData.ref = info.pull_request.head.ref;
+    prData.baseRef = info.pull_request.base.ref;
+    prData.sha = info.pull_request.head.sha;
+    prData.timestamp = info.pull_request.created_at;
     prData.pullRequest = info.number;
   } else {
-    prData.ref = `${info.ref.replace('refs/heads/', '')}`;
-    prData.baseRef = `${info.base_ref}`;
-    prData.sha = `${info.after}`;
-    prData.timestamp = `${info.head_commit.timestamp}`;
+    prData.ref = info.ref.replace('refs/heads/', '');
+    prData.baseRef = info.base_ref;
+    prData.sha = info.after;
+    prData.timestamp = info.head_commit.timestamp;
   }
 
   if (info.repository && info.sender) {
-    prData.actor = `${info.sender.login}`;
+    prData.actor = info.sender.login;
   } else {
     throw new Error('Issue with context');
   }

@@ -16,6 +16,8 @@ jobs:
         with:
           node-version: 12
           cache: npm
+      - name: Action debug
+        uses: hmarr/debug-action@v2
       - name: Install
         run: npm ci --prefer-offline
       - name: Lint
