@@ -1,6 +1,9 @@
 name: Coverage Upload Action
 description: Upload code coverage to a remote endpoint
 author: Neo Financial Engineering
+branding:
+  icon: upload-cloud
+  color: blue
 inputs:
   coverageData:
     description: 'location of lcov coverage file (default: coverage/lcov.info)'
