@@ -30,7 +30,7 @@ const run = async (): Promise<void> => {
       }
     }
 
-    console.log(prData.message)
+    //console.log(prData.message)
 
     // console.log(`Repo ID: ${prData.repositoryId}`);
     // console.log(`Ref of branch being merged: ${prData.ref}`);
