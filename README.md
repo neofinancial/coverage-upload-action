@@ -16,7 +16,7 @@ The pull request comment contains the following information:
 | Branches  |     |       |            |            |
 ```
 
-If you don't send the data to a remote endpoint the difference column will not be shown..
+If you don't send the data to a remote endpoint the difference column will not be shown.
 
 ## Usage
 
