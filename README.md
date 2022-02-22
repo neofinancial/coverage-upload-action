@@ -6,7 +6,7 @@ Upload code coverage data to a remote server
 
 This action will display the current coverage on any pull requests. You can also provide a remote endpoint to receive the coverage data and respond with the difference in coverage between the current branch and base branch.
 
-The pull request comment contains the following information:
+The pull request comment contains the following information.:
 
 ```txt
 |           | Hit | Found | Percentage | Difference |
