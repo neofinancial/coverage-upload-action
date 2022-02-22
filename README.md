@@ -13,7 +13,7 @@ The pull request comment contains the following information:
 | --------- | --- | ----- | ---------- | ---------- |
 | Lines     |     |       |            |            |
 | Functions |     |       |            |            |
-| Branches  |     |       |            |            |
+| Branches  |     |       |            |            |d
 ```
 
 If you don't send the data to a remote endpoint the difference column will not be shown.
