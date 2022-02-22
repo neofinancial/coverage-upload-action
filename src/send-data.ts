@@ -23,7 +23,9 @@ const sendData = async (url: string, prData: PRData): Promise<string> => {
   }
 
   try {
-    return axios.post(url, postData);
+    const response = await axios.post(url, postData);
+    console.log(response)
+    return response.data
   } catch (error) {
     throw new Error(error);
   }

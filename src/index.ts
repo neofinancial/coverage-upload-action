@@ -26,6 +26,7 @@ const run = async (): Promise<void> => {
     if (url) {
       try {
         prData.message = await sendData(url, prData);
+        console.log(prData.message)
       } catch (error) {
         console.log(`${error}, Could not send data, printing comment`);
       }
