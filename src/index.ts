@@ -22,6 +22,7 @@ const run = async (): Promise<void> => {
       );
     }
 
+    // const url = 'https://3dfe-75-159-190-236.ngrok.io/api/coverage';
     if (url) {
       try {
         prData.message = await sendData(url, prData);
