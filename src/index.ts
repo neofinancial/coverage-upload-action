@@ -26,7 +26,7 @@ const run = async (): Promise<void> => {
     if (url) {
       try {
         prData.message = await sendData(url, prData);
-        console.log(prData.message)
+        console.log('COMEOVERHERE',prData.message)
       } catch (error) {
         console.log(`${error}, Could not send data, printing comment`);
       }
@@ -48,7 +48,7 @@ const run = async (): Promise<void> => {
     // console.log(prData.coverage.branches.diff);
 
     if (prData.pullRequest) {
-      console.log(prData.pullRequest);
+      console.log('pullrequestoverhere',prData.pullRequest);
     }
 
     if (context.payload.pull_request) {
