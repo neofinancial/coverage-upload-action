@@ -5,11 +5,12 @@ import { Octokit } from '@octokit/action';
 import { CommentData } from './types';
 
 import constructComment from './construct-comment';
+import throwError from './lib/error-handling';
 
 const makeComment = async (commentData: CommentData): Promise<void> => {
   try {
     if (!context.payload.pull_request) {
-      setFailed('No pull requests found');
+      setFailed('No pull requests found.');
 
       return;
     }
@@ -55,7 +56,7 @@ const makeComment = async (commentData: CommentData): Promise<void> => {
       });
     }
   } catch (error) {
-    console.log(error.toString());
+    throwError('Could not generate comment.');
   }
 };
 

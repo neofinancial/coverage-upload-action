@@ -1,11 +1,18 @@
-import { getInput } from '@actions/core';
+import { getInput, setFailed } from '@actions/core';
 import { context } from '@actions/github';
 
 import getCoverage from './get-coverage';
-import { PRData } from './types';
+import throwError from './lib/error-handling';
+import { CommentData, PRData } from './types';
 
-const getData = async (): Promise<PRData> => {
+const getData = async (): Promise<PRData | void> => {
+
+
   const authToken = getInput('coverageToken');
+  if (!authToken){
+    setFailed( 'Failed to retrieve authToken from action. See configuration for instructions on how to add covergeToken to action.')
+    return
+  }
 
   const prData: PRData = {
     repositoryId: context.payload.repository?.id,
@@ -40,15 +47,31 @@ const getData = async (): Promise<PRData> => {
   if (info.repository && info.sender) {
     prData.actor = info.sender.login;
   } else {
-    throw new Error('Issue with context');
+    throw new Error('Error: Issue with context');
   }
 
-  const coverageData = getInput('coverageData');
-  const commentData = await getCoverage(coverageData);
+  let coverageData
+  try{
+    coverageData = getInput('coverageData');
+  }catch(error){
+    throwError(error, 'Failed to grab file ./coverage/lcov.info.')
+    return
+  }
+  
+  let commentData
+  try{
+    commentData = await getCoverage(coverageData);
+  }catch(error){
+    throwError(error, 'Failed to parse data from ./coverage/lcov.info.')
+    return
+  }
 
-  prData.coverage.lines = commentData.lines;
-  prData.coverage.functions = commentData.functions;
-  prData.coverage.branches = commentData.branches;
+  if(commentData){
+    prData.coverage.lines = commentData?.lines;
+    prData.coverage.functions = commentData?.functions;
+    prData.coverage.branches = commentData?.branches;
+  }
+  
 
   return prData;
 };

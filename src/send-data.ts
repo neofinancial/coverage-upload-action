@@ -1,8 +1,9 @@
 import axios from 'axios';
+import throwError from './lib/error-handling';
 
 import { CommentData, CoverageJson, PRData } from './types';
 
-const sendData = async (url: string, prData: PRData): Promise<CommentData> => {
+const sendData = async (url: string, prData: PRData): Promise<CommentData | void > => {
   const postData: CoverageJson = {
     id: prData.repositoryId,
     ref: prData.ref,
@@ -31,7 +32,9 @@ const sendData = async (url: string, prData: PRData): Promise<CommentData> => {
 
     return prData.coverage;
   } catch (error) {
-    throw new Error(error);
+    //TO DO: this will be different once upload action accepts a comment
+    throwError(error,'Failed to retrieve coverage from endpoint.');
+    return
   }
 };
 
