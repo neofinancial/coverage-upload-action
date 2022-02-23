@@ -67,7 +67,7 @@ const getData = async (): Promise<PRData | void> => {
   try {
     commentData = await getCoverage(coverageData);
   } catch (error) {
-    throwError(error, error.message);
+    throwError(error, 'meow');
 
     return;
   }
