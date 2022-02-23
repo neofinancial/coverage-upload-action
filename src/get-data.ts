@@ -67,7 +67,6 @@ const getData = async (): Promise<PRData | void> => {
   try {
     commentData = await getCoverage(coverageData);
   } catch (error) {
-    console.log(error)
     throwError(error, 'Failed to parse coverage from ./coverage/lcov.info. See configuration for instructions on how to upload coverage.');
 
     return;
