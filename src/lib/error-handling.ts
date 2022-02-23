@@ -1,8 +1,9 @@
-const throwError = (error: unknown, message?:string) => {
+const throwError = (error: unknown, message?:string): void => {
     if(error instanceof Error){
-        throw new Error(`Error: ${message}`)
+        throw new TypeError(`Error: ${message}`)
     }
-    throw new Error(`Error: unknown error`)
+    
+    throw new TypeError(`Error: unknown error`)
 }
 
 export default throwError

@@ -56,7 +56,7 @@ const makeComment = async (commentData: CommentData): Promise<void> => {
       });
     }
   } catch (error) {
-    throwError('Could not generate comment.');
+    throwError(error, 'Could not generate comment.');
   }
 };
 

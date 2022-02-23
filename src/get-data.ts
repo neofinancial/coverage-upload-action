@@ -3,15 +3,17 @@ import { context } from '@actions/github';
 
 import getCoverage from './get-coverage';
 import throwError from './lib/error-handling';
-import { CommentData, PRData } from './types';
+import { PRData } from './types';
 
 const getData = async (): Promise<PRData | void> => {
-
-
   const authToken = getInput('coverageToken');
-  if (!authToken){
-    setFailed( 'Failed to retrieve authToken from action. See configuration for instructions on how to add covergeToken to action.')
-    return
+
+  if (!authToken) {
+    setFailed(
+      'Failed to retrieve authToken from action. See configuration for instructions on how to add covergeToken to action.'
+    );
+
+    return;
   }
 
   const prData: PRData = {
@@ -50,28 +52,31 @@ const getData = async (): Promise<PRData | void> => {
     throw new Error('Error: Issue with context');
   }
 
-  let coverageData
-  try{
+  let coverageData;
+
+  try {
     coverageData = getInput('coverageData');
-  }catch(error){
-    throwError(error, 'Failed to grab file ./coverage/lcov.info.')
-    return
-  }
-  
-  let commentData
-  try{
-    commentData = await getCoverage(coverageData);
-  }catch(error){
-    throwError(error, 'Failed to parse data from ./coverage/lcov.info.')
-    return
+  } catch (error) {
+    throwError(error, 'Failed to grab file ./coverage/lcov.info.');
+
+    return;
   }
 
-  if(commentData){
+  let commentData;
+
+  try {
+    commentData = await getCoverage(coverageData);
+  } catch (error) {
+    throwError(error, 'Failed to parse data from ./coverage/lcov.info.');
+
+    return;
+  }
+
+  if (commentData) {
     prData.coverage.lines = commentData?.lines;
     prData.coverage.functions = commentData?.functions;
     prData.coverage.branches = commentData?.branches;
   }
-  
 
   return prData;
 };
