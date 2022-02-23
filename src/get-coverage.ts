@@ -17,16 +17,7 @@ const getCoverage = async (path: string): Promise<CommentData | void> => {
 
   try {
     coverageData = await lcovParse(path);
-  } catch (error) {
-    throwError(
-      error,
-      'Failed to parse coverage from ./coverage/lcov.info. See configuration for instructions on how to upload coverage.'
-    );
-
-    return;
-  }
-
-  try {
+  
     for (const i in coverageData) {
       commentData.lines.hit += coverageData[i].lines.hit;
       commentData.lines.found += coverageData[i].lines.found;
@@ -42,7 +33,7 @@ const getCoverage = async (path: string): Promise<CommentData | void> => {
 
     return commentData;
   } catch (error) {
-    throwError(error, 'Could not get lines/functions/branches from ./coverage/lcov.parse.');
+    throwError(error, 'Failted to parse from ./coverage/lcov.parse.');
 
     return;
   }
