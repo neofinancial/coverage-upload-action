@@ -27,12 +27,10 @@ const run = async (): Promise<void> => {
     if (url) {
       try {
         prData.message = await sendData(url, prData);
-
       } catch (error) {
         console.log(`${error}, Could not send data, printing comment`);
       }
     }
-
 
     console.log(`Repo ID: ${prData.repositoryId}`);
     console.log(`Ref of branch being merged: ${prData.ref}`);
@@ -46,10 +44,10 @@ const run = async (): Promise<void> => {
     console.log(prData.coverage.lines.diff);
     console.log(prData.coverage.functions.diff);
     console.log(prData.coverage.branches.diff);
-    console.log(prData.message)
+    console.log(prData.message);
 
     if (prData.pullRequest) {
-      console.log('pullrequestoverhere',prData.pullRequest);
+      console.log(prData.pullRequest);
     }
 
     if (context.payload.pull_request) {
