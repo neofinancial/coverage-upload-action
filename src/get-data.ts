@@ -67,7 +67,7 @@ const getData = async (): Promise<PRData | void> => {
   try {
     commentData = await getCoverage(coverageData);
   } catch (error) {
-    throwError(error, 'Failed to parse data from ./coverage/lcov.info.');
+    throwError(error, error.message);
 
     return;
   }
