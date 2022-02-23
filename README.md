@@ -1,6 +1,6 @@
 # Coverage Upload Action
 
-Upload code coverage data to a remote server.
+Upload code coverage data to a remote server
 
 ## Overview
 
