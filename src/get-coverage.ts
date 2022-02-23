@@ -1,23 +1,20 @@
 import * as lcov from 'lcov-parse';
 import { promisify } from 'util';
 
-import throwError from './lib/error-handling';
 import { CommentData } from './types';
 
 const lcovParse = promisify(lcov);
 
-const getCoverage = async (path: string): Promise<CommentData | void> => {
+const getCoverage = async (path: string): Promise<CommentData> => {
   const commentData = {
     lines: { hit: 0, found: 0, percent: 0, diff: 0 },
     functions: { hit: 0, found: 0, percent: 0, diff: 0 },
     branches: { hit: 0, found: 0, percent: 0, diff: 0 },
   };
 
-  let coverageData;
-
   try {
-    coverageData = await lcovParse(path);
-  
+    const coverageData = await lcovParse(path);
+
     for (const i in coverageData) {
       commentData.lines.hit += coverageData[i].lines.hit;
       commentData.lines.found += coverageData[i].lines.found;
@@ -33,9 +30,9 @@ const getCoverage = async (path: string): Promise<CommentData | void> => {
 
     return commentData;
   } catch (error) {
-    throwError(error, 'Failted to parse from ./coverage/lcov.parse.');
-
-    return;
+    throw new Error(
+      'Failed to parse coverage from specified path to coverage file from workflow variable `coverageData` (default path: coverage/lcov.info). See configuration for instructions on how to upload coverage.'
+    );
   }
 };
 

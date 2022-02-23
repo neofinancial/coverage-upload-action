@@ -1,19 +1,16 @@
-import { getInput, setFailed } from '@actions/core';
+import { getInput } from '@actions/core';
 import { context } from '@actions/github';
 
 import getCoverage from './get-coverage';
-import throwError from './lib/error-handling';
 import { PRData } from './types';
 
-const getData = async (): Promise<PRData | void> => {
+const getData = async (): Promise<PRData> => {
   const authToken = getInput('coverageToken');
 
   if (!authToken) {
-    setFailed(
-      'Failed to retrieve authToken from action. See configuration for instructions on how to add covergeToken to action.'
+    console.log(
+      'Warning: Failed to retrieve authToken from action, coverage data will not be sent to endpoint. See configuration for instructions on how to add coverageToken to action.'
     );
-
-    return;
   }
 
   const prData: PRData = {
@@ -49,34 +46,18 @@ const getData = async (): Promise<PRData | void> => {
   if (info.repository && info.sender) {
     prData.actor = info.sender.login;
   } else {
-    throw new Error('Error: Issue with context');
+    if (!info.repository && !info.sender) throw new Error('repository and sender are undefined');
+    if (!info.repository) throw new Error('repository is undefined');
+    if (!info.sender) throw new Error('sender is undefined');
   }
 
-  let coverageData;
+  const coverageData = getInput('coverageData');
 
-  try {
-    coverageData = getInput('coverageData');
-  } catch (error) {
-    throwError(error, 'Failed to grab file ./coverage/lcov.info.');
+  const commentData = await getCoverage(coverageData);
 
-    return;
-  }
-
-  let commentData;
-
-  try {
-    commentData = await getCoverage(coverageData);
-  } catch (error) {
-    throwError(error, 'Failed to parse coverage from ./coverage/lcov.info. See configuration for instructions on how to upload coverage.');
-
-    return;
-  }
-
-  if (commentData) {
-    prData.coverage.lines = commentData?.lines;
-    prData.coverage.functions = commentData?.functions;
-    prData.coverage.branches = commentData?.branches;
-  }
+  prData.coverage.lines = commentData.lines;
+  prData.coverage.functions = commentData.functions;
+  prData.coverage.branches = commentData.branches;
 
   return prData;
 };

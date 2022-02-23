@@ -3,9 +3,7 @@ import { context } from '@actions/github';
 import { Octokit } from '@octokit/action';
 
 import { CommentData } from './types';
-
 import constructComment from './construct-comment';
-import throwError from './lib/error-handling';
 
 const makeComment = async (commentData: CommentData): Promise<void> => {
   try {
@@ -56,7 +54,7 @@ const makeComment = async (commentData: CommentData): Promise<void> => {
       });
     }
   } catch (error) {
-    throwError(error, 'Could not generate comment.');
+    throw new Error('Could not generate comment.');
   }
 };
 
