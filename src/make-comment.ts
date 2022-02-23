@@ -2,10 +2,6 @@ import { setFailed } from '@actions/core';
 import { context } from '@actions/github';
 import { Octokit } from '@octokit/action';
 
-// import { CommentData } from './types';
-
-// import constructComment from './construct-comment';
-
 const makeComment = async (message?: string): Promise<void> => {
   try {
     if (!context.payload.pull_request) {

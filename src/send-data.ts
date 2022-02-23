@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {  CoverageJson, PRData } from './types';
+import { CoverageJson, PRData } from './types';
 
 const sendData = async (url: string, prData: PRData): Promise<string> => {
   const postData: CoverageJson = {
@@ -24,8 +24,8 @@ const sendData = async (url: string, prData: PRData): Promise<string> => {
 
   try {
     const response = await axios.post(url, postData);
-    console.log('blahhh',response)
-    return response.data.coverageDiff
+
+    return response.data.coverageDiff;
   } catch (error) {
     throw new Error(error);
   }
