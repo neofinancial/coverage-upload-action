@@ -44,7 +44,6 @@ const run = async (): Promise<void> => {
     console.log(prData.coverage.lines.diff);
     console.log(prData.coverage.functions.diff);
     console.log(prData.coverage.branches.diff);
-    console.log(prData.message);
 
     if (prData.pullRequest) {
       console.log(prData.pullRequest);
