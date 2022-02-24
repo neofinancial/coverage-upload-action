@@ -31,7 +31,7 @@ const getCoverage = async (path: string): Promise<CommentData> => {
     return commentData;
   } catch (error) {
     throw new Error(
-      'Failed to parse coverage from specified path to coverage file from workflow variable `coverageData` (default path: coverage/lcov.info). See configuration for instructions on how to upload coverage.'
+      'Failed to parse coverage file from path specified by `coverageData` (default path: coverage/lcov.info). See configuration for instructions on how to upload coverage.'
     );
   }
 };
