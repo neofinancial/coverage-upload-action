@@ -43,7 +43,7 @@ const run = async (): Promise<void> => {
       makeComment(prData.coverage);
     }
   } catch (error) {
-    setFailed(`${error}: coverage action failed to run.`);
+    setFailed(`\n coverage action failed to run.`);
   }
 };
 
