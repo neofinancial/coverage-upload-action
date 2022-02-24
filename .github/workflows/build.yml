@@ -23,7 +23,7 @@ jobs:
       - name: Build
         run: npm run build
       - name: Test
-        run: npm test -- --coverage
+        run: npm test
       - name: Upload coverage
         uses: ./
         with:
