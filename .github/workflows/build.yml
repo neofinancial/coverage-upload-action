@@ -29,6 +29,5 @@ jobs:
         with:
           coverageEndpoint: ${{ secrets.COVERAGE_ENDPOINT }}
           coverageToken: ${{ secrets.COVERAGE_TOKEN }}
-          coverageData: meowpath/meow
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
