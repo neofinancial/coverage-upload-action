@@ -18,7 +18,7 @@ const run = async (): Promise<void> => {
       try {
         prData.coverage = await sendData(url, prData);
       } catch (error) {
-        console.log('Warning: Failed to send data to endpoint. Printing comment.');
+        console.log('Warning: Failed to send data to endpoint. Printing comment...');
       }
     }
 

@@ -23,11 +23,11 @@ jobs:
       - name: Build
         run: npm run build
       - name: Test
-        run: npm test
+        run: npm test -- --coverage
       - name: Upload coverage
         uses: ./
         with:
-          coverageEndpoint: ${{ secrets.COVERAGE_ENDPOINT }}
+          coverageEndpoint:
           coverageToken: ${{ secrets.COVERAGE_TOKEN }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
