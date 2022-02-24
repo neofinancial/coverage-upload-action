@@ -30,7 +30,7 @@ const sendData = async (url: string, prData: PRData): Promise<CommentData> => {
     prData.coverage.branches.diff = response.data.branchesDifference;
 
     return prData.coverage;
-  } catch (error) {
+  } catch {
     //TO DO: this will be different once upload action accepts a comment
     throw new Error('Failed to retrieve coverage from endpoint.');
   }

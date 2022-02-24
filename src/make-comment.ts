@@ -53,7 +53,7 @@ const makeComment = async (commentData: CommentData): Promise<void> => {
         body: message,
       });
     }
-  } catch (error) {
+  } catch {
     throw new Error('Could not generate comment.');
   }
 };

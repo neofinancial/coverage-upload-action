@@ -29,7 +29,7 @@ const getCoverage = async (path: string): Promise<CommentData> => {
     commentData.branches.percent = (commentData.branches.hit / commentData.branches.found) * 100;
 
     return commentData;
-  } catch (error) {
+  } catch {
     throw new Error(
       'Failed to parse coverage file from path specified by `coverageData` (default path: coverage/lcov.info). See configuration for instructions on how to upload coverage.'
     );

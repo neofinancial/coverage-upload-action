@@ -8,7 +8,9 @@ const getData = async (): Promise<PRData> => {
   const authToken = getInput('coverageToken');
 
   if (!authToken) {
-    warning('Failed to retrieve `coverageToken`. See configuration for instructions on how to add coverageToken to action.');
+    warning(
+      'Failed to retrieve `coverageToken`. See configuration for instructions on how to add coverageToken to action.'
+    );
   }
 
   const prData: PRData = {
