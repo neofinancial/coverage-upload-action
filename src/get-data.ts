@@ -1,4 +1,4 @@
-import { getInput } from '@actions/core';
+import { getInput, warning } from '@actions/core';
 import { context } from '@actions/github';
 
 import getCoverage from './get-coverage';
@@ -8,7 +8,7 @@ const getData = async (): Promise<PRData> => {
   const authToken = getInput('coverageToken');
 
   if (!authToken) {
-    console.warn('Failed to retrieve `coverageToken`. See configuration for instructions on how to add coverageToken to action.');
+    throw warning('Failed to retrieve `coverageToken`. See configuration for instructions on how to add coverageToken to action.');
   }
 
   const prData: PRData = {

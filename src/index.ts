@@ -1,4 +1,4 @@
-import { getInput, setFailed } from '@actions/core';
+import { getInput, setFailed, warning } from '@actions/core';
 import { context } from '@actions/github';
 
 import getData from './get-data';
@@ -11,14 +11,14 @@ const run = async (): Promise<void> => {
 
     const url = getInput('coverageEndpoint');
     if(!url){
-      console.warn('Failed to retrieve `coverageEndpoint` from action. See configuration for instructions on how to add covergeEndpoint to action.');
+      throw warning('Failed to retrieve `coverageEndpoint` from action. See configuration for instructions on how to add covergeEndpoint to action.');
     }
 
     if (url) {
       try {
         prData.coverage = await sendData(url, prData);
       } catch (error) {
-        console.warn('Failed to send data to endpoint. Printing comment...');
+        throw warning('Failed to send data to endpoint. Printing comment...');
       }
     }
 
