@@ -9,21 +9,16 @@ const run = async (): Promise<void> => {
   try {
     const prData = await getData();
 
-    let url;
-
-    try {
-      url = getInput('coverageEndpoint');
-    } catch (error) {
-      throw new Error(
-        'Failed to retrieve `coverageEndpoint` from action. See configuration for instructions on how to add covergeEndpoint to action.'
-      );
+    const url = getInput('coverageEndpoint');
+    if(!url){
+      console.log('Warning: Failed to retrieve `coverageEndpoint` from action. See configuration for instructions on how to add covergeEndpoint to action.');
     }
 
     if (url) {
       try {
         prData.coverage = await sendData(url, prData);
       } catch (error) {
-        console.log(`${error}, Could not send data, printing comment`);
+        console.log('Warning: Failed to send data to endpoint. Printing comment.');
       }
     }
 

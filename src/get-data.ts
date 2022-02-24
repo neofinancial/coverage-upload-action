@@ -9,7 +9,7 @@ const getData = async (): Promise<PRData> => {
 
   if (!authToken) {
     console.log(
-      'Warning: Failed to retrieve authToken from action, coverage data will not be sent to endpoint. See configuration for instructions on how to add coverageToken to action.'
+      'Warning: Failed to retrieve `coverageToken`. See configuration for instructions on how to add coverageToken to action.'
     );
   }
 
