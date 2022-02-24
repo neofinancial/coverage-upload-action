@@ -11,14 +11,14 @@ const run = async (): Promise<void> => {
 
     const url = getInput('coverageEndpoint');
     if(!url){
-      throw warning('Failed to retrieve `coverageEndpoint` from action. See configuration for instructions on how to add covergeEndpoint to action.');
+      warning('Failed to retrieve `coverageEndpoint` from action. See configuration for instructions on how to add covergeEndpoint to action.');
     }
 
     if (url) {
       try {
         prData.coverage = await sendData(url, prData);
       } catch (error) {
-        throw warning('Failed to send data to endpoint. Printing comment...');
+        warning('Failed to send data to endpoint. Printing comment...');
       }
     }
 
@@ -43,7 +43,7 @@ const run = async (): Promise<void> => {
       makeComment(prData.coverage);
     }
   } catch (error) {
-    setFailed(error.message);
+    setFailed(`${error}: coverage action failed to run.`);
   }
 };
 
