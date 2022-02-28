@@ -17,7 +17,7 @@ inputs:
     required: false
   customMessage:
     description: toggle if the coverageEndpoint expects to respond with the custom message or just the difference
-    default: 'comment'
+    default: 'notcomment'
     required: false
 runs:
   using: 'node16'

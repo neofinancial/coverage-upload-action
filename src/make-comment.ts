@@ -37,6 +37,7 @@ const makeComment = async (message: string, commentData: CommentData): Promise<v
 
     console.log(botComment);
     console.log(message);
+    console.log(commentData);
     console.log('cheeeeese', customMessage);
 
     if (!botComment) {

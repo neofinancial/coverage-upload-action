@@ -32,9 +32,9 @@ const run = async (): Promise<void> => {
     if (url) {
       try {
         if (customMessage === 'comment') {
-          console.log('nice')
           prData.message = await sendDataComment(url, prData);
         } else {
+          console.log('niceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
           prData.coverage = await sendDataDiff(url, prData);
         }
       } catch (error) {
