@@ -4,7 +4,6 @@ import { context } from '@actions/github';
 import getData from './get-data';
 import makeComment from './make-comment';
 import sendDataComment from './send-data';
-
 import sendDataDiff from './send-data-diff';
 
 const run = async (): Promise<void> => {
