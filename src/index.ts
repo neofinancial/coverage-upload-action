@@ -46,7 +46,7 @@ const run = async (): Promise<void> => {
       makeComment(prData.coverage);
     }
   } catch (error) {
-    setFailed(`${error}\ncoverage action failed to run.`);
+    setFailed(`Coverage action failed to run: ${error.message}`)
   }
 };
 
