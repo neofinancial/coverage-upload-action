@@ -1,4 +1,4 @@
-import { getInput, warning } from '@actions/core';
+import { getInput } from '@actions/core';
 import { context } from '@actions/github';
 
 import getCoverage from './get-coverage';
