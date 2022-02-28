@@ -15,6 +15,10 @@ inputs:
   coverageToken:
     description: token to send with coverage data
     required: false
+  customMessage:
+    description: toggle if the coverageEndpoint expects to respond with the custom message or just the difference
+    default: 'comment'
+    required: false
 runs:
   using: 'node16'
   main: 'build/index.js'

@@ -3,7 +3,9 @@ import { context } from '@actions/github';
 
 import getData from './get-data';
 import makeComment from './make-comment';
-import sendData from './send-data';
+import sendDataComment from './send-data';
+
+import sendDataDiff from './send-data-diff';
 
 const run = async (): Promise<void> => {
   try {
@@ -23,10 +25,17 @@ const run = async (): Promise<void> => {
     }
 
     // const url = 'https://3dfe-75-159-190-236.ngrok.io/api/coverage';
+    // const url = getInput('coverageEndpoint');
+   // const url = 'http://83f4-75-159-190-236.ngrok.io/api/coverage'
+    const customMessage = getInput('customMessage');
 
     if (url) {
       try {
-        prData.message = await sendData(url, prData);
+        if (customMessage === 'comment') {
+          prData.message = await sendDataComment(url, prData);
+        } else {
+          prData.coverage = await sendDataDiff(url, prData);
+        }
       } catch (error) {
         console.log(`${error}, Could not send data, printing comment`);
       }
@@ -50,7 +59,7 @@ const run = async (): Promise<void> => {
     }
 
     if (context.payload.pull_request) {
-      makeComment(prData.message);
+      makeComment(prData.message as string, prData.coverage);
     }
   } catch (error) {
     setFailed(`Coverage action failed to run: ${error.message}`);
