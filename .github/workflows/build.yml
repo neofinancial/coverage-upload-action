@@ -27,7 +27,7 @@ jobs:
       - name: Upload coverage
         uses: ./
         with:
-          coverageEndpoint:
-          coverageToken: ${{ secrets.COVERAGE_TOKEN }}
+          coverageEndpoint: ${{ secrets.COVERAGE_ENDPOINT }}
+          coverageToken:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
