@@ -10,11 +10,12 @@ const run = async (): Promise<void> => {
     const prData = await getData();
 
     const url = getInput('coverageEndpoint');
+    const authToken = getInput('coverageToken');
 
-    if (!url) {
-      warning(
-        'Failed to retrieve `coverageEndpoint` from action. See configuration for instructions on how to add covergeEndpoint to action.'
-      );
+    if(!authToken && url){
+      warning('Failed to retrieve `coverageToken`. See configuration for instructions on how to add coverageToken to action.');
+    }else if(!url && authToken){
+      warning('Failed to retrieve `coverageEndpoint` from action. See configuration for instructions on how to add covergeEndpoint to action.');
     }
 
     if (url) {
