@@ -57,6 +57,15 @@ If you have an existing workflow that runs your tests you can just add the `Uplo
 | coverageEndpoint | The remote endpoint to upload coverage data to                         |                      | No       |
 | coverageToken    | A token to authenticate with the remote endpoint and identify the repo |                      | No       |
 
+This action also can accept a markdown comment . Modify your workflow like so:
+
+```json
+  customMessage:
+     description: toggle if the coverageEndpoint expects to respond with the custom message or just the difference
+     default: 'comment'
+     required: false
+```
+
 ## REST API Message Format
 
 This action will send a POST request to the specified endpoint with a message that looks like this:
