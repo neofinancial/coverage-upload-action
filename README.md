@@ -59,7 +59,7 @@ If you have an existing workflow that runs your tests you can just add the `Uplo
 
 This action also can accept a markdown comment . Modify your workflow like so:
 
-```json
+```yml
   customMessage:
      description: toggle if the coverageEndpoint expects to respond with the custom message or just the difference
      default: 'comment'
