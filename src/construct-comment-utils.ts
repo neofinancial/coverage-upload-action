@@ -28,9 +28,10 @@ const getCoverageDifferenceEmoji = (coverageDifference: number): string => {
 
 const getCoverageIncreaseOrDecreaseSign = (difference: number): string => {
 
+  //testing new formatting
   const testDifference = 3.467895;
 
-  if (testDifference > 0) {
+  if (testDifference > 0 && difference) {
     return `+${testDifference.toFixed(2).toString()}%`;
   }
 
