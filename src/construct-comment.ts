@@ -33,8 +33,8 @@ const constructComment = async (commentData: CommentData): Promise<string> => {
   return message;
 };
 
-const testFunction =() => {
-  const test = `import { getInput } from '@actions/core';
+const testFunction =(): void => {
+  let test = `import { getInput } from '@actions/core';
 import { context } from '@actions/github';
 
 import getCoverage from './get-coverage';
@@ -95,6 +95,9 @@ const getData = async (): Promise<PRData> => {
 };
 
 export default getData;`
+
+test += ``;
+
 }
 
 testFunction()
