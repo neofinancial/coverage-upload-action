@@ -15,6 +15,7 @@ const constructComment = async (commentData: CommentData): Promise<string> => {
 | Functions | ${commentData.functions.percent.toFixed(2)}% | ${getCoverageIncreaseOrDecreaseSign(commentData.functions.diff)}  | ${getCoverageDifferenceEmoji(commentData.functions.diff)} |
 | Branches  | ${commentData.branches.percent.toFixed(2)}%  | ${getCoverageIncreaseOrDecreaseSign(commentData.branches.diff)}   | ${getCoverageDifferenceEmoji(commentData.branches.diff)}  |
 <!-- coverage-action-comment -->
+${commentData}
 `;
   } else {
     message = `
@@ -32,5 +33,29 @@ const constructComment = async (commentData: CommentData): Promise<string> => {
 
   return message;
 };
+
+const testFunction = () => {
+  const test = "this is just here to test some coverage"
+  const test1 = "this code doesn't actually do anything"
+  let temp = ""
+ temp = ""
+ temp = ""
+ temp = ""
+ temp = ""
+ temp = ""
+ temp = ""
+ temp = ""
+ temp = ""
+ temp = ""
+ temp = ""
+ temp = ""
+ temp = ""
+ temp = ""
+ temp = ""
+ temp = ""
+ temp = ""
+
+
+}
 
 export default constructComment;
