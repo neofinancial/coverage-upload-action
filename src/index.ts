@@ -23,9 +23,6 @@ const run = async (): Promise<void> => {
       );
     }
 
-    // const url = 'https://3dfe-75-159-190-236.ngrok.io/api/coverage';
-    // const url = getInput('coverageEndpoint');
-   // const url = 'http://83f4-75-159-190-236.ngrok.io/api/coverage'
     const customMessage = getInput('customMessage');
 
     if (url) {
