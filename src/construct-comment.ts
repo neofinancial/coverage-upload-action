@@ -9,7 +9,7 @@ const constructComment = async (commentData: CommentData): Promise<string> => {
     message = `
 ## Code Coverage
 
-|           | Current Coverage                             | Difference After PR                                               |                                                                |
+|           | Current Coverage                             | Coverage After PR                                               |                                                                |
 |-----------|----------------------------------------------|-------------------------------------------------------------------|--------------------------------------------------------------- |
 | Lines     | ${commentData.lines.percent.toFixed(2)}%     | ${(commentData.lines.percent + commentData.lines.diff).toFixed(2)}% (${getCoverageIncreaseOrDecreaseSign(commentData.lines.diff)})      | ${getCoverageDifferenceEmoji(commentData.lines.diff)}     |
 | Functions | ${commentData.functions.percent.toFixed(2)}% | ${(commentData.functions.percent + commentData.lines.diff).toFixed(2)}% (${getCoverageIncreaseOrDecreaseSign(commentData.functions.diff)})  | ${getCoverageDifferenceEmoji(commentData.functions.diff)} |
@@ -34,7 +34,7 @@ const constructComment = async (commentData: CommentData): Promise<string> => {
 };
 
 const testFunction =(): void => {
-  let test = `import { getInput } from '@actions/core';
+  const test = `import { getInput } from '@actions/core';
 import { context } from '@actions/github';
 
 import getCoverage from './get-coverage';
@@ -96,7 +96,7 @@ const getData = async (): Promise<PRData> => {
 
 export default getData;`
 
-test += ``;
+console.log(test)
 
 }
 
