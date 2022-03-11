@@ -6,12 +6,13 @@ import { CommentData } from './types';
 const lcovParse = promisify(lcov);
 
 const getCoverage = async (path: string): Promise<CommentData> => {
+  const commentData = {
+    lines: { hit: 0, found: 0, percent: 0, diff: 0 },
+    functions: { hit: 0, found: 0, percent: 0, diff: 0 },
+    branches: { hit: 0, found: 0, percent: 0, diff: 0 },
+  };
+
   try {
-    const commentData = {
-      lines: { hit: 0, found: 0, percent: 0, diff: 0 },
-      functions: { hit: 0, found: 0, percent: 0, diff: 0 },
-      branches: { hit: 0, found: 0, percent: 0, diff: 0 },
-    };
     const coverageData = await lcovParse(path);
 
     for (const i in coverageData) {
@@ -28,8 +29,10 @@ const getCoverage = async (path: string): Promise<CommentData> => {
     commentData.branches.percent = (commentData.branches.hit / commentData.branches.found) * 100;
 
     return commentData;
-  } catch (err) {
-    throw new Error(err);
+  } catch {
+    throw new Error(
+      'Failed to parse coverage file from path specified by `coverageData` (default path: coverage/lcov.info). See configuration for instructions on how to upload coverage.'
+    );
   }
 };
 

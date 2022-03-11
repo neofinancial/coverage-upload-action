@@ -39,11 +39,16 @@ const getData = async (): Promise<PRData> => {
 
   if (info.repository && info.sender) {
     prData.actor = info.sender.login;
+  } else if (!info.repository && !info.sender) {
+    throw new Error('repository and sender are undefined');
+  } else if (!info.repository) {
+    throw new Error('repository is undefined');
   } else {
-    throw new Error('Issue with context');
+    throw new Error('sender is undefined');
   }
 
   const coverageData = getInput('coverageData');
+
   const commentData = await getCoverage(coverageData);
 
   prData.coverage.lines = commentData.lines;
