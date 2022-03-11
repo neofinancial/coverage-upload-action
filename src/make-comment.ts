@@ -3,13 +3,12 @@ import { context } from '@actions/github';
 import { Octokit } from '@octokit/action';
 
 import { CommentData } from './types';
-
 import constructComment from './construct-comment';
 
 const makeComment = async (commentData: CommentData): Promise<void> => {
   try {
     if (!context.payload.pull_request) {
-      setFailed('No pull requests found');
+      setFailed('No pull requests found.');
 
       return;
     }
@@ -54,8 +53,8 @@ const makeComment = async (commentData: CommentData): Promise<void> => {
         body: message,
       });
     }
-  } catch (error) {
-    console.log(error.toString());
+  } catch {
+    throw new Error('Could not generate comment.');
   }
 };
 
