@@ -1,5 +1,5 @@
 import { CommentData } from './types';
-import { getCoverageDifferenceEmoji, getCoverageEmoji, getCoverageIncreaseOrDecreaseSign } from './construct-comment-utils';
+import { getCoverageDifferenceEmoji, getCoverageEmoji, getCoverageAfterPr } from './construct-comment-utils';
 
 
 const constructComment = async (commentData: CommentData): Promise<string> => {
@@ -9,11 +9,11 @@ const constructComment = async (commentData: CommentData): Promise<string> => {
     message = `
 ## Code Coverage
 
-|           | Current Coverage                             | Coverage After PR                                               |                                                                |
+|           | Current Coverage                             | Coverage After PR                                                 |                                                                |
 |-----------|----------------------------------------------|-------------------------------------------------------------------|--------------------------------------------------------------- |
-| Lines     | ${commentData.lines.percent.toFixed(2)}%     | ${(commentData.lines.percent + commentData.lines.diff).toFixed(2)}% (${getCoverageIncreaseOrDecreaseSign(commentData.lines.diff)})      | ${getCoverageDifferenceEmoji(commentData.lines.diff)}     |
-| Functions | ${commentData.functions.percent.toFixed(2)}% | ${(commentData.functions.percent + commentData.lines.diff).toFixed(2)}% (${getCoverageIncreaseOrDecreaseSign(commentData.functions.diff)})  | ${getCoverageDifferenceEmoji(commentData.functions.diff)} |
-| Branches  | ${commentData.branches.percent.toFixed(2)}%  | ${(commentData.branches.percent + commentData.lines.diff.toFixed(2))}% (${getCoverageIncreaseOrDecreaseSign(commentData.branches.diff)})   | ${getCoverageDifferenceEmoji(commentData.branches.diff)}  |
+| Lines     | ${commentData.lines.percent.toFixed(2)}%     | ${getCoverageAfterPr(commentData.lines.percent, commentData.lines.diff)}      | ${getCoverageDifferenceEmoji(commentData.lines.diff)}     |
+| Functions | ${commentData.functions.percent.toFixed(2)}% | ${getCoverageAfterPr(commentData.functions.percent, commentData.functions.diff)}  | ${getCoverageDifferenceEmoji(commentData.functions.diff)} |
+| Branches  | ${commentData.branches.percent.toFixed(2)}%  | $${getCoverageAfterPr(commentData.branches.percent, commentData.branches.diff)}   | ${getCoverageDifferenceEmoji(commentData.branches.diff)}  |
 <!-- coverage-action-comment -->
 `;
   } else {
