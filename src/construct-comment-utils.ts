@@ -28,13 +28,11 @@ const getCoverageDifferenceEmoji = (coverageDifference: number): string => {
 
 const getCoverageIncreaseOrDecreaseSign = (difference: number): string => {
 
-  const testDiff = 3.5322134
-
-  if (testDiff>0 || difference > 0) {
-    return `+${(Math.round(testDiff * 100) / 100).toString()}%`;
+  if (difference > 0) {
+    return `+${(Math.round(difference * 100) / 100).toString()}%`;
   }
 
-  return `${(Math.round(testDiff * 100) / 100).toString()}%`;
+  return `${(Math.round(difference * 100) / 100).toString()}%`;
 };
 
 export { getCoverageDifferenceEmoji, getCoverageEmoji, getCoverageIncreaseOrDecreaseSign };
