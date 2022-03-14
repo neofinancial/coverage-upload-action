@@ -28,7 +28,6 @@ const run = async (): Promise<void> => {
     if (url) {
       try {
         if (customMessage === 'comment') {
-          console.log("IS CUSTOM COMMENT")
           prData.message = await sendDataComment(url, prData);
         } else {
           prData.coverage = await sendDataDiff(url, prData);
