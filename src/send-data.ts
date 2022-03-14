@@ -25,7 +25,6 @@ const sendDataComment = async (url: string, prData: PRData): Promise<string> => 
   try {
     const response = await axios.post(url, postData);
 
-    console.log("RESPONSE > DATA > MESSAGE", response.data.message)
     return response.data.message;
   } catch (error) {
     throw new Error(error);
