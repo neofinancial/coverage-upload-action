@@ -99,4 +99,4 @@ The action expects to receive a response to this message that looks like this:
 }
 ```
 
-These values are the % change in coverage for a particular metric and will be displayed in the `difference` column in the comment posted by the action..
+These values are the % change in coverage for a particular metric and will be displayed in the `difference` column in the comment posted by the action.
