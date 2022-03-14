@@ -19,13 +19,11 @@ const constructComment = async (commentData: CommentData): Promise<string> => {
   } else {
     message = `
 ## Code Coverage
-
 |           | Current Coverage                             |                                                    |
 |-----------|----------------------------------------------|----------------------------------------------------|
 | Lines     | ${commentData.lines.percent.toFixed(2)}%     | ${getCoverageEmoji(commentData.lines.percent)}     |
 | Functions | ${commentData.functions.percent.toFixed(2)}% | ${getCoverageEmoji(commentData.functions.percent)} |
 | Branches  | ${commentData.branches.percent.toFixed(2)}%  | ${getCoverageEmoji(commentData.branches.percent)}  |
-
 <!-- coverage-action-comment -->
 `;
   }
