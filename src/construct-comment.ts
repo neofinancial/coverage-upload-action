@@ -8,7 +8,6 @@ const constructComment = async (commentData: CommentData): Promise<string> => {
   if(commentData.lines.diff) {
     message = `
 ## Code Coverage
-
 |           | Current Coverage                             | Difference After PR                                               |                                                                |
 |-----------|----------------------------------------------|-------------------------------------------------------------------|--------------------------------------------------------------- |
 | Lines     | ${commentData.lines.percent.toFixed(2)}%     | ${getCoverageIncreaseOrDecreaseSign(commentData.lines.diff)}      | ${getCoverageDifferenceEmoji(commentData.lines.diff)}     |
@@ -19,13 +18,11 @@ const constructComment = async (commentData: CommentData): Promise<string> => {
   } else {
     message = `
 ## Code Coverage
-
 |           | Current Coverage                             |                                                    |
 |-----------|----------------------------------------------|----------------------------------------------------|
 | Lines     | ${commentData.lines.percent.toFixed(2)}%     | ${getCoverageEmoji(commentData.lines.percent)}     |
 | Functions | ${commentData.functions.percent.toFixed(2)}% | ${getCoverageEmoji(commentData.functions.percent)} |
 | Branches  | ${commentData.branches.percent.toFixed(2)}%  | ${getCoverageEmoji(commentData.branches.percent)}  |
-
 <!-- coverage-action-comment -->
 `;
   }

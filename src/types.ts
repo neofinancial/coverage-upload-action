@@ -21,6 +21,7 @@ export type PRData = {
   coverage: CommentData;
   token: string;
   pullRequest?: number;
+  message?: string;
 };
 
 export type CoverageJson = {
