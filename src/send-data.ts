@@ -23,7 +23,9 @@ const sendDataComment = async (url: string, prData: PRData): Promise<string> => 
   }
 
   try {
-    const response = await axios.post(url, postData);
+    const response = await axios.post(url, postData, {
+      headers: { responseType: 'comment' },
+    });
 
     return response.data.message;
   } catch (error) {
