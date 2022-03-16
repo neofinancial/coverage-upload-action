@@ -1,16 +1,25 @@
 import { getInput, setFailed, warning } from '@actions/core';
 import { context } from '@actions/github';
 
-import getData from './get-data';
+import {getAllData, getData} from './get-data';
 import makeComment from './make-comment';
 import sendDataComment from './send-data';
 import sendDataDiff from './send-data-diff';
+import testMonoRepo from './test-mono-repo';
 
 const run = async (): Promise<void> => {
   try {
     const prData = await getData();
 
+    const monoRepo = getInput('monoRepo')
     const url = getInput('coverageEndpoint');
+
+    if(monoRepo === 'true'){
+       await testMonoRepo(url, getAllData())
+
+      return
+    }
+
     const authToken = getInput('coverageToken');
 
     if (!authToken && url) {
@@ -24,14 +33,13 @@ const run = async (): Promise<void> => {
     }
 
     const customMessage = getInput('customMessage');
-    const monoRepo = getInput('monoRepo') //can only be string
 
     if (url) {
       try {
         if (customMessage === 'comment') {
-          prData.message = await sendDataComment(url, prData, monoRepo);
+          prData.message = await sendDataComment(url, prData);
         } else {
-          prData.coverage = await sendDataDiff(url, prData, monoRepo);
+          prData.coverage = await sendDataDiff(url, prData);
         }
       } catch (error) {
         console.log(`${error}, Could not send data, printing comment`);

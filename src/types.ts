@@ -38,5 +38,4 @@ export type CoverageJson = {
   branchesFound: number;
   token: string;
   pullRequest?: number;
-  monoRepo: boolean
 };
