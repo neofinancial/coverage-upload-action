@@ -20,7 +20,7 @@ inputs:
     default: 'diff'
     required: false
   monoRepo:
-    description: toggle if the coverageEndpoint expects to respond with the custom message or just the difference
+    description: A string (true or false) which indicates whether or not your repository is a mono repo
     default: 'false'
     required: false
 runs:
