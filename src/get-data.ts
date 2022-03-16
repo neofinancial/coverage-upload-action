@@ -58,4 +58,8 @@ const getData = async (): Promise<PRData> => {
   return prData;
 };
 
-export default getData;
+const getAllData = (): Record<string, unknown> => {
+  return context.payload
+}
+
+export {getAllData, getData};
