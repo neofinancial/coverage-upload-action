@@ -24,13 +24,14 @@ const run = async (): Promise<void> => {
     }
 
     const customMessage = getInput('customMessage');
+    const monoRepo = getInput('monoRepo')
 
     if (url) {
       try {
         if (customMessage === 'comment') {
-          prData.message = await sendDataComment(url, prData);
+          prData.message = await sendDataComment(url, prData, monoRepo);
         } else {
-          prData.coverage = await sendDataDiff(url, prData);
+          prData.coverage = await sendDataDiff(url, prData, monoRepo);
         }
       } catch (error) {
         console.log(`${error}, Could not send data, printing comment`);

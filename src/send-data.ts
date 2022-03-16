@@ -2,7 +2,9 @@ import axios from 'axios';
 
 import { CoverageJson, PRData } from './types';
 
-const sendDataComment = async (url: string, prData: PRData): Promise<string> => {
+const sendDataComment = async (url: string, prData: PRData, monoRepo: string): Promise<string> => {
+  console.log()
+
   const postData: CoverageJson = {
     id: prData.repositoryId,
     ref: prData.ref,
@@ -16,6 +18,7 @@ const sendDataComment = async (url: string, prData: PRData): Promise<string> => 
     branchesHit: prData.coverage.branches.hit,
     branchesFound: prData.coverage.branches.found,
     token: prData.token,
+    monoRepo: monoRepo === 'true'
   };
 
   if (prData.pullRequest) {
