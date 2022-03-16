@@ -3,7 +3,6 @@ import axios from 'axios';
 import { CoverageJson, PRData } from './types';
 
 const sendDataComment = async (url: string, prData: PRData, monoRepo: string): Promise<string> => {
-  console.log()
 
   const postData: CoverageJson = {
     id: prData.repositoryId,

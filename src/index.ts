@@ -24,7 +24,7 @@ const run = async (): Promise<void> => {
     }
 
     const customMessage = getInput('customMessage');
-    const monoRepo = getInput('monoRepo')
+    const monoRepo = getInput('monoRepo') //can only be string
 
     if (url) {
       try {
