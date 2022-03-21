@@ -44,6 +44,8 @@ const run = async (): Promise<void> => {
         console.log(`${error}, Could not send data, printing comment`);
       }
     }
+    
+    console.log('prData',prData)
 
     console.log(`Repo ID: ${prData.repositoryId}`);
     console.log(`Ref of branch being merged: ${prData.ref}`);
