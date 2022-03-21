@@ -3,7 +3,7 @@ import { context } from '@actions/github';
 
 import { getAllData, getData } from './get-data';
 import makeComment from './make-comment';
-//import sendDataComment from './send-data';
+import sendDataComment from './send-data';
 import sendDataDiff from './send-data-diff';
 import testMonoRepo from './test-mono-repo';
 
@@ -36,12 +36,12 @@ const run = async (): Promise<void> => {
 
     if (url) {
       try {
-//         if (customMessage === 'comment') {
-//           console.log('custom message is comment')
-//           prData.message = await sendDataComment(url, prData);
-//         } else {
+        if (customMessage === 'comment') {
+          console.log('custom message is comment')
+          prData.message = await sendDataComment(url, prData);
+        } else {
           prData.coverage = await sendDataDiff(url, prData);
-//         }
+        }
       } catch (error) {
         console.log(`${error}, Could not send data, printing comment`);
       }
