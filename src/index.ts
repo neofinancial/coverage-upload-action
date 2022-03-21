@@ -3,7 +3,7 @@ import { context } from '@actions/github';
 
 import { getAllData, getData } from './get-data';
 import makeComment from './make-comment';
-import sendDataComment from './send-data';
+//import sendDataComment from './send-data';
 import sendDataDiff from './send-data-diff';
 import testMonoRepo from './test-mono-repo';
 
