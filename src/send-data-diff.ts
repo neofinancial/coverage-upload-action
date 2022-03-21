@@ -24,7 +24,7 @@ const sendDataDiff = async (url: string, prData: PRData): Promise<CommentData> =
 
   try {
     const response = await axios.post(url, postData);
-
+    console.log("RESPONSE IN PR DATA",response)
     prData.coverage.lines.diff = response.data.linesDifference;
     prData.coverage.functions.diff = response.data.functionsDifference;
     prData.coverage.branches.diff = response.data.branchesDifference;
