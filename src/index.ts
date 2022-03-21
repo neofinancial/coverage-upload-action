@@ -31,7 +31,7 @@ const run = async (): Promise<void> => {
       );
     }
 
-    const customMessage = getInput('customMessage');
+    //const customMessage = getInput('customMessage');
 
     if (url) {
       try {
