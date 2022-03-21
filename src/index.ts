@@ -36,6 +36,7 @@ const run = async (): Promise<void> => {
     if (url) {
       try {
         if (customMessage === 'comment') {
+          console.log('custom message is comment')
           prData.message = await sendDataComment(url, prData);
         } else {
           prData.coverage = await sendDataDiff(url, prData);
@@ -45,7 +46,7 @@ const run = async (): Promise<void> => {
       }
     }
     
-    console.log('prData',prData)
+    console.log('prData',prData.coverage)
 
     console.log(`Repo ID: ${prData.repositoryId}`);
     console.log(`Ref of branch being merged: ${prData.ref}`);
