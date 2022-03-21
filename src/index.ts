@@ -32,7 +32,7 @@ const run = async (): Promise<void> => {
     }
 
     const customMessage = getInput('customMessage');
-    console.log('customMessage',customMesssage)
+    console.log('customMessage',customMessage)
 
     if (url) {
       try {
