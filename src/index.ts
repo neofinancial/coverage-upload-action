@@ -35,12 +35,12 @@ const run = async (): Promise<void> => {
 
     if (url) {
       try {
-        if (customMessage === 'comment') {
-          console.log('custom message is comment')
-          prData.message = await sendDataComment(url, prData);
-        } else {
+//         if (customMessage === 'comment') {
+//           console.log('custom message is comment')
+//           prData.message = await sendDataComment(url, prData);
+//         } else {
           prData.coverage = await sendDataDiff(url, prData);
-        }
+//         }
       } catch (error) {
         console.log(`${error}, Could not send data, printing comment`);
       }
