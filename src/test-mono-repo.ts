@@ -1,11 +1,13 @@
 import axios from 'axios';
 
-const testMonoRepo = async (url: string, allData: Record<string,unknown>): Promise<string> => {
+const testMonoRepo = async (url: string, allData: unknown): Promise<void> => {
+
+  console.log('data being sent, represents entire payload', allData)
 
   try {
     const response = await axios.post(url, allData);
 
-    return response.data.message;
+    console.log('RECIEVED RESPONSE',response.data.message)
   } catch (error) {
     throw new Error(error);
   }
