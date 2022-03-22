@@ -5,7 +5,7 @@ import { getCoverageDifferenceEmoji, getCoverageEmoji, getCoverageAfterPr } from
 const constructComment = async (commentData: CommentData): Promise<string> => {
   let message: string;
 
-  if(commentData.lines.diff) {
+  if(commentData.lines.diff === 0 || commentData.lines.diff) {
     message = `
 ## Code Coverage
 
