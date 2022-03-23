@@ -2,7 +2,8 @@ import { getInput } from '@actions/core';
 import { context } from '@actions/github';
 
 import getCoverage from './get-coverage';
-import { PRData } from './types';
+import getPathways from './get-pathways';
+import {  PRData } from './types';
 
 const getData = async (): Promise<PRData> => {
   const authToken = getInput('coverageToken');
@@ -49,17 +50,23 @@ const getData = async (): Promise<PRData> => {
 
   const coverageData = getInput('coverageData');
 
-  const commentData = await getCoverage(coverageData);
+  const coveragePathways:string[] = getPathways(coverageData)
 
-  prData.coverage.lines = commentData.lines;
-  prData.coverage.functions = commentData.functions;
-  prData.coverage.branches = commentData.branches;
+  const allCoverage = await Promise.all( coveragePathways.map(async (pathway: string) => {
+    const commentData =  await getCoverage(pathway);
+
+    prData.coverage.lines = commentData.lines;
+    prData.coverage.functions = commentData.functions;
+    prData.coverage.branches = commentData.branches;
+
+    return commentData
+  }))
+
+  console.log("all coverage", allCoverage)
+
 
   return prData;
 };
 
-const getAllData = (): Record<string, unknown> => {
-  return context.payload
-}
 
-export {getAllData, getData};
+export { getData};

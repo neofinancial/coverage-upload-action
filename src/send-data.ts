@@ -6,7 +6,6 @@ const sendDataComment = async (url: string, prData: PRData): Promise<string> => 
 
   const postData: CoverageJson = {
     id: prData.repositoryId,
-    ref: prData.ref,
     baseRef: prData.baseRef,
     hash: prData.sha,
     actor: prData.actor,
