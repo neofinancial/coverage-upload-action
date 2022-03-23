@@ -69,4 +69,4 @@ const getData = async (): Promise<PRData> => {
 };
 
 
-export { getData};
+export {getData};
