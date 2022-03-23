@@ -26,12 +26,13 @@ const sendData = async (url: string, prData: PRData): Promise<void> => {
     const response = await axios.post(url, postData);
 
     if(response.headers.responseType === 'difference'){
+      console.log('response type was difference ')
       prData.coverage.lines.diff = response.data.linesDifference;
       prData.coverage.functions.diff = response.data.functionsDifference;
       prData.coverage.branches.diff = response.data.branchesDifference;
 
     } else if(response.headers.responseType === 'comment'){
-
+      console.log('response type was comment')
       prData.message = response.data.comment
     }
   } catch (error) {

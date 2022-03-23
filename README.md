@@ -126,13 +126,13 @@ where these above value is a markdown string and will be displayed in the commen
 Whether or not a response is received the action will print out general information about the repository and its code coverage:
 
 ```json
-  Repo ID: int
-  Ref of branch being merged:  string
-  Ref of branch being merged into:  string
-  SHA of merge commit: string
-  PR creator: string 
-  Time PR created: date
-  Lines percent: int
-  Functions percent: int 
-  Branches percent: int
+  "Repo ID": int
+  "Ref of branch being merged":  string
+  "Ref of branch being merged into":  string
+  "SHA of merge commit": string
+  "PR creator": string 
+  "Time PR created": date
+  "Lines percent": int
+  "Functions percent": int 
+  "Branches percent": int
 ```
