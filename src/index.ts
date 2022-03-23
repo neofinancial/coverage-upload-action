@@ -9,7 +9,7 @@ const run = async (): Promise<void> => {
   try {
 
     const url = getInput('coverageEndpoint');
-    const prData = await getData();
+    let prData = await getData();
     const authToken = getInput('coverageToken');
 
     if (!authToken && url) {
@@ -24,7 +24,7 @@ const run = async (): Promise<void> => {
 
     if (url) {
       try {
-        await sendData(url, prData);
+        prData = await sendData(url, prData);
       } catch (error) {
         console.log(`${error}, Could not send data, printing comment`);
       }
@@ -57,7 +57,7 @@ const run = async (): Promise<void> => {
     }
 
     if (prData.pullRequest) {
-      console.log(prData.pullRequest);
+      console.log(`Pull Request Number: ${prData.pullRequest}`);
     }
 
     if (context.payload.pull_request) {

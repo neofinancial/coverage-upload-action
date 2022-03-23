@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import {  CoverageJson, PRData } from './types';
 
-const sendData = async (url: string, prData: PRData): Promise<void> => {
+const sendData = async (url: string, prData: PRData): Promise<PRData> => {
   const postData: CoverageJson = {
     id: prData.repositoryId,
     ref: prData.ref,
@@ -31,10 +31,14 @@ const sendData = async (url: string, prData: PRData): Promise<void> => {
       prData.coverage.functions.diff = response.data.functionsDifference;
       prData.coverage.branches.diff = response.data.branchesDifference;
 
+
+
     } else if(response.headers.responseType === 'comment'){
       console.log('response type was comment')
       prData.message = response.data.comment
     }
+
+    return prData
   } catch (error) {
     throw new Error(error);
   }
