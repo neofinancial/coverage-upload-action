@@ -1,3 +1,4 @@
+//import { globby } from "globby";
 
 
 const getPathways = (coverageData: string | string[]): string[] => {
@@ -5,10 +6,13 @@ const getPathways = (coverageData: string | string[]): string[] => {
     return [coverageData]
   }
 
+  // //object is globby
+  // if(){
+  //   return await globby(coverageData);
+  // }
+
   return coverageData
 
-  //need to check if glob here
-  //const paths = await globby(['*', '!cake']);
 }
 
 

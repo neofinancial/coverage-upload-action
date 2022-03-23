@@ -9,7 +9,6 @@ const run = async (): Promise<void> => {
   try {
 
     const url = getInput('coverageEndpoint');
-    let prData = await getData();
     const authToken = getInput('coverageToken');
 
     if (!authToken && url) {
@@ -21,6 +20,8 @@ const run = async (): Promise<void> => {
         'Failed to retrieve `coverageEndpoint` from action. See configuration for instructions on how to add covergeEndpoint to action.'
       );
     }
+
+    let prData = await getData();
 
     if (url) {
       try {
