@@ -1,4 +1,4 @@
-import { getInput, setFailed } from '@actions/core';
+import { setFailed } from '@actions/core';
 import { context } from '@actions/github';
 import { Octokit } from '@octokit/action';
 
@@ -33,7 +33,6 @@ const makeComment = async (message: string, commentData: CommentData): Promise<v
     });
 
     const botComment = comments.data.find((comment) => comment.body?.includes('<!-- coverage-action-comment -->'));
-    const customMessage = getInput('customMessage');
 
     console.log(botComment);
     console.log(message);
@@ -44,14 +43,14 @@ const makeComment = async (message: string, commentData: CommentData): Promise<v
         owner: owner,
         repo: repo,
         issue_number: pullRequestNumber,
-        body: customMessage === 'comment' ? message : await constructComment(commentData),
+        body: await constructComment(commentData),
       });
     } else {
       octokit.issues.updateComment({
         owner: owner,
         repo: repo,
         comment_id: botComment.id,
-        body: customMessage === 'comment' ? message : await constructComment(commentData),
+        body: await constructComment(commentData),
       });
     }
   } catch {

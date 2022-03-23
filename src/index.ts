@@ -1,23 +1,14 @@
 import { getInput, setFailed, warning } from '@actions/core';
 import { context } from '@actions/github';
 
-import { getAllData, getData } from './get-data';
+import {  getData } from './get-data';
 import makeComment from './make-comment';
-import sendDataComment from './send-data';
-import sendDataDiff from './send-data-diff';
-import testMonoRepo from './test-mono-repo';
+import sendData from './send-data';
 
 const run = async (): Promise<void> => {
   try {
-    const monoRepo = getInput('monoRepo');
+
     const url = getInput('coverageEndpoint');
-
-    if (monoRepo === 'true') {
-      await testMonoRepo(url, getAllData());
-
-      return;
-    }
-
     const prData = await getData();
     const authToken = getInput('coverageToken');
 
@@ -31,15 +22,12 @@ const run = async (): Promise<void> => {
       );
     }
 
-    const customMessage = getInput('customMessage');
-
     if (url) {
       try {
-        if (customMessage === 'comment') {
-          prData.message = await sendDataComment(url, prData);
-        } else {
-          prData.coverage = await sendDataDiff(url, prData);
-        }
+
+        await sendData(url, prData); // new, add setters for comment and for diff
+
+
       } catch (error) {
         console.log(`${error}, Could not send data, printing comment`);
       }
@@ -54,9 +42,10 @@ const run = async (): Promise<void> => {
     console.log(`Lines percent: ${prData.coverage.lines.percent}`);
     console.log(`Functions percent: ${prData.coverage.functions.percent}`);
     console.log(`Branches percent: ${prData.coverage.branches.percent}`);
-    console.log(prData.coverage.lines.diff);
-    console.log(prData.coverage.functions.diff);
-    console.log(prData.coverage.branches.diff);
+
+    console.log(`Lines difference: ${prData.coverage.lines.diff}`);
+    console.log(`Functions difference: ${prData.coverage.functions.diff}`);
+    console.log(`Branches Difference: ${prData.coverage.branches.diff}`);
 
     if (prData.pullRequest) {
       console.log(prData.pullRequest);
