@@ -27,7 +27,7 @@ jobs:
       - name: Upload coverage
         uses: ./
         with:
-          coverageData: ${{ toJSON(['coverage/lcov.info','packages/package-1/coverage/lcov.info','packages/package-2/coverage/lcov.info']) }}
+          coverageData: ${{ toJSON('coverage/lcov.info','packages/package-1/coverage/lcov.info','packages/package-2/coverage/lcov.info') }}
           coverageEndpoint: http://e3df-75-159-190-236.ngrok.io/api/coverage
           coverageToken: ${{ secrets.COVERAGE_TOKEN }}
         env:
