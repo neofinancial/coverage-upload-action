@@ -49,6 +49,7 @@ const getData = async (): Promise<PRData> => {
   }
 
   const coverageData = getInput('coverageData');
+  console.log("COVERAGE DATA",coverageData)
 
   const coveragePathways:string[] = getPathways(coverageData)
 
