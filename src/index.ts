@@ -24,10 +24,7 @@ const run = async (): Promise<void> => {
 
     if (url) {
       try {
-
-        await sendData(url, prData); // new, add setters for comment and for diff
-
-
+        await sendData(url, prData);
       } catch (error) {
         console.log(`${error}, Could not send data, printing comment`);
       }
@@ -43,9 +40,21 @@ const run = async (): Promise<void> => {
     console.log(`Functions percent: ${prData.coverage.functions.percent}`);
     console.log(`Branches percent: ${prData.coverage.branches.percent}`);
 
-    console.log(`Lines difference: ${prData.coverage.lines.diff}`);
-    console.log(`Functions difference: ${prData.coverage.functions.diff}`);
+    if(prData.coverage.lines.diff || prData.coverage.lines.diff === 0){
+      console.log(`Lines difference: ${prData.coverage.lines.diff}`);
+    }
+
+    if(prData.coverage.functions.diff || prData.coverage.functions.diff === 0){
+      console.log(`Functions difference: ${prData.coverage.functions.diff}`);
+    }
+
+    if(prData.coverage.branches.diff ||prData.coverage.branches.diff === 0){
     console.log(`Branches Difference: ${prData.coverage.branches.diff}`);
+    }
+
+    if(prData.message){
+      console.log(prData.message)
+    }
 
     if (prData.pullRequest) {
       console.log(prData.pullRequest);

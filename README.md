@@ -4,7 +4,7 @@ Upload code coverage data to a remote server
 
 ## Overview
 
-This action will display the current coverage on any pull requests. You can also provide a remote endpoint to receive the coverage data and respond with the difference in coverage between the current branch and base branch.
+This action will display the current coverage on any pull requests. You can also provide a remote endpoint to receive the coverage data and respond with the difference in coverage between the current branch and base branch, or a string to be displayed in the comment.
 
 The pull request comment contains the following information:
 
@@ -53,10 +53,9 @@ If you have an existing workflow that runs your tests you can just add the `Uplo
 
 | Name             | Description                                                                             | Default              | Required |
 | ---------------- | --------------------------------------------------------------------------------------- | -------------------- | -------- |
+| coverageEndpoint | The remote endpoint to upload coverage data to                                          | null                 | No       |
+| coverageToken    | A token to authenticate with the remote endpoint and identify the repo                  | null                 | No       |
 | coverageData     | The location of the lcov file containing coverage information                           | `coverage/lcov.info` | No       |
-| coverageEndpoint | The remote endpoint to upload coverage data to                                          |                      | No       |
-| coverageToken    | A token to authenticate with the remote endpoint and identify the repo                  |                      | No       |
-
 
 
 ## REST API Message Format
@@ -84,7 +83,6 @@ The `id` field is the GitHub repository ID and is added automatically. The `toke
 
 
 The action expects to receive one of two responses from the POST request:
-
 
 
 response header: 
@@ -125,3 +123,16 @@ response body:
 
 where these above value is a markdown string and will be displayed in the comment posted by the action
 
+Whether or not a response is received the action will print out general information about the repository and its code coverage:
+
+```json
+  Repo ID: int
+  Ref of branch being merged:  string
+  Ref of branch being merged into:  string
+  SHA of merge commit: string
+  PR creator: string 
+  Time PR created: date
+  Lines percent: int
+  Functions percent: int 
+  Branches percent: int
+```
