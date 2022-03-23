@@ -53,7 +53,7 @@ const run = async (): Promise<void> => {
     }
 
     if(prData.message){
-      console.log(prData.message)
+      console.log(`Message: ${prData.message}`)
     }
 
     if (prData.pullRequest) {
@@ -61,7 +61,7 @@ const run = async (): Promise<void> => {
     }
 
     if (context.payload.pull_request) {
-      makeComment(prData.message as string, prData.coverage);
+      makeComment(prData.coverage);
     }
   } catch (error) {
     setFailed(`Coverage action failed to run: ${error.message}`);
