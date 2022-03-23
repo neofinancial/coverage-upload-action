@@ -3,6 +3,7 @@
 
 const getPathways = (coverageData: string | string[]): string[] => {
   if(typeof coverageData === 'string'){
+    console.log('strrrrrrring')
     return [coverageData]
   }
 
