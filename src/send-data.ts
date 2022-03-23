@@ -38,6 +38,7 @@ const sendData = async (url: string, prData: PRData): Promise<PRData> => {
       prData.message = response.data.comment
     }
 
+    console.log("headers", response.headers)
     return prData
   } catch (error) {
     throw new Error(error);
