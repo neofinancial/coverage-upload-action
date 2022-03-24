@@ -13,7 +13,7 @@ const constructComment = async (commentData: CommentData): Promise<string> => {
 |-----------|----------------------------------------------|-------------------------------------------------------------------|--------------------------------------------------------------- |
 | Lines     | ${commentData.lines.percent.toFixed(2)}%     | ${getCoverageAfterPr(commentData.lines.percent, commentData.lines.diff)}      | ${getCoverageDifferenceEmoji(commentData.lines.diff)}     |
 | Functions | ${commentData.functions.percent.toFixed(2)}% | ${getCoverageAfterPr(commentData.functions.percent, commentData.functions.diff)}  | ${getCoverageDifferenceEmoji(commentData.functions.diff)} |
-| Branches  | ${commentData.branches.percent.toFixed(2)}%  | $${getCoverageAfterPr(commentData.branches.percent, commentData.branches.diff)}   | ${getCoverageDifferenceEmoji(commentData.branches.diff)}  |
+| Branches  | ${commentData.branches.percent.toFixed(2)}%  | ${getCoverageAfterPr(commentData.branches.percent, commentData.branches.diff)}   | ${getCoverageDifferenceEmoji(commentData.branches.diff)}  |
 <!-- coverage-action-comment -->
 `;
   } else {
