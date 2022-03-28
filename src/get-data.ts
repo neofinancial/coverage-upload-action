@@ -2,6 +2,7 @@ import { getInput } from '@actions/core';
 import { context } from '@actions/github';
 
 import getCoverage from './get-coverage';
+import getPathways from './get-pathways';
 import { PRData } from './types';
 
 const getData = async (): Promise<PRData> => {
@@ -48,6 +49,20 @@ const getData = async (): Promise<PRData> => {
   }
 
   const coverageData = getInput('coverageData');
+
+  const coveragePathways:string[] = await getPathways(coverageData)
+
+   const allCoverage = await Promise.all( coveragePathways.map(async (pathway: string) => {
+     const commentData =  await getCoverage(pathway);
+
+     prData.coverage.lines = commentData.lines;
+     prData.coverage.functions = commentData.functions;
+     prData.coverage.branches = commentData.branches;
+
+     return commentData
+   }))
+
+   console.log("all coverage", allCoverage)
 
   const commentData = await getCoverage(coverageData);
 
