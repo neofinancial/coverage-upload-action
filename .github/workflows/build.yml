@@ -27,8 +27,8 @@ jobs:
       - name: Upload coverage
         uses: ./
         with:
-          coverageData: '[coverage/lcov.info, packages/package-1/coverage/lcov.info, packages/package-2/coverage/lcov.info]'
-          coverageEndpoint: http://e3df-75-159-190-236.ngrok.io/api/coverage
+          coverageData: 'coverage/lcov.info, packages/package-1/coverage/lcov.info, packages/package-2/coverage/lcov.info'
+          coverageEndpoint: ${{ secrets.COVERAGE_ENDPOINT }}
           coverageToken: ${{ secrets.COVERAGE_TOKEN }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

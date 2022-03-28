@@ -1,18 +1,24 @@
 //import { globby } from "globby";
 
+import { globby } from "globby"
 
-const getPathways = (coverageData: string | string[]): string[] => {
-  if(typeof coverageData === 'string'){
-    console.log('strrrrrrring')
-    return [coverageData]
+
+const getPathways = async (coverageData: string): Promise<string[]> => {
+
+  if (coverageData.includes(',')){
+    const separated = coverageData.split(',')
+
+    console.log('separated string', separated)
+
+    const globbied = await globby(separated)
+
+    console.log('globbied',globbied)
+
+    return globbied
   }
 
-  // //object is globby
-  // if(){
-  //   return await globby(coverageData);
-  // }
 
-  return coverageData
+  return [coverageData]
 
 }
 
