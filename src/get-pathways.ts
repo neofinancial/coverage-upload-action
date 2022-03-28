@@ -1,8 +1,5 @@
-//import { globby } from "globby";
 
-import { globby } from "globby"
-
-
+import  globby from "globby"
 
 const getPathways = async (coverageData: string): Promise<string[]> => {
 
