@@ -1,6 +1,5 @@
-import * as lcov from 'lcov-parse';
+import lcov from 'lcov-parse';
 import { promisify } from 'util';
-
 
 import { CommentData } from './types';
 
