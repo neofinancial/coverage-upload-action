@@ -3,7 +3,9 @@ import globby from 'globby';
 const getPathways = async (coverageData: string): Promise<string[]> => {
 
   if (coverageData.includes(',')) {
-    coverageData.split(',');
+    const paths = await globby(coverageData.split(','));
+
+    return paths
   }
 
   console.log('coverageData',coverageData)
