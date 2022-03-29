@@ -5,12 +5,8 @@ const getPathways = async (coverageData: string): Promise<string[]> => {
   if (coverageData.includes(',')) {
     const separated = coverageData.split(',')
 
-    const paths = await globby(separated);
-
-    return paths
+    return separated
   }
-
-  console.log('coverageData',coverageData)
 
   const paths = await globby(coverageData);
 
