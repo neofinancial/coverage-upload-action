@@ -2,10 +2,10 @@ import { getInput } from '@actions/core';
 import { context } from '@actions/github';
 
 import getCoverage from './get-coverage';
-import getPathways from './get-pathways';
+
 import { PRData } from './types';
 
-const getData = async (): Promise<PRData> => {
+const getData = async (pathway: string): Promise<PRData> => {
   const authToken = getInput('coverageToken');
 
   const prData: PRData = {
@@ -48,21 +48,13 @@ const getData = async (): Promise<PRData> => {
     throw new Error('sender is undefined');
   }
 
-  const coverageData = getInput('coverageData');
+  const commentData = await getCoverage(pathway);
 
-  const coveragePathways: string[] = await getPathways(coverageData);
+  console.log("COMMENT DATA", commentData)
 
-  await Promise.all(
-    coveragePathways.map(async (pathway: string) => {
-      const commentData = await getCoverage(pathway);
-
-      prData.coverage.lines = commentData.lines;
-      prData.coverage.functions = commentData.functions;
-      prData.coverage.branches = commentData.branches;
-
-      return commentData;
-    })
-  );
+  prData.coverage.lines = commentData.lines;
+  prData.coverage.functions = commentData.functions;
+  prData.coverage.branches = commentData.branches;
 
 
   return prData;
