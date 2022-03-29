@@ -54,6 +54,7 @@ const getData = async (): Promise<PRData> => {
 
   const coveragePathways:string[] = await getPathways(coverageData)
 
+
   const allCoverage = await Promise.all( coveragePathways.map(async (pathway: string) => {
     const commentData =  await getCoverage(pathway);
 

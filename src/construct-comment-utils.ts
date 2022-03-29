@@ -6,8 +6,7 @@ const getCoverageEmoji = (coverage: number): string => {
   } else if (coverage >= 80) {
     return '🥈';
   } else if (coverage >= 70) {
-    return '🥉';
-  } else {
+    return '🥉';  } else {
     return '😔';
   }
 };
