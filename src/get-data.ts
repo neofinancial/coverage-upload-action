@@ -3,8 +3,7 @@ import { context } from '@actions/github';
 
 import getCoverage from './get-coverage';
 import getPathways from './get-pathways';
-import {  PRData } from './types';
-
+import { PRData } from './types';
 
 const getData = async (): Promise<PRData> => {
   const authToken = getInput('coverageToken');
@@ -50,26 +49,23 @@ const getData = async (): Promise<PRData> => {
   }
 
   const coverageData = getInput('coverageData');
-  console.log("COVERAGE DATA",coverageData)
 
-  const coveragePathways:string[] = await getPathways(coverageData)
+  const coveragePathways: string[] = await getPathways(coverageData);
 
+  await Promise.all(
+    coveragePathways.map(async (pathway: string) => {
+      const commentData = await getCoverage(pathway);
 
-  const allCoverage = await Promise.all( coveragePathways.map(async (pathway: string) => {
-    const commentData =  await getCoverage(pathway);
+      prData.coverage.lines = commentData.lines;
+      prData.coverage.functions = commentData.functions;
+      prData.coverage.branches = commentData.branches;
 
-    prData.coverage.lines = commentData.lines;
-    prData.coverage.functions = commentData.functions;
-    prData.coverage.branches = commentData.branches;
-
-    return commentData
-  }))
-
-  console.log("all coverage", allCoverage)
+      return commentData;
+    })
+  );
 
 
   return prData;
 };
 
-
-export {getData};
+export { getData };

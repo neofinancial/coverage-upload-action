@@ -1,13 +1,12 @@
 import { getInput, setFailed, warning } from '@actions/core';
 import { context } from '@actions/github';
 
-import {  getData } from './get-data';
+import { getData } from './get-data';
 import makeComment from './make-comment';
 import sendData from './send-data';
 
 const run = async (): Promise<void> => {
   try {
-
     const url = getInput('coverageEndpoint');
     const authToken = getInput('coverageToken');
 
@@ -41,20 +40,20 @@ const run = async (): Promise<void> => {
     console.log(`Functions percent: ${prData.coverage.functions.percent}`);
     console.log(`Branches percent: ${prData.coverage.branches.percent}`);
 
-    if(prData.coverage.lines.diff || prData.coverage.lines.diff === 0){
+    if (prData.coverage.lines.diff || prData.coverage.lines.diff === 0) {
       console.log(`Lines difference: ${prData.coverage.lines.diff}`);
     }
 
-    if(prData.coverage.functions.diff || prData.coverage.functions.diff === 0){
+    if (prData.coverage.functions.diff || prData.coverage.functions.diff === 0) {
       console.log(`Functions difference: ${prData.coverage.functions.diff}`);
     }
 
-    if(prData.coverage.branches.diff ||prData.coverage.branches.diff === 0){
-    console.log(`Branches Difference: ${prData.coverage.branches.diff}`);
+    if (prData.coverage.branches.diff || prData.coverage.branches.diff === 0) {
+      console.log(`Branches Difference: ${prData.coverage.branches.diff}`);
     }
 
-    if(prData.message){
-      console.log(prData.message)
+    if (prData.message) {
+      console.log(prData.message);
     }
 
     if (prData.pullRequest) {

@@ -6,11 +6,8 @@ import { CommentData } from './types';
 const lcovParse = promisify(lcov);
 
 const getCoverage = async (path: string): Promise<CommentData> => {
-
   try {
-
     const coverageData = await lcovParse(path);
-    //const commentData = handleCoverage(coverageData)
 
     const commentData = {
       lines: { hit: 0, found: 0, percent: 0, diff: 0 },
@@ -30,8 +27,6 @@ const getCoverage = async (path: string): Promise<CommentData> => {
     commentData.lines.percent = (commentData.lines.hit / commentData.lines.found) * 100;
     commentData.functions.percent = (commentData.functions.hit / commentData.functions.found) * 100;
     commentData.branches.percent = (commentData.branches.hit / commentData.branches.found) * 100;
-
-
 
     return commentData;
   } catch {

@@ -34,9 +34,9 @@ const makeComment = async (message: string, commentData: CommentData): Promise<v
 
     const botComment = comments.data.find((comment) => comment.body?.includes('<!-- coverage-action-comment -->'));
 
-    console.log("bot comment",botComment);
-    console.log("pr data message",message);
-    console.log("comment data",commentData);
+    console.log('bot comment', botComment);
+    console.log('pr data message', message);
+    console.log('comment data', commentData);
 
     if (!botComment) {
       octokit.issues.createComment({
