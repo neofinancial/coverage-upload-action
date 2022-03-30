@@ -18,9 +18,11 @@ const getPathways = async (coverageData: string): Promise<string[]> => {
     pathwayArray = splitBySeparator(pathwayString)
   }
 
+  console.log('PATHWAY ARRAY pre glob',pathwayArray)
+
   pathwayArray = await globby(pathwayString);
 
-  console.log('PATHWAY ARRAY')
+  console.log('PATHWAY ARRAY post glob',pathwayArray)
 
   return pathwayArray
 
