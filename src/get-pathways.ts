@@ -1,17 +1,31 @@
 import globby from 'globby';
 
+const trimWhiteSpace = (paths: string): string => {
+  return paths.replace(/\s/g, "")
+}
+
+const splitBySeparator = (paths: string):string[] => {
+  return paths.split(',')
+}
+
 const getPathways = async (coverageData: string): Promise<string[]> => {
 
-  if (coverageData.includes(',')) {
-    const separated = coverageData.split(',')
+  const pathwayString = trimWhiteSpace(coverageData)
 
-    return separated
+  let pathwayArray
+
+  if (pathwayString.includes(',')) {
+    pathwayArray = splitBySeparator(pathwayString)
   }
 
-  const paths = await globby(coverageData);
+  pathwayArray = await globby(pathwayString);
 
-  return paths
+  console.log('PATHWAY ARRAY')
+
+  return pathwayArray
 
 };
+
+
 
 export default getPathways;
