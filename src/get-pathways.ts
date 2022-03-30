@@ -21,8 +21,6 @@ const getPathways = async (coverageData: string): Promise<string[]> => {
   const pathwayArray = splitBySeparator(pathwayString, ',');
 
   if (isGlobby(pathwayString)) {
-    console.log('isglobby');
-
     return globby(pathwayArray);
   }
 
