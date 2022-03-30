@@ -50,12 +50,9 @@ const getData = async (pathway: string): Promise<PRData> => {
 
   const commentData = await getCoverage(pathway);
 
-  console.log("COMMENT DATA", commentData)
-
   prData.coverage.lines = commentData.lines;
   prData.coverage.functions = commentData.functions;
   prData.coverage.branches = commentData.branches;
-
 
   return prData;
 };
