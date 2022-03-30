@@ -28,7 +28,7 @@ jobs:
         uses: ./
         with:
           coverageData: 'packages/packae-2/lcov.info,coverage/lcov.info'
-          coverageEndpoint:  http://ce58-2001-56a-fa88-d100-5163-7211-7a28-b691.ngrok.io/api/coverage
+          coverageEndpoint:  http://8471-2001-56a-fa88-d100-3421-403f-f43b-3660.ngrok.io/api/coverage
           coverageToken: ${{ secrets.COVERAGE_TOKEN }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

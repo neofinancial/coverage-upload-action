@@ -27,8 +27,9 @@ const run = async (): Promise<void> => {
 
 
     console.log('COVERAGE PATHWAYS /going to be posted from', coveragePathways)
+
     await Promise.all
-    ( coveragePathways.map(async (pathway)=>{
+    (coveragePathways.map(async (pathway)=>{
       let prData = await getData(pathway);
 
       if (url) {
