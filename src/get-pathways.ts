@@ -4,28 +4,30 @@ const trimWhiteSpace = (paths: string): string => {
   return paths.replace(/\s/g, "")
 }
 
-const splitBySeparator = (paths: string):string[] => {
-  return paths.split(',')
+const splitBySeparator = (paths: string, separator: string):string[] => {
+  if(paths.includes(separator)){
+   return paths.split(separator)
+  }
+
+  return [paths]
+}
+
+const isGlobby = (paths: string): boolean => {
+  return (paths.includes('!') || paths.includes('*') || paths.includes('?'))
 }
 
 const getPathways = async (coverageData: string): Promise<string[]> => {
 
   const pathwayString = trimWhiteSpace(coverageData)
+  const pathwayArray = splitBySeparator(pathwayString, ',')
 
-  let pathwayArray
+  if(isGlobby(pathwayString)){
+    console.log('isglobby')
 
-  if (pathwayString.includes(',')) {
-    pathwayArray = splitBySeparator(pathwayString)
+    return globby(pathwayArray)
   }
 
-  console.log('PATHWAY ARRAY pre glob',pathwayArray)
-
-  pathwayArray = await globby(pathwayString);
-
-  console.log('PATHWAY ARRAY post glob',pathwayArray)
-
   return pathwayArray
-
 };
 
 
