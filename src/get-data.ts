@@ -12,6 +12,7 @@ const getData = async (pathway: string): Promise<PRData> => {
     repositoryId: context.payload.repository?.id,
     ref: '',
     baseRef: '',
+    pathName: pathway,
     sha: '',
     actor: '',
     timestamp: Date.now().toString(),

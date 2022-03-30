@@ -27,6 +27,7 @@ const run = async (): Promise<void> => {
 
     await Promise.all(
       coveragePathways.map(async (pathway) => {
+
         let prData = await getData(pathway);
 
         if (url) {
@@ -43,6 +44,7 @@ const run = async (): Promise<void> => {
         console.log(`SHA of merge commit: ${prData.sha}`);
         console.log(`PR creator: ${prData.actor}`);
         console.log(`Time PR created: ${prData.timestamp}`);
+        console.log(`Pathway to coverage file: ${prData.pathName}`);
         console.log(`Lines percent: ${prData.coverage.lines.percent}`);
         console.log(`Functions percent: ${prData.coverage.functions.percent}`);
         console.log(`Branches percent: ${prData.coverage.branches.percent}`);
