@@ -1,7 +1,7 @@
 import { getInput, setFailed, warning } from '@actions/core';
 import { context } from '@actions/github';
 
-import {  getData } from './get-data';
+import { getData } from './get-data';
 import makeComment from './make-comment';
 import sendData from './send-data';
 
