@@ -6,7 +6,7 @@ import constructComment from './construct-comment';
 
 import { CommentData } from './types';
 
-const makeComment = async (message: string, commentData: CommentData): Promise<void> => {
+const makeComment = async (message: string |undefined, commentData: CommentData): Promise<void> => {
   try {
     if (!context.payload.pull_request) {
       setFailed('No pull requests found.');

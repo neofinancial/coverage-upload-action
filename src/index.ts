@@ -61,7 +61,7 @@ const run = async (): Promise<void> => {
     }
 
     if (context.payload.pull_request) {
-      makeComment(prData.coverage);
+      makeComment(prData.message, prData.coverage);
     }
   } catch (error) {
     setFailed(`Coverage action failed to run: ${error.message}`);
