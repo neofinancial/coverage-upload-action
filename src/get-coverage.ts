@@ -6,6 +6,9 @@ import { CommentData } from './types';
 const lcovParse = promisify(lcov);
 
 const getCoverage = async (path: string): Promise<CommentData> => {
+
+  console.log("ADDING A COVERAGE LINE TO DECREASE COVERAGE")
+
   const commentData = {
     lines: { hit: 0, found: 0, percent: 0, diff: 0 },
     functions: { hit: 0, found: 0, percent: 0, diff: 0 },
