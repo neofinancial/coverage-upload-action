@@ -31,7 +31,7 @@ const getCoverage = async (path: string): Promise<CommentData> => {
     return commentData;
   } catch {
     throw new Error(
-      'Failed to parse coverage file(s) from path(s) / pattern specified by `coverageData` (default path: coverage/lcov.info). See configuration for instructions on how to upload coverage.'
+      'Failed to parse coverage file(s) from path(s) specified by `coverage.yml` or `coverageData`. See configuration for instructions on how to upload coverage.'
     );
   }
 };
