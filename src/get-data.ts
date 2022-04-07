@@ -5,7 +5,6 @@ import getCoverage from './get-coverage';
 
 import { PRData } from './types';
 
-
 const getData = async (pathway: string): Promise<PRData> => {
   const authToken = getInput('coverageToken');
 
