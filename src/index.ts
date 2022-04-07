@@ -22,11 +22,13 @@ const run = async (): Promise<void> => {
     }
 
 
-    const coveragePathways: string[] = await getPathways();
+    const coveragePathways: Record<string,string>[] = await getPathways();
+
+    console.log(Object.keys(coveragePathways)[0])
 
     await Promise.all(
       coveragePathways.map(async (pathway) => {
-        let prData = await getData(pathway);
+        let prData = await getData(pathway[0]);
 
         if (url) {
           try {

@@ -6,17 +6,12 @@ interface Pathway {
   coverage: Record<string,string>[]
 }
 
-const getPathways = async (): Promise<string[]> => {
+const getPathways = async (): Promise<Record<string,string>[]> => {
 
   try {
     const configuration: Pathway | any = yaml.load(fs.readFileSync('coverage.yml', 'utf8'));
 
-    console.log("YAML",configuration);
-
-
-    configuration.coverage.map((coverage: any) =>{
-      return coverage
-    })
+    return configuration.coverage
 
   } catch (error) {
     console.log(`Error: ${error.message}`);
