@@ -24,7 +24,7 @@ const run = async (): Promise<void> => {
 
     const coveragePathways: Record<string,string>[] = await getPathways();
 
-    console.log(Object.keys(coveragePathways)[0])
+    console.log(Object.keys(coveragePathways))
 
     await Promise.all(
       coveragePathways.map(async (pathway) => {
