@@ -1,24 +1,12 @@
 import { getInput } from '@actions/core';
 import { context } from '@actions/github';
-import * as fs  from 'fs';
-import * as yaml from 'js-yaml'
 
 import getCoverage from './get-coverage';
+
 import { PRData } from './types';
 
 
-
-const getData = async (): Promise<PRData> => {
-
-  try {
-    const doc = yaml.load(fs.readFileSync('meow.yml', 'utf8'));
-
-    console.log("YAMLLL",doc);
-  } catch (e) {
-    console.log(e);
-  }
-
-
+const getData = async (pathway: string): Promise<PRData> => {
   const authToken = getInput('coverageToken');
 
   const prData: PRData = {
@@ -61,9 +49,7 @@ const getData = async (): Promise<PRData> => {
     throw new Error('sender is undefined');
   }
 
-  const coverageData = getInput('coverageData');
-
-  const commentData = await getCoverage(coverageData);
+  const commentData = await getCoverage(pathway);
 
   prData.coverage.lines = commentData.lines;
   prData.coverage.functions = commentData.functions;
@@ -72,5 +58,4 @@ const getData = async (): Promise<PRData> => {
   return prData;
 };
 
-
-export {getData};
+export { getData };
