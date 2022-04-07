@@ -11,6 +11,7 @@ const getPathways = async (): Promise<Record<string,string>[]> => {
   try {
     const configuration: Pathway | any = yaml.load(fs.readFileSync('coverage.yml', 'utf8'));
 
+    console.log("CONFIGURATION", configuration)
     return configuration.coverage
 
   } catch (error) {
