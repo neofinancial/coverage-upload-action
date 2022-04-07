@@ -1,10 +1,28 @@
 import { getInput } from '@actions/core';
 import { context } from '@actions/github';
+import * as fs  from 'fs';
+import * as yaml from 'js-yaml'
 
 import getCoverage from './get-coverage';
 import { PRData } from './types';
 
+
+
+
+
+
 const getData = async (): Promise<PRData> => {
+
+  try {
+    const doc = yaml.load(fs.readFileSync('./meow.yml', 'utf8'));
+
+    console.log("YAMLLL",doc);
+  } catch (e) {
+    console.log(e);
+  }
+
+
+
   const authToken = getInput('coverageToken');
 
   const prData: PRData = {
