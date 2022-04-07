@@ -1,0 +1,4 @@
+coverage: !!map
+# - pathway: display name
+  - coverage/lcov.info: coverage-upload-action
+  - packages/meow-package/coverage/lcov.info: meow package

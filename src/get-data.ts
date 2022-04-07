@@ -8,19 +8,15 @@ import { PRData } from './types';
 
 
 
-
-
-
 const getData = async (): Promise<PRData> => {
 
   try {
-    const doc = yaml.load(fs.readFileSync('./meow.yml', 'utf8'));
+    const doc = yaml.load(fs.readFileSync('meow.yml', 'utf8'));
 
     console.log("YAMLLL",doc);
   } catch (e) {
     console.log(e);
   }
-
 
 
   const authToken = getInput('coverageToken');
