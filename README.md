@@ -57,6 +57,24 @@ If you have an existing workflow that runs your tests you can just add the `Uplo
 | coverageToken    | A token to authenticate with the remote endpoint and identify the repo                  | null                 | No       |
 | coverageData     | The location of the lcov file containing coverage information                           | `coverage/lcov.info` | No       |
 
+## Configuration
+
+If you want this action to generate more than one coverage report from a single repository, or to customize the display name shown for a repository,
+you can set up a configuration file
+
+1. add a file `coverage.yml` to the root of your repository
+2. structure the data in `coverage.yml` as follows
+
+```
+coverage:
+  -
+    path: path/to/coverage/file
+    displayName: some cool display name
+  -
+    path: path/to/other/coverage/file
+    displayName: some ... other cool display name
+```
+
 
 ## REST API Message Format
 
