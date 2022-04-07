@@ -4,8 +4,13 @@
 
 # ]
 
-map:
-  path: coverage/lcov.info
-  displayName: coverage-upload-action
-  path: packages/meow-package/coverage/lcov.info
-  displayName: 'meow package'
+# map:
+#   path: coverage/lcov.info
+#   displayName: coverage-upload-action
+#   path: packages/meow-package/coverage/lcov.info
+#   displayName: 'meow package'
+
+
+coverage: !!omap
+  - coverage/lcov.info: coverage-upload-action
+  - packages/meow-package/coverage/lcov.info: meow package
