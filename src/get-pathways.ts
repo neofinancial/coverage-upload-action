@@ -9,11 +9,12 @@ interface Pathway {
 const getPathways = async (): Promise<string[]> => {
 
   try {
-    const configuration: Pathway | unknown = yaml.load(fs.readFileSync('coverage.yml', 'utf8'));
+    const configuration: Pathway | any = yaml.load(fs.readFileSync('coverage.yml', 'utf8'));
 
     console.log("YAML",configuration);
 
-    configuration.coverage.map((coverage) =>{
+
+    configuration.coverage.map((coverage: any) =>{
       return coverage
     })
 
