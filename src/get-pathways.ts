@@ -1,4 +1,5 @@
 
+import { getInput } from '@actions/core';
 import * as fs  from 'fs';
 import * as yaml from 'js-yaml'
 
@@ -18,11 +19,16 @@ const getPathways = async (): Promise<PathwayProperties[]> => {
 
     return configuration.coverage
 
-  } catch (error) {
-    console.log(`Error: ${error.message}`);
+  } catch  {
+
+    const coverageData = getInput('coverageData')
+
+    const coverageProperties: PathwayProperties = {path: coverageData, displayName: coverageData}
+
+    return [coverageProperties];
   }
 
-  return [];
+
 };
 
 export default getPathways;
