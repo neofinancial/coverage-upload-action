@@ -24,9 +24,11 @@ const run = async (): Promise<void> => {
 
     const coveragePathways: PathwayProperties[] = await getPathways();
 
+    console.log("COVERAGEPATHWAYS",coveragePathways)
+
     await Promise.all(
       coveragePathways.map(async (pathway) => {
-        let prData = await getData(pathway.name);
+        let prData = await getData(pathway.path);
 
         if (url) {
           try {
