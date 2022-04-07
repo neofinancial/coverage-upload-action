@@ -2,7 +2,7 @@ import { getInput, setFailed, warning } from '@actions/core';
 import { context } from '@actions/github';
 
 import { getData } from './get-data';
-import getPathways from './get-pathways';
+import getPathways, { PathwayProperties } from './get-pathways';
 import makeComment from './make-comment';
 import sendData from './send-data';
 
@@ -22,13 +22,11 @@ const run = async (): Promise<void> => {
     }
 
 
-    const coveragePathways: Record<string,string>[] = await getPathways();
-
-    console.log(Object.keys(coveragePathways))
+    const coveragePathways: PathwayProperties[] = await getPathways();
 
     await Promise.all(
       coveragePathways.map(async (pathway) => {
-        let prData = await getData(pathway[0]);
+        let prData = await getData(pathway.name);
 
         if (url) {
           try {

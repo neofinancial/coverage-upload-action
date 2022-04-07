@@ -2,16 +2,20 @@
 import * as fs  from 'fs';
 import * as yaml from 'js-yaml'
 
-interface Pathway {
-  coverage: Record<string,string>[]
+export interface PathwayProperties {
+  name:string
+  displayName: string
 }
 
-const getPathways = async (): Promise<Record<string,string>[]> => {
+interface CoverageConfig {
+  coverage: PathwayProperties []
+}
+
+const getPathways = async (): Promise<PathwayProperties[]> => {
 
   try {
-    const configuration: Pathway | any = yaml.load(fs.readFileSync('coverage.yml', 'utf8'));
+    const configuration: CoverageConfig  | any = yaml.load(fs.readFileSync('coverage.yml', 'utf8'));
 
-    console.log("CONFIGURATION", configuration)
     return configuration.coverage
 
   } catch (error) {

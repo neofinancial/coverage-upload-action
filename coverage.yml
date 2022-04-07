@@ -2,12 +2,7 @@
 coverage:
   -
     path: coverage/lcov.info
-    display_name: coverage-upload-action
+    displayName: coverage-upload-action
   -
     path: packages/meow-package/coverage/lcov.info
-    display_name: meow package
-
-# coverage: !!omap
-#   - coverage/lcov.info: coverage-upload-action
-#   - packages/meow-package/coverage/lcov.info: meow package
-
+    displayName: meow package
