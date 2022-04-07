@@ -6,5 +6,5 @@
 
 map:
   Block style: !!map
-    path : /coverage/lcov.info
-    displayName: : coverage-upload-action
+    path: coverage/lcov.info
+    displayName: coverage-upload-action
