@@ -5,6 +5,7 @@
 # ]
 
 map:
-  Block style: !!map
-    path: coverage/lcov.info
-    displayName: coverage-upload-action
+  path: coverage/lcov.info
+  displayName: coverage-upload-action
+  path: packages/meow-package/coverage/lcov.info
+  displayName: 'meow package'
