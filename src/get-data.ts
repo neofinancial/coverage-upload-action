@@ -59,7 +59,7 @@ const getData = async (): Promise<PRData> => {
 };
 
 const getAllData = (): Record<string, unknown> => {
-  return context.payload
-}
+  return context.payload;
+};
 
-export {getAllData, getData};
+export { getAllData, getData };
