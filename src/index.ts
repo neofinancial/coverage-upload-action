@@ -9,7 +9,7 @@ import sendDataDiff from './send-data-diff';
 const run = async (): Promise<void> => {
   try {
     const url = getInput('coverageEndpoint');
-    const authToken = undefined;
+    const authToken = getInput('coverageToken');
     const prData = await getData(authToken);
 
     if (!authToken && url) {
