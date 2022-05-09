@@ -19,7 +19,7 @@ export type PRData = {
   actor: string;
   timestamp: string;
   coverage: CommentData;
-  token: string;
+  token: string | null;
   pullRequest?: number;
   message?: string;
 };

@@ -4,8 +4,7 @@ import { context } from '@actions/github';
 import getCoverage from './get-coverage';
 import { PRData } from './types';
 
-const getData = async (): Promise<PRData> => {
-  const authToken = getInput('coverageToken');
+const getData = async (authToken?: string): Promise<PRData> => {
 
   const prData: PRData = {
     repositoryId: context.payload.repository?.id,
@@ -19,7 +18,7 @@ const getData = async (): Promise<PRData> => {
       functions: { hit: 0, found: 0, percent: 0, diff: 0 },
       branches: { hit: 0, found: 0, percent: 0, diff: 0 },
     },
-    token: authToken,
+    token: authToken ?? null,
   };
 
   const info = context.payload;
@@ -48,7 +47,6 @@ const getData = async (): Promise<PRData> => {
   }
 
   const coverageData = getInput('coverageData');
-
   const commentData = await getCoverage(coverageData);
 
   prData.coverage.lines = commentData.lines;
@@ -58,8 +56,5 @@ const getData = async (): Promise<PRData> => {
   return prData;
 };
 
-const getAllData = (): Record<string, unknown> => {
-  return context.payload;
-};
 
-export { getAllData, getData };
+export { getData };

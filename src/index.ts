@@ -9,10 +9,8 @@ import sendDataDiff from './send-data-diff';
 const run = async (): Promise<void> => {
   try {
     const url = getInput('coverageEndpoint');
-
-    //provided a url but not a coverage token
-    const prData = await getData();
-    const authToken = getInput('coverageToken');
+    const authToken = undefined
+    const prData = await getData(authToken);
 
     if (!authToken && url) {
       warning(
@@ -47,9 +45,9 @@ const run = async (): Promise<void> => {
     console.log(`Lines percent: ${prData.coverage.lines.percent}`);
     console.log(`Functions percent: ${prData.coverage.functions.percent}`);
     console.log(`Branches percent: ${prData.coverage.branches.percent}`);
-    console.log(prData.coverage.lines.diff);
-    console.log(prData.coverage.functions.diff);
-    console.log(prData.coverage.branches.diff);
+    console.log(`Lines percent difference: ${prData.coverage.lines.diff}`);
+    console.log(`Functions difference: ${prData.coverage.functions.diff}`);
+    console.log(`Branches difference: ${prData.coverage.branches.diff}`);
 
     if (prData.pullRequest) {
       console.log(prData.pullRequest);
