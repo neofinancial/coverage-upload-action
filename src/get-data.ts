@@ -17,7 +17,7 @@ const getData = async (authToken?: string): Promise<PRData> => {
       functions: { hit: 0, found: 0, percent: 0, diff: 0 },
       branches: { hit: 0, found: 0, percent: 0, diff: 0 },
     },
-    token: authToken ,
+    token: authToken,
   };
 
   const info = context.payload;
