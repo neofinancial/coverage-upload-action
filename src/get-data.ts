@@ -5,7 +5,6 @@ import getCoverage from './get-coverage';
 import { PRData } from './types';
 
 const getData = async (authToken?: string): Promise<PRData> => {
-
   const prData: PRData = {
     repositoryId: context.payload.repository?.id,
     ref: '',
@@ -55,6 +54,5 @@ const getData = async (authToken?: string): Promise<PRData> => {
 
   return prData;
 };
-
 
 export { getData };
