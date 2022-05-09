@@ -33,7 +33,7 @@ const run = async (): Promise<void> => {
 
     const customMessage = getInput('customMessage');
 
-    if (url) {
+    if (url && authToken) {
       try {
         if (customMessage === 'comment') {
           prData.message = await sendDataComment(url, prData);
