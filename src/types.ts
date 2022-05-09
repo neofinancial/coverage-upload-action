@@ -36,6 +36,6 @@ export type CoverageJson = {
   functionsFound: number;
   branchesHit: number;
   branchesFound: number;
-  token: string;
+  token: string | null;
   pullRequest?: number;
 };
