@@ -1,23 +1,16 @@
 import { getInput, setFailed, warning } from '@actions/core';
 import { context } from '@actions/github';
 
-import { getAllData, getData } from './get-data';
+import { getData } from './get-data';
 import makeComment from './make-comment';
 import sendDataComment from './send-data';
 import sendDataDiff from './send-data-diff';
-import testMonoRepo from './test-mono-repo';
 
 const run = async (): Promise<void> => {
   try {
-    const monoRepo = getInput('monoRepo');
     const url = getInput('coverageEndpoint');
 
-    if (monoRepo === 'true') {
-      await testMonoRepo(url, getAllData());
-
-      return;
-    }
-
+    //provided a url but not a coverage token
     const prData = await getData();
     const authToken = getInput('coverageToken');
 

@@ -56,7 +56,6 @@ If you have an existing workflow that runs your tests you can just add the `Uplo
 | coverageData     | The location of the lcov file containing coverage information                           | `coverage/lcov.info` | No       |
 | coverageEndpoint | The remote endpoint to upload coverage data to                                          |                      | No       |
 | coverageToken    | A token to authenticate with the remote endpoint and identify the repo                  |                      | No       |
-| monoRepo         | A string (true or false) which indicates whether or not your repository is a mono repo  | `false`              | No       |
 
 This action also can accept a markdown comment . Modify your workflow like so:
 
