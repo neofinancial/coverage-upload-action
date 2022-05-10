@@ -1,6 +1,6 @@
 # Coverage Upload Action Changelog
 
-## 1.0.3 (May 10, 2022)
+## 1.0.2 (May 10, 2022)
 
 - require authtoken to post to endpoint
 
