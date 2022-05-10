@@ -2,7 +2,7 @@ import { getInput, setFailed, warning } from '@actions/core';
 import { context } from '@actions/github';
 
 import { getData } from './get-data';
-import getPathways from './get-pathways';
+import getConfiguration, { PathwayProperties } from './get-pathways';
 import makeComment from './make-comment';
 import sendData from './send-data';
 
@@ -21,14 +21,16 @@ const run = async (): Promise<void> => {
       );
     }
 
-    const coverageData = getInput('coverageData');
-
-    const coveragePathways: string[] = await getPathways(coverageData);
+    const coverageConfiguration: PathwayProperties[] = await getConfiguration();
 
     await Promise.all(
-      coveragePathways.map(async (pathway) => {
-
-        let prData = await getData(pathway);
+      coverageConfiguration.map(async (configuration) => {
+        const splitConfigurationPath = configuration.path.split('/');
+        const configurationPath =
+          splitConfigurationPath[splitConfigurationPath.length - 1] === '/lcov.info'
+            ? configuration.path.concat('/lcov.info')
+            : configuration.path;
+        let prData = await getData(configurationPath);
 
         if (url) {
           try {
@@ -62,7 +64,7 @@ const run = async (): Promise<void> => {
         }
 
         if (context.payload.pull_request) {
-          makeComment(prData.coverage);
+          makeComment(prData.message, prData.coverage);
         }
       })
     );

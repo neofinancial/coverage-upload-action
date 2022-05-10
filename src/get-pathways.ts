@@ -1,30 +1,28 @@
-import globby from 'globby';
+import { getInput } from '@actions/core';
+import * as fs from 'fs';
+import * as yaml from 'js-yaml';
 
-const trimWhiteSpace = (paths: string): string => {
-  return paths.replace(/\s/g, '');
-};
+export interface PathwayProperties {
+  path: string;
+  displayName: string;
+}
 
-const splitBySeparator = (paths: string, separator: string): string[] => {
-  if (paths.includes(separator)) {
-    return paths.split(separator);
+interface CoverageConfig {
+  coverage: PathwayProperties[];
+}
+
+const getConfiguration = async (): Promise<PathwayProperties[]> => {
+  try {
+    const configuration: CoverageConfig = yaml.load(fs.readFileSync('coverage.yml', 'utf8')) as CoverageConfig;
+
+    return configuration.coverage;
+  } catch {
+    const coverageData = getInput('coverageData');
+
+    const coverageProperties: PathwayProperties = { path: coverageData, displayName: coverageData };
+
+    return [coverageProperties];
   }
-
-  return [paths];
 };
 
-const isGlobby = (paths: string): boolean => {
-  return paths.includes('!') || paths.includes('*') || paths.includes('?');
-};
-
-const getPathways = async (coverageData: string): Promise<string[]> => {
-  const pathwayString = trimWhiteSpace(coverageData);
-  const pathwayArray = splitBySeparator(pathwayString, ',');
-
-  if (isGlobby(pathwayString)) {
-    return globby(pathwayArray);
-  }
-
-  return pathwayArray;
-};
-
-export default getPathways;
+export default getConfiguration;
