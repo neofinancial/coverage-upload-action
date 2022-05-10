@@ -2,7 +2,7 @@ import { getInput, setFailed, warning } from '@actions/core';
 import { context } from '@actions/github';
 
 import { getData } from './get-data';
-import getPathways, { PathwayProperties } from './get-pathways';
+import getConfiguration, { PathwayProperties } from './get-pathways';
 import makeComment from './make-comment';
 import sendData from './send-data';
 
@@ -21,11 +21,16 @@ const run = async (): Promise<void> => {
       );
     }
 
-    const coveragePathways: PathwayProperties[] = await getPathways();
+    const coverageConfiguration: PathwayProperties[] = await getConfiguration();
 
     await Promise.all(
-      coveragePathways.map(async (pathway) => {
-        let prData = await getData(pathway.path);
+      coverageConfiguration.map(async (configuration) => {
+        const splitConfigurationPath = configuration.path.split('/');
+        const configurationPath =
+          splitConfigurationPath[splitConfigurationPath.length - 1] === '/lcov.info'
+            ? configuration.path.concat('/lcov.info')
+            : configuration.path;
+        let prData = await getData(configurationPath);
 
         if (url) {
           try {

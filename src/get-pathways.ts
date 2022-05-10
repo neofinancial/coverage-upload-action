@@ -11,9 +11,9 @@ interface CoverageConfig {
   coverage: PathwayProperties[];
 }
 
-const getPathways = async (): Promise<PathwayProperties[]> => {
+const getConfiguration = async (): Promise<PathwayProperties[]> => {
   try {
-    const configuration: CoverageConfig | any = yaml.load(fs.readFileSync('coverage.yml', 'utf8'));
+    const configuration: CoverageConfig = yaml.load(fs.readFileSync('coverage.yml', 'utf8')) as CoverageConfig;
 
     return configuration.coverage;
   } catch {
@@ -25,4 +25,4 @@ const getPathways = async (): Promise<PathwayProperties[]> => {
   }
 };
 
-export default getPathways;
+export default getConfiguration;
