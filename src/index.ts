@@ -30,8 +30,8 @@ const run = async (): Promise<void> => {
           splitConfigurationPath[splitConfigurationPath.length - 1] === 'lcov.info'
             ? configuration.path
             : configuration.path.concat('lcov.info');
-        let prData = await getData(configurationPath);
-        
+        let prData = await getData(configurationPath, configuration.displayName);
+
         if (url) {
           try {
             prData = await sendData(url, prData);
