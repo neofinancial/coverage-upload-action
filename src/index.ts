@@ -27,9 +27,9 @@ const run = async (): Promise<void> => {
       coverageConfiguration.map(async (configuration) => {
         const splitConfigurationPath = configuration.path.split('/');
         const configurationPath =
-          splitConfigurationPath[splitConfigurationPath.length - 1] === '/lcov.info'
-            ? configuration.path.concat('/lcov.info')
-            : configuration.path;
+          splitConfigurationPath[splitConfigurationPath.length - 1] === 'lcov.info'
+            ? configuration.path
+            : configuration.path.concat('lcov.info');
         let prData = await getData(configurationPath);
 
         if (url) {
