@@ -7,9 +7,7 @@ import sendData from './send-data';
 
 const run = async (): Promise<void> => {
   try {
-
     const url = getInput('coverageEndpoint');
-    let prData = await getData();
     const authToken = getInput('coverageToken');
 
     if (!authToken && url) {
@@ -22,7 +20,9 @@ const run = async (): Promise<void> => {
       );
     }
 
-    if (url) {
+    let prData = await getData(authToken);
+
+    if (url && authToken) {
       try {
         prData = await sendData(url, prData);
       } catch (error) {
@@ -40,20 +40,20 @@ const run = async (): Promise<void> => {
     console.log(`Functions percent: ${prData.coverage.functions.percent}`);
     console.log(`Branches percent: ${prData.coverage.branches.percent}`);
 
-    if(prData.coverage.lines.diff || prData.coverage.lines.diff === 0) {
+    if (prData.coverage.lines.diff || prData.coverage.lines.diff === 0) {
       console.log(`Lines difference: ${prData.coverage.lines.diff}`);
     }
 
-    if(prData.coverage.functions.diff || prData.coverage.functions.diff === 0) {
+    if (prData.coverage.functions.diff || prData.coverage.functions.diff === 0) {
       console.log(`Functions difference: ${prData.coverage.functions.diff}`);
     }
 
-    if(prData.coverage.branches.diff ||prData.coverage.branches.diff === 0) {
-    console.log(`Branches Difference: ${prData.coverage.branches.diff}`);
+    if (prData.coverage.branches.diff || prData.coverage.branches.diff === 0) {
+      console.log(`Branches Difference: ${prData.coverage.branches.diff}`);
     }
 
-    if(prData.message) {
-      console.log(`Message: ${prData.message}`)
+    if (prData.message) {
+      console.log(`Message: ${prData.message}`);
     }
 
     if (prData.pullRequest) {

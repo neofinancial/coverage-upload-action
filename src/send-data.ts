@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {  CoverageJson, PRData } from './types';
+import { CoverageJson, PRData } from './types';
 
 const sendData = async (url: string, prData: PRData): Promise<PRData> => {
   const postData: CoverageJson = {
@@ -25,16 +25,15 @@ const sendData = async (url: string, prData: PRData): Promise<PRData> => {
   try {
     const response = await axios.post(url, postData);
 
-    if(response.headers.responsetype === 'difference'){
+    if (response.headers.responsetype === 'difference') {
       prData.coverage.lines.diff = response.data.linesDifference;
       prData.coverage.functions.diff = response.data.functionsDifference;
       prData.coverage.branches.diff = response.data.branchesDifference;
-
-    } else if(response.headers.responsetype === 'comment'){
-      prData.message = response.data.comment
+    } else if (response.headers.responsetype === 'comment') {
+      prData.message = response.data.comment;
     }
 
-    return prData
+    return prData;
   } catch (error) {
     throw new Error(error);
   }
