@@ -23,6 +23,7 @@ export type PRData = {
   token: string;
   pullRequest?: number;
   message?: string;
+  displayName: string;
 };
 
 export type CoverageJson = {
@@ -40,4 +41,5 @@ export type CoverageJson = {
   branchesFound: number;
   token: string;
   pullRequest?: number;
+  displayName: string;
 };

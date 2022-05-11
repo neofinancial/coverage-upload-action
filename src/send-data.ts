@@ -17,6 +17,7 @@ const sendData = async (url: string, prData: PRData): Promise<PRData> => {
     branchesHit: prData.coverage.branches.hit,
     branchesFound: prData.coverage.branches.found,
     token: prData.token,
+    displayName: prData.displayName,
   };
 
   if (prData.pullRequest) {

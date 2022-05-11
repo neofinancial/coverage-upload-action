@@ -5,7 +5,7 @@ import getCoverage from './get-coverage';
 
 import { PRData } from './types';
 
-const getData = async (pathway: string): Promise<PRData> => {
+const getData = async (pathway: string, displayName: string): Promise<PRData> => {
   const authToken = getInput('coverageToken');
 
   const prData: PRData = {
@@ -13,6 +13,7 @@ const getData = async (pathway: string): Promise<PRData> => {
     ref: '',
     baseRef: '',
     pathName: pathway,
+    displayName: displayName,
     sha: '',
     actor: '',
     timestamp: Date.now().toString(),
