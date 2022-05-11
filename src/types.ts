@@ -13,7 +13,7 @@ export type CommentData = {
 
 export type PRData = {
   repositoryId: number;
-  pathName: string;
+  pathway: string;
   ref: string;
   baseRef: string;
   sha: string;
@@ -30,7 +30,7 @@ export type CoverageJson = {
   id: number;
   ref: string;
   baseRef: string;
-  pathName: string;
+  pathway: string;
   hash: string;
   actor: string;
   linesHit: number;
