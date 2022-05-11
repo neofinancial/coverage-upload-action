@@ -32,7 +32,7 @@ const run = async (): Promise<void> => {
             : configuration.path.concat('lcov.info');
         let prData = await getData(configurationPath);
 
-        if (url) {
+        if (url && authToken) {
           try {
             prData = await sendData(url, prData);
           } catch (error) {
@@ -56,6 +56,10 @@ const run = async (): Promise<void> => {
 
         if (prData.coverage.functions.diff || prData.coverage.functions.diff === 0) {
           console.log(`Functions difference: ${prData.coverage.functions.diff}`);
+        }
+
+        if (prData.coverage.branches.diff || prData.coverage.branches.diff === 0) {
+          console.log(`Branches Difference: ${prData.coverage.branches.diff}`);
         }
 
         if (prData.message) {
