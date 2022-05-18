@@ -68,25 +68,23 @@ you can set up a configuration file
 Example file structure:
 
 ```
-root
-  |firstpath
-    |package
-        |lcov.info
-  |secondpath
-    |lcov.info
-
+mono-repository/
+├─ packages/
+│  ├─ examplepath/
+│  │  ├─ coverage/
+│  │  │  ├─ lcov.info
+│  ├─ coverage/
+│  │  ├─ lcov.info
 ```
 
 In `coverage.yml`:
 
 ```
 coverage:
-  -
-    path: firstpath/package/
-    displayName: some cool display name
-  -
-    path: secondpath/
-    displayName: some ... other cool display name
+  - displayName: some cool display name
+    path: packages/examplepath/coverage/lcov.info
+  - displayName: some ... other cool display name
+    path: packages/coverage/lcov.info
 ```
 
 ## REST API Message Format

@@ -1,17 +1,17 @@
 import { getInput } from '@actions/core';
-import * as fs from 'fs';
-import * as yaml from 'js-yaml';
+import fs from 'fs';
+import yaml from 'js-yaml';
 
-export interface PathwayProperties {
+export interface PathProperties {
   path: string;
   displayName: string;
 }
 
 interface CoverageConfig {
-  coverage: PathwayProperties[];
+  coverage: PathProperties[];
 }
 
-const getConfiguration = async (): Promise<PathwayProperties[]> => {
+const getConfiguration = async (): Promise<PathProperties[]> => {
   try {
     const configuration: CoverageConfig = yaml.load(fs.readFileSync('coverage.yml', 'utf8')) as CoverageConfig;
 
@@ -19,7 +19,7 @@ const getConfiguration = async (): Promise<PathwayProperties[]> => {
   } catch {
     const coverageData = getInput('coverageData');
 
-    const coverageProperties: PathwayProperties = { path: coverageData, displayName: coverageData };
+    const coverageProperties: PathProperties = { path: coverageData, displayName: coverageData };
 
     return [coverageProperties];
   }

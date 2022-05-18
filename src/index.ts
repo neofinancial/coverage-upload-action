@@ -2,7 +2,7 @@ import { getInput, setFailed, warning } from '@actions/core';
 import { context } from '@actions/github';
 
 import { getData } from './get-data';
-import getConfiguration, { PathwayProperties } from './get-pathways';
+import getConfiguration, { PathProperties } from './get-coverage-properties';
 import makeComment from './make-comment';
 import sendData from './send-data';
 
@@ -21,7 +21,7 @@ const run = async (): Promise<void> => {
       );
     }
 
-    const coverageConfiguration: PathwayProperties[] = await getConfiguration();
+    const coverageConfiguration: PathProperties[] = await getConfiguration();
 
     await Promise.all(
       coverageConfiguration.map(async (configuration) => {

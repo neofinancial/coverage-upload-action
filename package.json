@@ -31,9 +31,7 @@
     "@actions/core": "^1.6.0",
     "@actions/github": "^5.0.0",
     "@octokit/action": "^3.18.0",
-    "@types/filesystem": "^0.0.32",
     "axios": "^0.25.0",
-    "file-system": "^2.2.2",
     "is-plain-object": "^5.0.0",
     "js-yaml": "^4.1.0",
     "lcov-parse": "^1.0.0"
