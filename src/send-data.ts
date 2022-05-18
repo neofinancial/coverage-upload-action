@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-import { CoverageJson, PRData } from './types';
+import { CoverageJson, PullRequestData } from './types';
 
-const sendData = async (url: string, prData: PRData): Promise<PRData> => {
+const sendPullRequestData = async (url: string, prData: PullRequestData): Promise<PullRequestData> => {
   const postData: CoverageJson = {
     id: prData.repositoryId,
     ref: prData.ref,
@@ -39,4 +39,4 @@ const sendData = async (url: string, prData: PRData): Promise<PRData> => {
   }
 };
 
-export default sendData;
+export default sendPullRequestData;

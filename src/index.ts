@@ -2,8 +2,8 @@ import { getInput, setFailed, warning } from '@actions/core';
 import { context } from '@actions/github';
 
 import { getData } from './get-data';
-import makeComment from './make-comment';
-import sendData from './send-data';
+import makePullRequestComment from './make-comment';
+import sendPullRequestData from './send-data';
 
 const run = async (): Promise<void> => {
   try {
@@ -24,7 +24,7 @@ const run = async (): Promise<void> => {
 
     if (url && authToken) {
       try {
-        prData = await sendData(url, prData);
+        prData = await sendPullRequestData(url, prData);
       } catch (error) {
         console.log(`${error}, Could not send data, printing comment`);
       }
@@ -61,7 +61,7 @@ const run = async (): Promise<void> => {
     }
 
     if (context.payload.pull_request) {
-      makeComment(prData.message, prData.coverage);
+      makePullRequestComment(prData.message, prData.coverage);
     }
   } catch (error) {
     setFailed(`Coverage action failed to run: ${error.message}`);
