@@ -6,7 +6,7 @@ const sendData = async (url: string, prData: PRData): Promise<PRData> => {
   const postData: CoverageJson = {
     id: prData.repositoryId,
     baseRef: prData.baseRef,
-    pathway: prData.pathway,
+    path: prData.path,
     ref: prData.ref,
     hash: prData.sha,
     actor: prData.actor,
