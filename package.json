@@ -1,6 +1,6 @@
 {
   "name": "coverage-upload-action",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "Parses coverage file and uploads to remote endpoint",
   "author": "Neo Financial Engineering",
   "license": "MIT",
@@ -26,7 +26,7 @@
   },
   "engines": {
     "node": ">=16.0.0"
-},
+  },
   "dependencies": {
     "@actions/core": "^1.6.0",
     "@actions/github": "^5.0.0",
