@@ -70,11 +70,12 @@ Example file structure:
 ```
 mono-repository/
 ├─ packages/
-│  ├─ examplepath/
+│  ├─ firstpath/
 │  │  ├─ coverage/
 │  │  │  ├─ lcov.info
-│  ├─ coverage/
-│  │  ├─ lcov.info
+│  ├─ secondpath/
+│  │  ├─ coverage/
+│  │  │  ├─ lcov.info
 ```
 
 In `coverage.yml`:
@@ -82,9 +83,9 @@ In `coverage.yml`:
 ```
 coverage:
   - displayName: some cool display name
-    path: packages/examplepath/coverage/lcov.info
+    path: packages/firstpath/coverage/lcov.info
   - displayName: some ... other cool display name
-    path: packages/coverage/lcov.info
+    path: packages/secondpath/coverage/lcov.info
 ```
 
 ## REST API Message Format
