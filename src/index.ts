@@ -2,7 +2,7 @@ import { getInput, setFailed, warning } from '@actions/core';
 import { context } from '@actions/github';
 
 import { getData } from './get-data';
-import getConfiguration, { PathwayProperties } from './get-pathways';
+import getConfiguration, { PathProperties } from './get-coverage-properties';
 import makeComment from './make-comment';
 import sendData from './send-data';
 
@@ -21,7 +21,7 @@ const run = async (): Promise<void> => {
       );
     }
 
-    const coverageConfiguration: PathwayProperties[] = await getConfiguration();
+    const coverageConfiguration: PathProperties[] = await getConfiguration();
 
     await Promise.all(
       coverageConfiguration.map(async (configuration) => {
@@ -32,7 +32,7 @@ const run = async (): Promise<void> => {
             : configuration.path.concat('lcov.info');
         let prData = await getData(configurationPath, configuration.displayName);
 
-        if (url) {
+        if (url && authToken) {
           try {
             prData = await sendData(url, prData);
           } catch (error) {
@@ -57,6 +57,10 @@ const run = async (): Promise<void> => {
 
         if (prData.coverage.functions.diff || prData.coverage.functions.diff === 0) {
           console.log(`Functions difference: ${prData.coverage.functions.diff}`);
+        }
+
+        if (prData.coverage.branches.diff || prData.coverage.branches.diff === 0) {
+          console.log(`Branches Difference: ${prData.coverage.branches.diff}`);
         }
 
         if (prData.message) {

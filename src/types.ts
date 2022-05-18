@@ -20,7 +20,7 @@ export type PRData = {
   actor: string;
   timestamp: string;
   coverage: CommentData;
-  token: string;
+  token?: string;
   pullRequest?: number;
   message?: string;
   displayName: string;
@@ -39,7 +39,7 @@ export type CoverageJson = {
   functionsFound: number;
   branchesHit: number;
   branchesFound: number;
-  token: string;
+  token?: string;
   pullRequest?: number;
   displayName: string;
 };
