@@ -5,15 +5,15 @@ import getCoverage from './get-coverage';
 
 import { PRData } from './types';
 
-const getData = async (pathway: string, displayName: string): Promise<PRData> => {
+const getData = async (path: string, displayName: string): Promise<PRData> => {
   const authToken = getInput('coverageToken');
 
   const prData: PRData = {
     repositoryId: context.payload.repository?.id,
     ref: '',
     baseRef: '',
-    pathway,
-    displayName: displayName ?? pathway,
+    path,
+    displayName: displayName ?? path,
     sha: '',
     actor: '',
     timestamp: Date.now().toString(),
@@ -50,7 +50,7 @@ const getData = async (pathway: string, displayName: string): Promise<PRData> =>
     throw new Error('sender is undefined');
   }
 
-  const commentData = await getCoverage(pathway);
+  const commentData = await getCoverage(path);
 
   prData.coverage.lines = commentData.lines;
   prData.coverage.functions = commentData.functions;
