@@ -82,21 +82,16 @@ The `id` field is the GitHub repository ID and is added automatically. The `toke
 
 The action expects to receive one of two responses from the POST request to the remote endpoint:
 
-response header:
-
-```json
-{
-  "responseType": "difference"
-}
-```
-
 response body:
 
 ```json
 {
-  "linesDifference": "int",
-  "functionsDifference": "int",
-  "branchesDifference": "int"
+  "type": "difference",
+  "data": {
+    "linesDifference": "int",
+    "functionsDifference": "int",
+    "branchesDifference": "int"
+  }
 }
 ```
 
@@ -104,19 +99,14 @@ where these above values are the % change in coverage for a particular metric an
 
 or alternatively ...
 
-response header:
-
-```json
-{
-  "responseType": "comment"
-}
-```
-
 response body:
 
 ```json
 {
-  "comment": "string"
+  "type": "comment",
+  "data": {
+    "comment": "string"
+  }
 }
 ```
 

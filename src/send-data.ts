@@ -25,12 +25,12 @@ const sendPullRequestData = async (url: string, prData: PullRequestData): Promis
   try {
     const response = await axios.post(url, postData);
 
-    if (response.headers.responsetype === 'difference') {
-      prData.coverage.lines.diff = response.data.linesDifference;
-      prData.coverage.functions.diff = response.data.functionsDifference;
-      prData.coverage.branches.diff = response.data.branchesDifference;
-    } else if (response.headers.responsetype === 'comment') {
-      prData.message = response.data.comment;
+    if (response.data.type === 'difference') {
+      prData.coverage.lines.diff = response.data.data.linesDifference;
+      prData.coverage.functions.diff = response.data.data.functionsDifference;
+      prData.coverage.branches.diff = response.data.data.branchesDifference;
+    } else if (response.data.type === 'comment') {
+      prData.message = response.data.data.comment;
     }
 
     return prData;
