@@ -3,7 +3,6 @@
 ## 2.0.0 (May 18, 2022)
 
 - Modified action to receive body from the payload
-
 - Display difference in code coverage when the difference is zero
 - Only show up to two decimal places for the coverage difference
 - Added messages to explain the error to the user
