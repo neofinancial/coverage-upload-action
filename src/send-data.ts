@@ -24,6 +24,8 @@ const sendPullRequestData = async (url: string, prData: PullRequestData): Promis
 
   try {
     const response = await axios.post(url, postData);
+    console.log('----------------RESPONSE--------------');
+    console.log(response);
 
     if (response.data.type === 'difference') {
       prData.coverage.lines.diff = response.data.data.linesDifference;
