@@ -95,14 +95,14 @@ The action expects to receive a response to this message that looks like this:
 These values are the % change in coverage for a particular metric and will be displayed in the `difference` column in the comment posted by the action.
 
 
-## CONTRIBUTING
+## Contributing
 
 1. Test your changes (see below)
 1. Update the version in `package.json`
 1. Update `CHANGELOG.md`
 1. Commit your changes to github and open a pull request
 
-### TESTING
+### Testing
 
 ##### Testing changes you made to this repository
 
