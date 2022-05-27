@@ -93,3 +93,28 @@ The action expects to receive a response to this message that looks like this:
 ```
 
 These values are the % change in coverage for a particular metric and will be displayed in the `difference` column in the comment posted by the action.
+
+
+## CONTRIBUTING
+
+1. Test your changes (see below)
+1. Update the version in `package.json`
+1. Update `CHANGELOG.md`
+1. Commit your changes to github and open a pull request
+
+### TESTING
+
+##### Testing changes you made to this repository
+
+1. In build.yml make sure the `uses` clause in the `Upload coverage` step is set to `./`
+1. Open a pull request / draft pull request to trigger this workflow run. The code on your branch will be ran for the `Upload coverage` step upon github actions running `build.yml`
+
+#### Testing changes you made to another repository against this action
+
+1. In your repository that references this action, change your workflows code from
+ `uses: neofinancial/coverage-upload-action@v1` to `uses: neofinancial/coverage-upload-action@commit-hash` where the commit hash is the version of code you want to test against.
+1. Run the workflow that references this action.
+
+
+
+
