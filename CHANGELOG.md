@@ -1,5 +1,13 @@
 # Coverage Upload Action Changelog
 
+## 2.0.0 (May 18, 2022)
+
+- Modified action to receive body from the payload
+- Display difference in code coverage when the difference is zero
+- Only show up to two decimal places for the coverage difference
+- Added messages to explain the error to the user
+- Update action to accept comment from service
+
 ## 1.0.2 (May 10, 2022)
 
 - require authtoken to post to endpoint

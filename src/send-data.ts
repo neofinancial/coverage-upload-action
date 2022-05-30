@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-import { CoverageJson, PRData } from './types';
+import { CoverageJson, PullRequestData } from './types';
 
-const sendDataComment = async (url: string, prData: PRData): Promise<string> => {
+const sendPullRequestData = async (url: string, prData: PullRequestData): Promise<PullRequestData> => {
   const postData: CoverageJson = {
     id: prData.repositoryId,
     ref: prData.ref,
@@ -23,14 +23,20 @@ const sendDataComment = async (url: string, prData: PRData): Promise<string> => 
   }
 
   try {
-    const response = await axios.post(url, postData, {
-      headers: { responseType: 'comment' },
-    });
+    const { data: responseData } = await axios.post(url, postData);
 
-    return response.data.message;
+    if (responseData.type === 'difference') {
+      prData.coverage.lines.diff = responseData.data.linesDifference;
+      prData.coverage.functions.diff = responseData.data.functionsDifference;
+      prData.coverage.branches.diff = responseData.data.branchesDifference;
+    } else if (responseData.type === 'comment') {
+      prData.message = responseData.data.comment;
+    }
+
+    return prData;
   } catch (error) {
     throw new Error(error);
   }
 };
 
-export default sendDataComment;
+export default sendPullRequestData;
