@@ -104,15 +104,16 @@ These values are the % change in coverage for a particular metric and will be di
 
 ### Testing
 
-##### Testing changes you made to this repository
+##### Testing action changes directly
 
-1. In build.yml make sure the `uses` clause in the `Upload coverage` step is set to `./`
-1. Open a pull request / draft pull request to trigger this workflow run. The code on your branch will be ran for the `Upload coverage` step upon github actions running `build.yml`
+1. In [build.yml](./.github/workflows/build.yml#L30) set `Upload coverage` steps `uses` clause to `./`
+1. Open a pull request to run the `build` workflow. The code on your branch will be ran for the `Upload coverage` step upon github actions running. Check the `Upload coverage` steps output for more details about your run.
 
-#### Testing changes you made to another repository against this action
+#### Testing action against another repository
 
 1. In your repository that references this action, change your workflows code from
- `uses: neofinancial/coverage-upload-action@v1` to `uses: neofinancial/coverage-upload-action@commit-hash` where the commit hash is the **full** commit hash version of code you want to test against.
+ `uses: neofinancial/coverage-upload-action@v1` to `uses: neofinancial/coverage-upload-action@<commit-hash>` where the commit hash is the **full** commit hash you wish to test.
+1. If your other repository is running a local server you want to test changes against, make sure you change the `coverageEndpoint` in `build.yml` to an ngrok url that points towards your local server.
 1. Run the workflow that references this action.
 
 
