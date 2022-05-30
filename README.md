@@ -112,7 +112,7 @@ These values are the % change in coverage for a particular metric and will be di
 #### Testing changes you made to another repository against this action
 
 1. In your repository that references this action, change your workflows code from
- `uses: neofinancial/coverage-upload-action@v1` to `uses: neofinancial/coverage-upload-action@commit-hash` where the commit hash is the version of code you want to test against.
+ `uses: neofinancial/coverage-upload-action@v1` to `uses: neofinancial/coverage-upload-action@commit-hash` where the commit hash is the **full** commit hash version of code you want to test against.
 1. Run the workflow that references this action.
 
 
