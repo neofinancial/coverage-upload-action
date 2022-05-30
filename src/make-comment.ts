@@ -1,4 +1,4 @@
-import { getInput, setFailed } from '@actions/core';
+import { setFailed } from '@actions/core';
 import { context } from '@actions/github';
 import { Octokit } from '@octokit/action';
 
@@ -6,7 +6,7 @@ import constructComment from './construct-comment';
 
 import { CommentData } from './types';
 
-const makeComment = async (message: string, commentData: CommentData): Promise<void> => {
+const makePullRequestComment = async (message: string | undefined, commentData: CommentData): Promise<void> => {
   try {
     if (!context.payload.pull_request) {
       setFailed('No pull requests found.');
@@ -33,25 +33,25 @@ const makeComment = async (message: string, commentData: CommentData): Promise<v
     });
 
     const botComment = comments.data.find((comment) => comment.body?.includes('<!-- coverage-action-comment -->'));
-    const customMessage = getInput('customMessage');
 
     console.log(botComment);
-    console.log(message);
     console.log(commentData);
+
+    const body = message ?? (await constructComment(commentData));
 
     if (!botComment) {
       octokit.issues.createComment({
         owner: owner,
         repo: repo,
         issue_number: pullRequestNumber,
-        body: customMessage === 'comment' ? message : await constructComment(commentData),
+        body,
       });
     } else {
       octokit.issues.updateComment({
         owner: owner,
         repo: repo,
         comment_id: botComment.id,
-        body: customMessage === 'comment' ? message : await constructComment(commentData),
+        body,
       });
     }
   } catch {
@@ -59,4 +59,4 @@ const makeComment = async (message: string, commentData: CommentData): Promise<v
   }
 };
 
-export default makeComment;
+export default makePullRequestComment;

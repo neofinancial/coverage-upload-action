@@ -2,10 +2,10 @@ import { getInput } from '@actions/core';
 import { context } from '@actions/github';
 
 import getCoverage from './get-coverage';
-import { PRData } from './types';
+import { PullRequestData } from './types';
 
-const getData = async (authToken?: string): Promise<PRData> => {
-  const prData: PRData = {
+const getData = async (authToken?: string): Promise<PullRequestData> => {
+  const prData: PullRequestData = {
     repositoryId: context.payload.repository?.id,
     ref: '',
     baseRef: '',
