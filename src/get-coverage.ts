@@ -27,6 +27,7 @@ const getCoverage = async (path: string): Promise<CommentData> => {
     commentData.lines.percent = (commentData.lines.hit / commentData.lines.found) * 100;
     commentData.functions.percent = (commentData.functions.hit / commentData.functions.found) * 100;
     commentData.branches.percent = (commentData.branches.hit / commentData.branches.found) * 100;
+    // // //
 
     return commentData;
   } catch {

@@ -30,8 +30,10 @@ const sendPullRequestData = async (url: string, prData: PullRequestData): Promis
       prData.coverage.functions.diff = responseData.data.functionsDifference;
       prData.coverage.branches.diff = responseData.data.branchesDifference;
     } else if (responseData.type === 'comment') {
+      console.log('here in comment');
       prData.message = responseData.data.comment;
     }
+    //
 
     return prData;
   } catch (error) {
