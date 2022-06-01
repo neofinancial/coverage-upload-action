@@ -1,8 +1,8 @@
 # Coverage Upload Action Changelog
 
-## 2.1.0 (May 18, 2022)
+## 2.1.0 (April 1, 2022)
 
-- Modify post request to end a path and displayName to a remote endpoint
+- Modify post request to send a path and displayName to a remote endpoint
 
 ## 2.0.0 (May 18, 2022)
 
