@@ -13,6 +13,7 @@ export type CommentData = {
 
 export type PRData = {
   repositoryId: number;
+  path: string;
   ref: string;
   baseRef: string;
   sha: string;
@@ -22,12 +23,14 @@ export type PRData = {
   token?: string;
   pullRequest?: number;
   message?: string;
+  displayName: string;
 };
 
 export type CoverageJson = {
   id: number;
   ref: string;
   baseRef: string;
+  path: string;
   hash: string;
   actor: string;
   linesHit: number;
@@ -38,4 +41,5 @@ export type CoverageJson = {
   branchesFound: number;
   token?: string;
   pullRequest?: number;
+  displayName: string;
 };

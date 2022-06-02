@@ -30,7 +30,7 @@ const run = async (): Promise<void> => {
           splitConfigurationPath[splitConfigurationPath.length - 1] === 'lcov.info'
             ? configuration.path
             : configuration.path.concat('lcov.info');
-        let prData = await getData(configurationPath);
+        let prData = await getData(configurationPath, configuration.displayName);
 
         if (url && authToken) {
           try {
@@ -46,6 +46,7 @@ const run = async (): Promise<void> => {
         console.log(`SHA of merge commit: ${prData.sha}`);
         console.log(`PR creator: ${prData.actor}`);
         console.log(`Time PR created: ${prData.timestamp}`);
+        console.log(`Pathway to coverage file: ${prData.path}`);
         console.log(`Lines percent: ${prData.coverage.lines.percent}`);
         console.log(`Functions percent: ${prData.coverage.functions.percent}`);
         console.log(`Branches percent: ${prData.coverage.branches.percent}`);
