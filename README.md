@@ -113,45 +113,35 @@ The `id` field is the GitHub repository ID and is added automatically. The `toke
 
 The action expects to receive one of two responses from the POST request to the remote endpoint:
 
-response header:
-
-```json
-{
-  "responseType": "difference"
-}
-```
-
 response body:
 
 ```json
 {
-  "linesDifference": "int",
-  "functionsDifference": "int",
-  "branchesDifference": "int"
+  "type": "difference",
+  "data": {
+    "linesDifference": "int",
+    "functionsDifference": "int",
+    "branchesDifference": "int"
+  }
 }
 ```
 
-where these above values are the % change in coverage for a particular metric and will be displayed in the `difference` column in the comment posted by the action
+where the data values are the % change in coverage for a particular metric and will be displayed in the `difference` column in the comment posted by the action
 
 or alternatively ...
 
-response header:
-
-```json
-{
-  "responseType": "comment"
-}
-```
-
 response body:
 
 ```json
 {
-  "comment": "string"
+  "type": "comment",
+  "data": {
+    "comment": "string"
+  }
 }
 ```
 
-where these above value is a markdown string and will be displayed in the comment posted by the action
+where the data value is a markdown string and will be displayed in the comment posted by the action
 
 Whether or not a response is received the action will print out general information about the repository and its code coverage:
 

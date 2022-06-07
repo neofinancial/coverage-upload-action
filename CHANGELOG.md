@@ -1,17 +1,14 @@
 # Coverage Upload Action Changelog
 
+<<<<<<< HEAD
 ## 2.1.0 (June 2, 2022)
 
 - Modify post request to send a path and displayName to a remote endpoint
 
 ## 2.0.0 (May 18, 2022)
 
-- Modified action to receive header from the payload
-- Modify readme to explain how to attach the header
-
+- Modified action to receive body from the payload
 - Display difference in code coverage when the difference is zero
-- Added mono repo flag to the CI
-- Added Leah as code owner
 - Only show up to two decimal places for the coverage difference
 - Added messages to explain the error to the user
 - Update action to accept comment from service

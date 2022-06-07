@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-import { CoverageJson, PRData } from './types';
+import { CoverageJson, PullRequestData } from './types';
 
-const sendData = async (url: string, prData: PRData): Promise<PRData> => {
+const sendPullRequestData = async (url: string, prData: PullRequestData): Promise<PullRequestData> => {
   const postData: CoverageJson = {
     id: prData.repositoryId,
     baseRef: prData.baseRef,
@@ -25,14 +25,14 @@ const sendData = async (url: string, prData: PRData): Promise<PRData> => {
   }
 
   try {
-    const response = await axios.post(url, postData);
+    const { data: responseData } = await axios.post(url, postData);
 
-    if (response.headers.responsetype === 'difference') {
-      prData.coverage.lines.diff = response.data.linesDifference;
-      prData.coverage.functions.diff = response.data.functionsDifference;
-      prData.coverage.branches.diff = response.data.branchesDifference;
-    } else if (response.headers.responsetype === 'comment') {
-      prData.message = response.data.comment;
+    if (responseData.type === 'difference') {
+      prData.coverage.lines.diff = responseData.data.linesDifference;
+      prData.coverage.functions.diff = responseData.data.functionsDifference;
+      prData.coverage.branches.diff = responseData.data.branchesDifference;
+    } else if (responseData.type === 'comment') {
+      prData.message = responseData.data.comment;
     }
 
     return prData;
@@ -41,4 +41,4 @@ const sendData = async (url: string, prData: PRData): Promise<PRData> => {
   }
 };
 
-export default sendData;
+export default sendPullRequestData;

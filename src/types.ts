@@ -11,7 +11,7 @@ export type CommentData = {
   branches: CoverageInfo;
 };
 
-export type PRData = {
+export type PullRequestData = {
   repositoryId: number;
   path: string;
   ref: string;
