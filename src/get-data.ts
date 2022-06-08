@@ -5,7 +5,7 @@ import getCoverage from './get-coverage';
 
 import { PullRequestData } from './types';
 
-const getData = async (path: string, displayName: string): Promise<PullRequestData> => {
+const getPullRequestData = async (path: string, displayName: string): Promise<PullRequestData> => {
   const authToken = getInput('coverageToken');
 
   const prData: PullRequestData = {
@@ -59,4 +59,4 @@ const getData = async (path: string, displayName: string): Promise<PullRequestDa
   return prData;
 };
 
-export { getData };
+export { getPullRequestData };

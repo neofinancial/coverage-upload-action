@@ -105,7 +105,9 @@ This action will send a POST request to the specified endpoint with a message th
   "linesTotal": 101,
   "branchesHit": 19,
   "branchesTotal": 23,
-  "token": "secret"
+  "token": "secret",
+  "path": "packages/firstpath/coverage/lcov.info",
+  "displayName": "some cool display name"
 }
 ```
 

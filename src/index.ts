@@ -1,7 +1,7 @@
 import { getInput, setFailed, warning } from '@actions/core';
 import { context } from '@actions/github';
 
-import { getData } from './get-data';
+import { getPullRequestData } from './get-data';
 import getConfiguration, { PathProperties } from './get-coverage-properties';
 import makePullRequestComment from './make-comment';
 import sendPullRequestData from './send-data';
@@ -30,7 +30,7 @@ const run = async (): Promise<void> => {
           splitConfigurationPath[splitConfigurationPath.length - 1] === 'lcov.info'
             ? configuration.path
             : configuration.path.concat('lcov.info');
-        let prData = await getData(configurationPath, configuration.displayName);
+        let prData = await getPullRequestData(configurationPath, configuration.displayName);
 
         if (url && authToken) {
           try {
