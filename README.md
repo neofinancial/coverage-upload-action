@@ -59,8 +59,7 @@ If you have an existing workflow that runs your tests you can just add the `Uplo
 
 ## Configuration
 
-If you want this action to generate more than one coverage report from a single repository, or to customize the display name shown for a repository,
-you can set up a configuration file
+If you want this action to generate more than one coverage report from a single repository, or to customize the display name shown for a repository, you can set up a configuration file:
 
 1. add a file `coverage.yml` to the root of your repository
 2. structure the data in `coverage.yml` as follows
