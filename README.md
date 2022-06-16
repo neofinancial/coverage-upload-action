@@ -67,7 +67,7 @@ If you want this action to generate more than one coverage report from a single 
 Example file structure:
 
 ```
-mono-repository/
+monorepo/
 ├─ packages/
 │  ├─ firstpath/
 │  │  ├─ coverage/
