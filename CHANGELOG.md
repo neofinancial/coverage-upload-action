@@ -1,9 +1,10 @@
 # Coverage Upload Action Changelog
 
-## 2.1.0 (June 13, 2022)
+## 3.0.0 (June 20, 2022)
 
 - Parse all paths and display names from a config file
 - Modify post request to send a path and displayName to a remote endpoint
+- Modify post request to send data to a remote endpoint as a list of pull request objects
 
 ## 2.0.0 (May 18, 2022)
 
