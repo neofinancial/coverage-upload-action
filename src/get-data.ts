@@ -1,7 +1,7 @@
 import { getInput } from '@actions/core';
 import { context } from '@actions/github';
 
-import getCoverage from './get-coverage';
+import { getCoverage } from './get-coverage';
 
 import { PullRequestData } from './types';
 

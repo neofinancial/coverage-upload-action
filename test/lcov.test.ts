@@ -1,4 +1,4 @@
-import getCoverage from '../src/get-coverage';
+import { getCoverage } from '../src/get-coverage';
 
 describe('getCoverage tests', () => {
   test('should throw error', async () => {
