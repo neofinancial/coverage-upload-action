@@ -159,3 +159,26 @@ Whether or not a response is received the action will print out general informat
 "Functions percent": "int"
 "Branches percent": "int"
 ```
+These values are the % change in coverage for a particular metric and will be displayed in the `difference` column in the comment posted by the action.
+
+## Contributing
+
+1. Test your changes (see below)
+1. Update the version in `package.json`
+1. Update `CHANGELOG.md`
+1. Commit your changes and open a pull request
+
+### Testing
+
+##### Testing Action changes in this repo
+
+1. In [build.yml](./.github/workflows/build.yml#L30) set the `Upload coverage` step's `uses` clause to `./`
+1. Open a pull request to run the `build` workflow. The code on your branch will be run for the `Upload coverage` step. Check the `Upload coverage` step's output for more details about your run.
+
+#### Testing Action against another repository
+
+1. In your repository that references this action, change your workflow's code from
+ `uses: neofinancial/coverage-upload-action@v1` to `uses: neofinancial/coverage-upload-action@<commit-hash>` where the commit hash is the **full** commit hash you wish to test.
+1. If your other repository is running a local server you want to test changes against, make sure you change the `coverageEndpoint` in `build.yml` to an ngrok url that points towards your local server.
+1. Run the workflow that references this action.
+
