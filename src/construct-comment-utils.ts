@@ -33,7 +33,7 @@ const getCoverageIncreaseOrDecreaseSign = (difference: number): string => {
 
   return `${(Math.round(difference * 100) / 100).toString()}%`;
 };
-
+//
 const getCoverageAfterPr = (current: number, difference: number): string => {
   const newCoverage = Math.round((current + difference) * 100) / 100;
 
