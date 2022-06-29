@@ -36,10 +36,10 @@ const getCoverage = async (path: string): Promise<CommentData> => {
   }
 };
 
-const getMonoRepoCoverage = async (monoRepoData: PullRequestData[]): Promise<CommentData> => {
+const getMonorepoCoverage = async (monorepoData: PullRequestData[]): Promise<CommentData> => {
   try {
     // eslint-disable-next-line unicorn/no-reduce
-    const { linesData, functionsData, branchesData } = monoRepoData.reduce(
+    const { linesData, functionsData, branchesData } = monorepoData.reduce(
       (initial, current) => {
         return {
           linesData: {
@@ -81,4 +81,4 @@ const getMonoRepoCoverage = async (monoRepoData: PullRequestData[]): Promise<Com
   }
 };
 
-export { getCoverage, getMonoRepoCoverage };
+export { getCoverage, getMonorepoCoverage };

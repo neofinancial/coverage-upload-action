@@ -51,7 +51,7 @@ const sendPullRequestData = async (url: string, prData: PullRequestData[]): Prom
 
     return receivedPrData;
   } catch (error) {
-    console.log(`${error}, Could not send data, printing comment`);
+    console.error(`Could not send PR data: ${error.message},`);
   }
 
   return prData[0];

@@ -2,11 +2,11 @@ import { getInput, setFailed, warning } from '@actions/core';
 import { context } from '@actions/github';
 
 import { getPullRequestData } from './get-data';
-import getConfiguration, { PathProperties } from './get-coverage-properties';
+import getConfiguration, { PathProperties } from './get-configuration';
 import makePullRequestComment from './make-comment';
 import sendPullRequestData from './send-data';
 import { CommentData, PullRequestData } from './types';
-import { getMonoRepoCoverage } from './get-coverage';
+import { getMonorepoCoverage } from './get-coverage';
 
 const run = async (): Promise<void> => {
   try {
@@ -39,7 +39,7 @@ const run = async (): Promise<void> => {
     await Promise.all(coverageConfigurationPromise);
 
     if (url && authToken) {
-      const coverageData: CommentData = await getMonoRepoCoverage(constructedPrData);
+      const coverageData: CommentData = await getMonorepoCoverage(constructedPrData);
       const receivedPrData: PullRequestData = await sendPullRequestData(url, constructedPrData);
 
       console.log(`Repo ID: ${constructedPrData[0].repositoryId}`);
