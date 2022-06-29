@@ -1,14 +1,18 @@
 import { getInput, setFailed, warning } from '@actions/core';
 import { context } from '@actions/github';
 
-import { getData } from './get-data';
+import { getPullRequestData } from './get-data';
+import getConfiguration, { PathProperties } from './get-configuration';
 import makePullRequestComment from './make-comment';
 import sendPullRequestData from './send-data';
+import { CommentData, PullRequestData } from './types';
+import { getMonorepoCoverage } from './get-coverage';
 
 const run = async (): Promise<void> => {
   try {
     const url = getInput('coverageEndpoint');
     const authToken = getInput('coverageToken');
+    const constructedPrData: PullRequestData[] = [];
 
     if (!authToken && url) {
       warning(
@@ -20,48 +24,57 @@ const run = async (): Promise<void> => {
       );
     }
 
-    let prData = await getData(authToken);
+    const coverageConfiguration: PathProperties[] = await getConfiguration();
+
+    const coverageConfigurationPromise = coverageConfiguration.map(async (configuration) => {
+      const splitConfigurationPath = configuration.path.split('/');
+      const configurationPath =
+        splitConfigurationPath[splitConfigurationPath.length - 1] === 'lcov.info'
+          ? configuration.path
+          : configuration.path.concat('lcov.info');
+
+      constructedPrData.push(await getPullRequestData(configurationPath, configuration.displayName));
+    });
+
+    await Promise.all(coverageConfigurationPromise);
 
     if (url && authToken) {
-      try {
-        prData = await sendPullRequestData(url, prData);
-      } catch (error) {
-        console.log(`${error}, Could not send data, printing comment`);
+      const coverageData: CommentData = await getMonorepoCoverage(constructedPrData);
+      const receivedPrData: PullRequestData = await sendPullRequestData(url, constructedPrData);
+
+      console.log(`Repo ID: ${constructedPrData[0].repositoryId}`);
+      console.log(`Ref of branch being merged: ${constructedPrData[0].ref}`);
+      console.log(`Ref of branch being merged into: ${constructedPrData[0].baseRef}`);
+      console.log(`SHA of merge commit: ${constructedPrData[0].sha}`);
+      console.log(`PR creator: ${constructedPrData[0].actor}`);
+      console.log(`Time PR created: ${constructedPrData[0].timestamp}`);
+      console.log(`Lines percent: ${coverageData.lines.percent}`);
+      console.log(`Functions percent: ${coverageData.functions.percent}`);
+      console.log(`Branches percent: ${coverageData.branches.percent}`);
+
+      if (receivedPrData.coverage.lines.diff || receivedPrData.coverage.lines.diff === 0) {
+        console.log(`Lines difference: ${receivedPrData.coverage.lines.diff}`);
       }
-    }
 
-    console.log(`Repo ID: ${prData.repositoryId}`);
-    console.log(`Ref of branch being merged: ${prData.ref}`);
-    console.log(`Ref of branch being merged into: ${prData.baseRef}`);
-    console.log(`SHA of merge commit: ${prData.sha}`);
-    console.log(`PR creator: ${prData.actor}`);
-    console.log(`Time PR created: ${prData.timestamp}`);
-    console.log(`Lines percent: ${prData.coverage.lines.percent}`);
-    console.log(`Functions percent: ${prData.coverage.functions.percent}`);
-    console.log(`Branches percent: ${prData.coverage.branches.percent}`);
+      if (receivedPrData.coverage.functions.diff || receivedPrData.coverage.functions.diff === 0) {
+        console.log(`Functions difference: ${receivedPrData.coverage.functions.diff}`);
+      }
 
-    if (prData.coverage.lines.diff || prData.coverage.lines.diff === 0) {
-      console.log(`Lines difference: ${prData.coverage.lines.diff}`);
-    }
+      if (receivedPrData.coverage.branches.diff || receivedPrData.coverage.branches.diff === 0) {
+        console.log(`Branches Difference: ${receivedPrData.coverage.branches.diff}`);
+      }
 
-    if (prData.coverage.functions.diff || prData.coverage.functions.diff === 0) {
-      console.log(`Functions difference: ${prData.coverage.functions.diff}`);
-    }
+      if (receivedPrData.message) {
+        console.log(`Message: ${receivedPrData.message}`);
+      }
 
-    if (prData.coverage.branches.diff || prData.coverage.branches.diff === 0) {
-      console.log(`Branches Difference: ${prData.coverage.branches.diff}`);
-    }
+      if (constructedPrData[0].pullRequest) {
+        console.log(`Pull Request Number: ${receivedPrData.pullRequest}`);
+      }
 
-    if (prData.message) {
-      console.log(`Message: ${prData.message}`);
-    }
-
-    if (prData.pullRequest) {
-      console.log(`Pull Request Number: ${prData.pullRequest}`);
-    }
-
-    if (context.payload.pull_request) {
-      makePullRequestComment(prData.message, prData.coverage);
+      if (context.payload.pull_request) {
+        await makePullRequestComment(receivedPrData.message, receivedPrData.coverage);
+      }
     }
   } catch (error) {
     setFailed(`Coverage action failed to run: ${error.message}`);

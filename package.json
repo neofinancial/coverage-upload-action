@@ -1,6 +1,6 @@
 {
   "name": "coverage-upload-action",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Parses coverage file and uploads to remote endpoint",
   "author": "Neo Financial Engineering",
   "license": "MIT",
@@ -33,10 +33,12 @@
     "@octokit/action": "^3.18.0",
     "axios": "^0.25.0",
     "is-plain-object": "^5.0.0",
+    "js-yaml": "^4.1.0",
     "lcov-parse": "^1.0.0"
   },
   "devDependencies": {
     "@types/jest": "^27.4.0",
+    "@types/js-yaml": "^4.0.5",
     "eslint": "^7.17.0",
     "eslint-config-neo": "^0.6.3",
     "jest": "^27.5.0",

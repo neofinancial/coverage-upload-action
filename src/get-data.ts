@@ -1,14 +1,19 @@
 import { getInput } from '@actions/core';
 import { context } from '@actions/github';
 
-import getCoverage from './get-coverage';
+import { getCoverage } from './get-coverage';
+
 import { PullRequestData } from './types';
 
-const getData = async (authToken?: string): Promise<PullRequestData> => {
+const getPullRequestData = async (path: string, displayName: string): Promise<PullRequestData> => {
+  const authToken = getInput('coverageToken');
+
   const prData: PullRequestData = {
     repositoryId: context.payload.repository?.id,
     ref: '',
     baseRef: '',
+    path,
+    displayName: displayName ?? path,
     sha: '',
     actor: '',
     timestamp: Date.now().toString(),
@@ -45,8 +50,7 @@ const getData = async (authToken?: string): Promise<PullRequestData> => {
     throw new Error('sender is undefined');
   }
 
-  const coverageData = getInput('coverageData');
-  const commentData = await getCoverage(coverageData);
+  const commentData = await getCoverage(path);
 
   prData.coverage.lines = commentData.lines;
   prData.coverage.functions = commentData.functions;
@@ -55,4 +59,4 @@ const getData = async (authToken?: string): Promise<PullRequestData> => {
   return prData;
 };
 
-export { getData };
+export { getPullRequestData };
