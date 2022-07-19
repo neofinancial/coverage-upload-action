@@ -5,12 +5,11 @@ import { getData } from './get-data';
 import makePullRequestComment from './make-comment';
 import sendPullRequestData from './send-data';
 
-const actionDebug = getInput('actionDebug');
-
 const run = async (): Promise<void> => {
   try {
     const url = getInput('coverageEndpoint');
     const authToken = getInput('coverageToken');
+    const actionDebug = getInput('actionDebug');
 
     if (!authToken && url) {
       warning(
