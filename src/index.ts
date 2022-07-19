@@ -5,6 +5,8 @@ import { getData } from './get-data';
 import makePullRequestComment from './make-comment';
 import sendPullRequestData from './send-data';
 
+const actionDebug = getInput('actionDebug');
+
 const run = async (): Promise<void> => {
   try {
     const url = getInput('coverageEndpoint');
@@ -26,11 +28,11 @@ const run = async (): Promise<void> => {
       try {
         prData = await sendPullRequestData(url, prData);
       } catch (error) {
-        console.log(`${error}, Could not send data, printing comment`);
+        console.log(`${error}, Could not send data`);
       }
     }
 
-    if (process.env.ACTION_DEBUG === 'true') {
+    if (actionDebug === 'true') {
       console.log(`Repo ID: ${prData.repositoryId}`);
       console.log(`Ref of branch being merged: ${prData.ref}`);
       console.log(`Ref of branch being merged into: ${prData.baseRef}`);
@@ -64,7 +66,7 @@ const run = async (): Promise<void> => {
       if (context.payload.pull_request) {
         makePullRequestComment(prData.message, prData.coverage);
       }
-    } else if (process.env.ACTION_DEBUG === 'false' || prData.message) {
+    } else if (actionDebug === 'false' || prData.message) {
       console.log(prData.message);
     }
   } catch (error) {
