@@ -64,9 +64,7 @@ const run = async (): Promise<void> => {
       if (context.payload.pull_request) {
         makePullRequestComment(prData.message, prData.coverage);
       }
-    }
-
-    if (prData.message) {
+    } else if (process.env.ACTION_DEBUG === 'false' || prData.message) {
       console.log(prData.message);
     }
   } catch (error) {
