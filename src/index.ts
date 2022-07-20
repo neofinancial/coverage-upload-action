@@ -61,12 +61,10 @@ const run = async (): Promise<void> => {
       if (prData.pullRequest) {
         console.log(`Pull Request Number: ${prData.pullRequest}`);
       }
+    }
 
-      if (context.payload.pull_request) {
-        makePullRequestComment(prData.message, prData.coverage);
-      }
-    } else if (actionDebug === 'false' || !actionDebug) {
-      console.log(prData.message);
+    if (context.payload.pull_request) {
+      makePullRequestComment(prData.message, prData.coverage);
     }
   } catch (error) {
     setFailed(`Coverage action failed to run: ${error.message}`);

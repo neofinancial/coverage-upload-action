@@ -59,7 +59,7 @@ Note: The `actionDebug` variable is optional and if it is not provided it will d
 | coverageEndpoint | The remote endpoint to upload coverage data to                         | null                 | No       |
 | coverageToken    | A token to authenticate with the remote endpoint and identify the repo | null                 | No       |
 | coverageData     | The location of the lcov file containing coverage information          | `coverage/lcov.info` | No       |
-| actionDebug      | flag to view verbose debug data                                        | false                | No       |
+| actionDebug      | Flag to view verbose debug data                                        | false                | No       |
 
 ## REST API Message Format
 
