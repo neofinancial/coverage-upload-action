@@ -34,11 +34,6 @@ const makePullRequestComment = async (message: string | undefined, commentData: 
 
     const botComment = comments.data.find((comment) => comment.body?.includes('<!-- coverage-action-comment -->'));
 
-    console.log(botComment);
-    console.log(commentData);
-
-    console.log('HELLO');
-
     const body = message ?? (await constructComment(commentData));
 
     if (!botComment) {
