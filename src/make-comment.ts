@@ -37,6 +37,8 @@ const makePullRequestComment = async (message: string | undefined, commentData: 
     console.log(botComment);
     console.log(commentData);
 
+    console.log('HELLO');
+
     const body = message ?? (await constructComment(commentData));
 
     if (!botComment) {

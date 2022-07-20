@@ -54,13 +54,13 @@ const run = async (): Promise<void> => {
         console.log(`Branches Difference: ${prData.coverage.branches.diff}`);
       }
 
-      if (prData.message) {
-        console.log(`Message: ${prData.message}`);
-      }
-
       if (prData.pullRequest) {
         console.log(`Pull Request Number: ${prData.pullRequest}`);
       }
+    }
+
+    if (prData.message) {
+      console.log(`Message: ${prData.message}`);
     }
 
     if (context.payload.pull_request) {
