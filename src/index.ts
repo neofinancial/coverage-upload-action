@@ -1,9 +1,10 @@
 import { getInput, setFailed, warning } from '@actions/core';
 import { context } from '@actions/github';
 
+import { getCoverageAfterPr, getCoverageDifferenceEmoji, getCoverageEmoji } from './construct-comment-utils';
+
 import { getData } from './get-data';
 import makePullRequestComment from './make-comment';
-import constructComment from './construct-comment';
 import sendPullRequestData from './send-data';
 
 const run = async (): Promise<void> => {
@@ -61,7 +62,47 @@ const run = async (): Promise<void> => {
     }
 
     if (prData.message) {
-      console.log(`Message: ${await constructComment(prData.coverage)}`);
+      console.log(`Message: ${prData.message}`);
+    }
+
+    if (prData.coverage.lines.diff === 0 || prData.coverage.lines.diff) {
+      console.log(
+        `## Code Coverage
+
+        |           | Current Coverage                                 | Coverage After PR                                                                         |                                                               |
+        |-----------|--------------------------------------------------|-------------------------------------------------------------------------------------------|---------------------------------------------------------------|
+        | Lines     | ${prData.coverage.lines.percent.toFixed(2)}%     | ${getCoverageAfterPr(
+          prData.coverage.lines.percent,
+          prData.coverage.lines.diff
+        )}          | ${getCoverageDifferenceEmoji(prData.coverage.lines.diff)}     |
+        | Functions | ${prData.coverage.functions.percent.toFixed(2)}% | ${getCoverageAfterPr(
+          prData.coverage.functions.percent,
+          prData.coverage.functions.diff
+        )}  | ${getCoverageDifferenceEmoji(prData.coverage.functions.diff)} |
+        | Branches  | ${prData.coverage.branches.percent.toFixed(2)}%  | ${getCoverageAfterPr(
+          prData.coverage.branches.percent,
+          prData.coverage.branches.diff
+        )}    | ${getCoverageDifferenceEmoji(prData.coverage.branches.diff)}  |
+        <!-- coverage-action-comment -->`
+      );
+    } else {
+      console.log(
+        `
+## Code Coverage
+|           | Current Coverage                             |                                                    |
+|-----------|----------------------------------------------|----------------------------------------------------|
+| Lines     | ${prData.coverage.lines.percent.toFixed(2)}%     | ${getCoverageEmoji(
+          prData.coverage.lines.percent
+        )}     |
+| Functions | ${prData.coverage.functions.percent.toFixed(2)}% | ${getCoverageEmoji(
+          prData.coverage.functions.percent
+        )} |
+| Branches  | ${prData.coverage.branches.percent.toFixed(2)}%  | ${getCoverageEmoji(
+          prData.coverage.branches.percent
+        )}  |
+<!-- coverage-action-comment -->
+`
+      );
     }
 
     if (context.payload.pull_request) {
