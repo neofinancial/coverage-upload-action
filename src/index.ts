@@ -1,6 +1,7 @@
 import { getInput, setFailed, warning } from '@actions/core';
 import { context } from '@actions/github';
 
+import constructDisplayMessage from './construct-display-message';
 import { getData } from './get-data';
 import makePullRequestComment from './make-comment';
 import sendPullRequestData from './send-data';
@@ -31,39 +32,6 @@ const run = async (): Promise<void> => {
       }
     }
 
-    const linesCoverage = {
-      name: 'Lines',
-      coverage: `${prData.coverage.lines.percent.toFixed(2)}%`,
-      differenceAfterPR: prData.message
-        ? `${prData.message.split('\n')[4].split('|')[3].replace(/ /g, '')} ${prData.message
-            .split('\n')[4]
-            .split('|')[4]
-            .replace(/ /g, '')} `
-        : 'No Data',
-    };
-
-    const functionsCoverage = {
-      name: 'Functions',
-      coverage: `${prData.coverage.functions.percent.toFixed(2)}%`,
-      differenceAfterPR: prData.message
-        ? `${prData.message.split('\n')[5].split('|')[3].replace(/ /g, '')} ${prData.message
-            .split('\n')[5]
-            .split('|')[4]
-            .replace(/ /g, '')} `
-        : 'No Data',
-    };
-
-    const branchesCoverage = {
-      name: 'Branches',
-      coverage: `${prData.coverage.branches.percent.toFixed(2)}%`,
-      differenceAfterPR: prData.message
-        ? `${prData.message.split('\n')[6].split('|')[3].replace(/ /g, '')} ${prData.message
-            .split('\n')[6]
-            .split('|')[4]
-            .replace(/ /g, '')} `
-        : 'No Data',
-    };
-
     if (actionDebug === 'true') {
       console.log(`Repo ID: ${prData.repositoryId}`);
       console.log(`Ref of branch being merged: ${prData.ref}`);
@@ -93,7 +61,7 @@ const run = async (): Promise<void> => {
     }
 
     if (prData.message) {
-      console.table([linesCoverage, functionsCoverage, branchesCoverage]);
+      console.table(constructDisplayMessage(prData));
     }
 
     if (context.payload.pull_request) {
