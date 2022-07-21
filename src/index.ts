@@ -3,6 +3,7 @@ import { context } from '@actions/github';
 
 import { getData } from './get-data';
 import makePullRequestComment from './make-comment';
+import constructComment from './construct-comment';
 import sendPullRequestData from './send-data';
 
 const run = async (): Promise<void> => {
@@ -60,7 +61,7 @@ const run = async (): Promise<void> => {
     }
 
     if (prData.message) {
-      console.log(`Message: ${prData.message}`);
+      console.log(`Message: ${constructComment(prData.coverage)}`);
     }
 
     if (context.payload.pull_request) {
