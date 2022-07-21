@@ -63,25 +63,32 @@ const run = async (): Promise<void> => {
 
     if (prData.message) {
       console.log(`Message: ${prData.message}`);
-      console.table([
-        [
-          `${prData.coverage.lines.percent.toFixed(2)}%`,
-          `${getCoverageAfterPr(
-            prData.coverage.lines.percent,
-            prData.coverage.lines.diff
-          )} ${getCoverageDifferenceEmoji(prData.coverage.lines.diff)}`,
-        ],
-        [
-          `${prData.coverage.functions.percent.toFixed(2)}%`,
-          `${getCoverageAfterPr(prData.coverage.functions.percent, prData.coverage.functions.diff)}
-            ${getCoverageDifferenceEmoji(prData.coverage.functions.diff)}`,
-        ],
-        [
-          `${prData.coverage.branches.percent.toFixed(2)}%`,
-          `${getCoverageAfterPr(prData.coverage.branches.percent, prData.coverage.branches.diff)}
-            ${getCoverageDifferenceEmoji(prData.coverage.branches.diff)}`,
-        ],
-      ]);
+
+      const linesCoverage = {
+        coverage: `${prData.coverage.lines.percent.toFixed(2)}%`,
+        coverageAfterPR: `${getCoverageAfterPr(
+          prData.coverage.lines.percent,
+          prData.coverage.lines.diff
+        )} ${getCoverageDifferenceEmoji(prData.coverage.lines.diff)}`,
+      };
+
+      const functionsCoverage = {
+        coverage: `${prData.coverage.functions.percent.toFixed(2)}%`,
+        coverageAfterPR: `${getCoverageAfterPr(
+          prData.coverage.functions.percent,
+          prData.coverage.functions.diff
+        )} ${getCoverageDifferenceEmoji(prData.coverage.functions.diff)}`,
+      };
+
+      const branchesCoverage = {
+        coverage: `${prData.coverage.branches.percent.toFixed(2)}%`,
+        coverageAfterPR: `${getCoverageAfterPr(
+          prData.coverage.branches.percent,
+          prData.coverage.branches.diff
+        )} ${getCoverageDifferenceEmoji(prData.coverage.branches.diff)}`,
+      };
+
+      console.table([linesCoverage, functionsCoverage, branchesCoverage]);
     } else if (prData.coverage.lines.diff === 0 || prData.coverage.lines.diff) {
       console.table(
         [
