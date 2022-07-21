@@ -1,8 +1,6 @@
 import { getInput, setFailed, warning } from '@actions/core';
 import { context } from '@actions/github';
 
-import { getCoverageAfterPr, getCoverageDifferenceEmoji, getCoverageEmoji } from './construct-comment-utils';
-
 import { getData } from './get-data';
 import makePullRequestComment from './make-comment';
 import sendPullRequestData from './send-data';
