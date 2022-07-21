@@ -34,36 +34,27 @@ const run = async (): Promise<void> => {
     }
 
     const linesCoverage = {
+      name: 'Lines',
       coverage: `${prData.coverage.lines.percent.toFixed(2)}%`,
-      coverageAfterPR:
-        prData.coverage.lines.diff === 0 || prData.coverage.lines.diff
-          ? `${getCoverageAfterPr(
-              prData.coverage.lines.percent,
-              prData.coverage.lines.diff
-            )}${getCoverageDifferenceEmoji(prData.coverage.lines.diff)}`
-          : `${getCoverageEmoji(prData.coverage.lines.percent)}`,
+      differenceAfterPR: prData.message
+        ? `${prData.message.split('\n')[4].split('|')[3]} ${prData.message.split('\n')[4].split('|')[4]} `
+        : 'No Data',
     };
 
     const functionsCoverage = {
+      name: 'Functions',
       coverage: `${prData.coverage.functions.percent.toFixed(2)}%`,
-      coverageAfterPR:
-        prData.coverage.lines.diff === 0 || prData.coverage.lines.diff
-          ? `${getCoverageAfterPr(
-              prData.coverage.functions.percent,
-              prData.coverage.functions.diff
-            )}${getCoverageDifferenceEmoji(prData.coverage.functions.diff)}`
-          : `${getCoverageEmoji(prData.coverage.functions.percent)}`,
+      differenceAfterPR: prData.message
+        ? `${prData.message.split('\n')[4].split('|')[3]} ${prData.message.split('\n')[4].split('|')[4]} `
+        : 'No Data',
     };
 
     const branchesCoverage = {
+      name: 'Branches',
       coverage: `${prData.coverage.branches.percent.toFixed(2)}%`,
-      coverageAfterPR:
-        prData.coverage.lines.diff === 0 || prData.coverage.lines.diff
-          ? `${getCoverageAfterPr(
-              prData.coverage.branches.percent,
-              prData.coverage.branches.diff
-            )}${getCoverageDifferenceEmoji(prData.coverage.branches.diff)}`
-          : `${getCoverageEmoji(prData.coverage.branches.percent)}`,
+      differenceAfterPR: prData.message
+        ? `${prData.message.split('\n')[4].split('|')[3]} ${prData.message.split('\n')[4].split('|')[4]} `
+        : 'No Data',
     };
 
     if (actionDebug === 'true') {
@@ -97,14 +88,10 @@ const run = async (): Promise<void> => {
     if (prData.message) {
       console.log(`Message: ${prData.message}`);
 
-      console.log(prData.message.split('\n')[4].split('|'));
-      console.log(prData.message.split('\n')[5].split('|'));
-      console.log(prData.message.split('\n')[6].split('|'));
+      // console.log(prData.message.split('\n')[4].split('|'));
+      // console.log(prData.message.split('\n')[5].split('|'));
+      // console.log(prData.message.split('\n')[6].split('|'));
 
-      console.table([linesCoverage, functionsCoverage, branchesCoverage]);
-    } else if (prData.coverage.lines.diff === 0 || prData.coverage.lines.diff) {
-      console.table([linesCoverage, functionsCoverage, branchesCoverage]);
-    } else {
       console.table([linesCoverage, functionsCoverage, branchesCoverage]);
     }
 
