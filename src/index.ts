@@ -97,9 +97,11 @@ const run = async (): Promise<void> => {
     if (prData.message) {
       console.log(`Message: ${prData.message}`);
 
-      console.log(prData.message.indexOf('Lines'));
-      console.log(prData.message.indexOf('Functions'));
-      console.log(prData.message.indexOf('Branches'));
+      console.log(prData.message.split('\n')[0]);
+      console.log(prData.message.split('\n')[1]);
+      console.log(prData.message.split('\n')[2]);
+      console.log(prData.message.split('\n')[3]);
+      console.log(prData.message.split('\n')[4]);
 
       console.table([linesCoverage, functionsCoverage, branchesCoverage]);
     } else if (prData.coverage.lines.diff === 0 || prData.coverage.lines.diff) {
