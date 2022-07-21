@@ -61,7 +61,7 @@ const run = async (): Promise<void> => {
     }
 
     if (prData.message) {
-      console.log(`Message: ${constructComment(prData.coverage)}`);
+      console.log(`Message: ${await constructComment(prData.coverage)}`);
     }
 
     if (context.payload.pull_request) {
