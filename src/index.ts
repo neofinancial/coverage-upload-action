@@ -33,6 +33,39 @@ const run = async (): Promise<void> => {
       }
     }
 
+    const linesCoverage = {
+      coverage: `${prData.coverage.lines.percent.toFixed(2)}%`,
+      coverageAfterPR:
+        prData.coverage.lines.diff === 0 || prData.coverage.lines.diff
+          ? `${getCoverageAfterPr(
+              prData.coverage.lines.percent,
+              prData.coverage.lines.diff
+            )}${getCoverageDifferenceEmoji(prData.coverage.lines.diff)}`
+          : `${getCoverageEmoji(prData.coverage.lines.percent)}`,
+    };
+
+    const functionsCoverage = {
+      coverage: `${prData.coverage.functions.percent.toFixed(2)}%`,
+      coverageAfterPR:
+        prData.coverage.lines.diff === 0 || prData.coverage.lines.diff
+          ? `${getCoverageAfterPr(
+              prData.coverage.functions.percent,
+              prData.coverage.functions.diff
+            )}${getCoverageDifferenceEmoji(prData.coverage.functions.diff)}`
+          : `${getCoverageEmoji(prData.coverage.functions.percent)}`,
+    };
+
+    const branchesCoverage = {
+      coverage: `${prData.coverage.branches.percent.toFixed(2)}%`,
+      coverageAfterPR:
+        prData.coverage.lines.diff === 0 || prData.coverage.lines.diff
+          ? `${getCoverageAfterPr(
+              prData.coverage.branches.percent,
+              prData.coverage.branches.diff
+            )}${getCoverageDifferenceEmoji(prData.coverage.branches.diff)}`
+          : `${getCoverageEmoji(prData.coverage.branches.percent)}`,
+    };
+
     if (actionDebug === 'true') {
       console.log(`Repo ID: ${prData.repositoryId}`);
       console.log(`Ref of branch being merged: ${prData.ref}`);
@@ -64,64 +97,11 @@ const run = async (): Promise<void> => {
     if (prData.message) {
       console.log(`Message: ${prData.message}`);
 
-      const linesCoverage = {
-        coverage: `${prData.coverage.lines.percent.toFixed(2)}%`,
-        coverageAfterPR: `${getCoverageAfterPr(
-          prData.coverage.lines.percent,
-          prData.coverage.lines.diff
-        )} ${getCoverageDifferenceEmoji(prData.coverage.lines.diff)}`,
-      };
-
-      const functionsCoverage = {
-        coverage: `${prData.coverage.functions.percent.toFixed(2)}%`,
-        coverageAfterPR: `${getCoverageAfterPr(
-          prData.coverage.functions.percent,
-          prData.coverage.functions.diff
-        )} ${getCoverageDifferenceEmoji(prData.coverage.functions.diff)}`,
-      };
-
-      const branchesCoverage = {
-        coverage: `${prData.coverage.branches.percent.toFixed(2)}%`,
-        coverageAfterPR: `${getCoverageAfterPr(
-          prData.coverage.branches.percent,
-          prData.coverage.branches.diff
-        )} ${getCoverageDifferenceEmoji(prData.coverage.branches.diff)}`,
-      };
-
       console.table([linesCoverage, functionsCoverage, branchesCoverage]);
     } else if (prData.coverage.lines.diff === 0 || prData.coverage.lines.diff) {
-      console.table(
-        [
-          [
-            `${prData.coverage.lines.percent.toFixed(2)}%`,
-            `${getCoverageAfterPr(prData.coverage.lines.percent, prData.coverage.lines.diff)}`,
-            `${getCoverageDifferenceEmoji(prData.coverage.lines.diff)}`,
-          ],
-          [
-            `${prData.coverage.functions.percent.toFixed(2)}%`,
-            `${getCoverageAfterPr(prData.coverage.functions.percent, prData.coverage.functions.diff)}`,
-            `${getCoverageDifferenceEmoji(prData.coverage.functions.diff)}`,
-          ],
-          [
-            `${prData.coverage.branches.percent.toFixed(2)}%`,
-            `${getCoverageAfterPr(prData.coverage.branches.percent, prData.coverage.branches.diff)}`,
-            `${getCoverageDifferenceEmoji(prData.coverage.branches.diff)}`,
-          ],
-        ],
-        ['Current Coverage', 'Coverage After PR']
-      );
+      console.table([linesCoverage, functionsCoverage, branchesCoverage]);
     } else {
-      console.table(
-        [
-          [`${prData.coverage.lines.percent.toFixed(2)}%`, `${getCoverageEmoji(prData.coverage.lines.percent)}`],
-          [
-            `${prData.coverage.functions.percent.toFixed(2)}%`,
-            `${getCoverageEmoji(prData.coverage.functions.percent)}`,
-          ],
-          [`${prData.coverage.branches.percent.toFixed(2)}%`, `${getCoverageEmoji(prData.coverage.branches.percent)}`],
-        ],
-        ['Current Coverage']
-      );
+      console.table([linesCoverage, functionsCoverage, branchesCoverage]);
     }
 
     if (context.payload.pull_request) {
