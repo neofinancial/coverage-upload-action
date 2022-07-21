@@ -35,7 +35,10 @@ const run = async (): Promise<void> => {
       name: 'Lines',
       coverage: `${prData.coverage.lines.percent.toFixed(2)}%`,
       differenceAfterPR: prData.message
-        ? `${prData.message.split('\n')[4].split('|')[3]} ${prData.message.split('\n')[4].split('|')[4]} `
+        ? `${prData.message.split('\n')[4].split('|')[3]} ${prData.message
+            .split('\n')[4]
+            .split('|')[4]
+            .replace(/ /g, '')} `
         : 'No Data',
     };
 
@@ -43,7 +46,10 @@ const run = async (): Promise<void> => {
       name: 'Functions',
       coverage: `${prData.coverage.functions.percent.toFixed(2)}%`,
       differenceAfterPR: prData.message
-        ? `${prData.message.split('\n')[5].split('|')[3]} ${prData.message.split('\n')[5].split('|')[4]} `
+        ? `${prData.message.split('\n')[5].split('|')[3]} ${prData.message
+            .split('\n')[5]
+            .split('|')[4]
+            .replace(/ /g, '')} `
         : 'No Data',
     };
 
@@ -51,7 +57,10 @@ const run = async (): Promise<void> => {
       name: 'Branches',
       coverage: `${prData.coverage.branches.percent.toFixed(2)}%`,
       differenceAfterPR: prData.message
-        ? `${prData.message.split('\n')[6].split('|')[3]} ${prData.message.split('\n')[6].split('|')[4]} `
+        ? `${prData.message.split('\n')[6].split('|')[3]} ${prData.message
+            .split('\n')[6]
+            .split('|')[4]
+            .replace(/ /g, '')} `
         : 'No Data',
     };
 
