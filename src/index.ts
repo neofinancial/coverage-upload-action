@@ -63,6 +63,26 @@ const run = async (): Promise<void> => {
 
     if (prData.message) {
       console.log(`Message: ${prData.message}`);
+      console.table(
+        [
+          [
+            `${prData.coverage.lines.percent.toFixed(2)}%`,
+            `${getCoverageAfterPr(prData.coverage.lines.percent, prData.coverage.lines.diff)}`,
+            `${getCoverageDifferenceEmoji(prData.coverage.lines.diff)}`,
+          ],
+          [
+            `${prData.coverage.functions.percent.toFixed(2)}%`,
+            `${getCoverageAfterPr(prData.coverage.functions.percent, prData.coverage.functions.diff)}`,
+            `${getCoverageDifferenceEmoji(prData.coverage.functions.diff)}`,
+          ],
+          [
+            `${prData.coverage.branches.percent.toFixed(2)}%`,
+            `${getCoverageAfterPr(prData.coverage.branches.percent, prData.coverage.branches.diff)}`,
+            `${getCoverageDifferenceEmoji(prData.coverage.branches.diff)}`,
+          ],
+        ],
+        ['Current Coverage', 'Coverage After PR']
+      );
     } else if (prData.coverage.lines.diff === 0 || prData.coverage.lines.diff) {
       console.table(
         [
