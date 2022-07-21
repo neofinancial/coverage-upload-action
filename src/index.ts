@@ -93,12 +93,6 @@ const run = async (): Promise<void> => {
     }
 
     if (prData.message) {
-      console.log(`Message: ${prData.message}`);
-
-      // console.log(prData.message.split('\n')[4].split('|'));
-      // console.log(prData.message.split('\n')[5].split('|'));
-      // console.log(prData.message.split('\n')[6].split('|'));
-
       console.table([linesCoverage, functionsCoverage, branchesCoverage]);
     }
 
