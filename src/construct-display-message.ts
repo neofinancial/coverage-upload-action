@@ -11,7 +11,10 @@ const constructDisplayMessage = (prData: PullRequestData): displayMessageObject[
     name: 'Lines',
     coverage: `${prData.coverage.lines.percent.toFixed(2)}%`,
     differenceAfterPR: prData.message
-      ? `${prData.message.split('\n')[4].split('|')[3].trim()} ${prData.message.split('\n')[4].split('|')[0].trim()} `
+      ? `${prData.message.split('\n')[4].split('|')[3].trim()} ${prData.message
+          .split('\n')[4]
+          .split('|')[0]
+          .trimEnd()} `
       : 'No Data',
     test: prData.message ? `${prData.message.split('\n')[4].split('|')[4].trim()}` : 'No Data',
   };
@@ -20,7 +23,10 @@ const constructDisplayMessage = (prData: PullRequestData): displayMessageObject[
     name: 'Functions',
     coverage: `${prData.coverage.functions.percent.toFixed(2)}%`,
     differenceAfterPR: prData.message
-      ? `${prData.message.split('\n')[5].split('|')[3].trim()} ${prData.message.split('\n')[5].split('|')[0].trim()} `
+      ? `${prData.message.split('\n')[5].split('|')[3].trim()} ${prData.message
+          .split('\n')[5]
+          .split('|')[0]
+          .trimEnd()} `
       : 'No Data',
     test: prData.message ? `${prData.message.split('\n')[5].split('|')[4].trim()}` : 'No Data',
   };
@@ -29,13 +35,13 @@ const constructDisplayMessage = (prData: PullRequestData): displayMessageObject[
     name: 'Branches',
     coverage: `${prData.coverage.branches.percent.toFixed(2)}%`,
     differenceAfterPR: prData.message
-      ? `${prData.message.split('\n')[6].split('|')[3].trim()} ${prData.message.split('\n')[6].split('|')[0].trim()} `
+      ? `${prData.message.split('\n')[6].split('|')[3].trim()} ${prData.message
+          .split('\n')[6]
+          .split('|')[0]
+          .trimEnd()} `
       : 'No Data',
     test: prData.message ? `${prData.message.split('\n')[6].split('|')[4].trim()}` : 'No Data',
   };
-
-  console.log(branchesCoverage.differenceAfterPR.trimEnd());
-  console.log(branchesCoverage.differenceAfterPR);
 
   return [linesCoverage, functionsCoverage, branchesCoverage];
 };
