@@ -28,7 +28,7 @@ const run = async (): Promise<void> => {
       try {
         prData = await sendPullRequestData(url, prData);
       } catch (error) {
-        console.log(`${error}, Could not send data`);
+        console.log(`${error}, Could not send data. Make sure to upgrade to the newest version.`);
       }
     }
 

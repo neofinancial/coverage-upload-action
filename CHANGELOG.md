@@ -1,5 +1,9 @@
 # Coverage Upload Action Changelog
 
+## 2.0.2 (July 26, 2022)
+
+- Changing GitHub's CodeQL-Action workflows from v1 to v2
+
 ## 2.0.1 (July 21, 2022)
 
 - Added action debug variable to build.yml
