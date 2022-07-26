@@ -16,6 +16,7 @@ const constructDisplayMessage = (prData: PullRequestData): displayMessageObject[
           .split('|')[4]
           .replace(/ /g, '')} `
       : 'No Data',
+    test: prData.message ? `${prData.message.split('\n')[4].split('|')[4]}` : 'No Data',
   };
 
   const functionsCoverage = {
