@@ -61,7 +61,7 @@ const run = async (): Promise<void> => {
     }
 
     if (prData.message) {
-      console.table(constructDisplayMessage(prData));
+      console.table('%c', 'text-align: left', constructDisplayMessage(prData));
     }
 
     if (context.payload.pull_request) {
