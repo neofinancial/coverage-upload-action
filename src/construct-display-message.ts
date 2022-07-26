@@ -13,6 +13,7 @@ const constructDisplayMessage = (prData: PullRequestData): displayMessageObject[
     differenceAfterPR: prData.message
       ? `${prData.message.split('\n')[4].split('|')[3].replace(/ /g, '')} ${prData.message
           .split('\n')[4]
+          .split('|')[0]
           .replace(/ /g, '')} `
       : 'No Data',
     test: prData.message ? `${prData.message.split('\n')[4].split('|')[4].replace(/ /g, '')}` : 'No Data',
@@ -24,6 +25,7 @@ const constructDisplayMessage = (prData: PullRequestData): displayMessageObject[
     differenceAfterPR: prData.message
       ? `${prData.message.split('\n')[5].split('|')[3].replace(/ /g, '')} ${prData.message
           .split('\n')[5]
+          .split('|')[0]
           .replace(/ /g, '')} `
       : 'No Data',
     test: prData.message ? `${prData.message.split('\n')[5].split('|')[4].replace(/ /g, '')}` : 'No Data',
@@ -35,6 +37,7 @@ const constructDisplayMessage = (prData: PullRequestData): displayMessageObject[
     differenceAfterPR: prData.message
       ? `${prData.message.split('\n')[6].split('|')[3].replace(/ /g, '')} ${prData.message
           .split('\n')[6]
+          .split('|')[0]
           .replace(/ /g, '')} `
       : 'No Data',
     test: prData.message ? `${prData.message.split('\n')[6].split('|')[4].replace(/ /g, '')}` : 'No Data',
