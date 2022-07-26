@@ -13,10 +13,9 @@ const constructDisplayMessage = (prData: PullRequestData): displayMessageObject[
     differenceAfterPR: prData.message
       ? `${prData.message.split('\n')[4].split('|')[3].replace(/ /g, '')} ${prData.message
           .split('\n')[4]
-          .split('|')[4]
           .replace(/ /g, '')} `
       : 'No Data',
-    test: prData.message ? `${prData.message.split('\n')[4].split('|')[4]}` : 'No Data',
+    test: prData.message ? `${prData.message.split('\n')[4].split('|')[4].replace(/ /g, '')}` : 'No Data',
   };
 
   const functionsCoverage = {
@@ -25,9 +24,9 @@ const constructDisplayMessage = (prData: PullRequestData): displayMessageObject[
     differenceAfterPR: prData.message
       ? `${prData.message.split('\n')[5].split('|')[3].replace(/ /g, '')} ${prData.message
           .split('\n')[5]
-          .split('|')[4]
           .replace(/ /g, '')} `
       : 'No Data',
+    test: prData.message ? `${prData.message.split('\n')[5].split('|')[4].replace(/ /g, '')}` : 'No Data',
   };
 
   const branchesCoverage = {
@@ -36,9 +35,9 @@ const constructDisplayMessage = (prData: PullRequestData): displayMessageObject[
     differenceAfterPR: prData.message
       ? `${prData.message.split('\n')[6].split('|')[3].replace(/ /g, '')} ${prData.message
           .split('\n')[6]
-          .split('|')[4]
           .replace(/ /g, '')} `
       : 'No Data',
+    test: prData.message ? `${prData.message.split('\n')[6].split('|')[4].replace(/ /g, '')}` : 'No Data',
   };
 
   return [linesCoverage, functionsCoverage, branchesCoverage];
