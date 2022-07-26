@@ -10,10 +10,8 @@ const constructDisplayMessage = (prData: PullRequestData): displayMessageObject[
   const linesCoverage = {
     name: 'Lines',
     coverage: `${prData.coverage.lines.percent.toFixed(2)}%`,
-    differenceAfterPR: prData.message
-      ? `${prData.message.split('\n')[4].split('|')[3].trim()} ${prData.message.split('\n')[4].split('|')[0].trim()}`
-      : 'No Data',
-    test: prData.message ? `${prData.message.split('\n')[4].split('|')[4].trim()}` : 'No Data',
+    differenceAfterPR: prData.message ? `${prData.message.split('\n')[4].split('|')[3].trim()}` : 'No Data',
+    '': prData.message ? `${prData.message.split('\n')[4].split('|')[4].trim()}` : 'No Data',
   };
 
   const functionsCoverage = {
@@ -22,7 +20,7 @@ const constructDisplayMessage = (prData: PullRequestData): displayMessageObject[
     differenceAfterPR: prData.message
       ? `${prData.message.split('\n')[5].split('|')[3].trim()} ${prData.message.split('\n')[5].split('|')[0].trim()}`
       : 'No Data',
-    test: prData.message ? `${prData.message.split('\n')[5].split('|')[4].trim()}` : 'No Data',
+    '': prData.message ? `${prData.message.split('\n')[5].split('|')[4].trim()}` : 'No Data',
   };
 
   const branchesCoverage = {
@@ -31,7 +29,7 @@ const constructDisplayMessage = (prData: PullRequestData): displayMessageObject[
     differenceAfterPR: prData.message
       ? `${prData.message.split('\n')[6].split('|')[3].trim()} ${prData.message.split('\n')[6].split('|')[0].trim()}`
       : 'No Data',
-    test: prData.message ? `${prData.message.split('\n')[6].split('|')[4].trim()}` : 'No Data',
+    '': prData.message ? `${prData.message.split('\n')[6].split('|')[4].trim()}` : 'No Data',
   };
 
   console.log(
