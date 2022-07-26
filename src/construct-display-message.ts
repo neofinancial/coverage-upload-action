@@ -34,6 +34,9 @@ const constructDisplayMessage = (prData: PullRequestData): displayMessageObject[
     test: prData.message ? `${prData.message.split('\n')[6].split('|')[4].trim()}` : 'No Data',
   };
 
+  console.log(branchesCoverage.differenceAfterPR.trimEnd());
+  console.log(branchesCoverage.differenceAfterPR);
+
   return [linesCoverage, functionsCoverage, branchesCoverage];
 };
 
