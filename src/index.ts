@@ -62,6 +62,7 @@ const run = async (): Promise<void> => {
 
     if (prData.message) {
       console.table(constructDisplayMessage(prData));
+      console.log(prData);
     }
 
     if (context.payload.pull_request) {
