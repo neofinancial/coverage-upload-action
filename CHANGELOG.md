@@ -1,6 +1,6 @@
 # Coverage Upload Action Changelog
 
-## 2.0.1 (July 21, 2022)
+## 2.0.1 (July 27, 2022)
 
 - Added action debug variable to build.yml
 - Conditionally show more verbose data if action debug variable is true
