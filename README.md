@@ -140,6 +140,7 @@ These values are the % change in coverage for a particular metric and will be di
 
 1. In [build.yml](./.github/workflows/build.yml#L30) set the `Upload coverage` step's `uses` clause to `./`
 1. Open a pull request to run the `build` workflow. The code on your branch will be run for the `Upload coverage` step. Check the `Upload coverage` step's output for more details about your run.
+test
 
 #### Testing Action against another repository
 
