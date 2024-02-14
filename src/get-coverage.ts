@@ -15,6 +15,10 @@ const getCoverage = async (path: string): Promise<CommentData> => {
   try {
     const coverageData = await lcovParse(path);
 
+    if (!coverageData) {
+      throw new Error('No coverage data found');
+    }
+
     for (const i in coverageData) {
       commentData.lines.hit += coverageData[i].lines.hit;
       commentData.lines.found += coverageData[i].lines.found;

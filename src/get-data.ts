@@ -39,10 +39,10 @@ const getData = async (authToken?: string): Promise<PullRequestData> => {
     prData.actor = info.sender.login;
   } else if (!info.repository && !info.sender) {
     throw new Error('repository and sender are undefined');
-  } else if (!info.repository) {
-    throw new Error('repository is undefined');
-  } else {
+  } else if (info.repository) {
     throw new Error('sender is undefined');
+  } else {
+    throw new Error('repository is undefined');
   }
 
   const coverageData = getInput('coverageData');
