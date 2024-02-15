@@ -39,18 +39,18 @@ const makePullRequestComment = async (message: string | undefined, commentData: 
 
     const body = message ?? (await constructComment(commentData));
 
-    if (!botComment) {
-      octokit.issues.createComment({
-        owner: owner,
-        repo: repo,
-        issue_number: pullRequestNumber,
-        body,
-      });
-    } else {
+    if (botComment) {
       octokit.issues.updateComment({
         owner: owner,
         repo: repo,
         comment_id: botComment.id,
+        body,
+      });
+    } else {
+      octokit.issues.createComment({
+        owner: owner,
+        repo: repo,
+        issue_number: pullRequestNumber,
         body,
       });
     }

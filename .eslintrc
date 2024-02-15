@@ -1,5 +1,6 @@
 {
   "extends": "eslint-config-neo/config-backend",
+  "ignorePatterns": ["**/lcov.test.ts"],
   "rules": {
     "no-console": "off",
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true }]
