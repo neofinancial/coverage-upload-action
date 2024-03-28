@@ -22,6 +22,7 @@ export type PullRequestData = {
   token?: string;
   pullRequest?: number;
   message?: string;
+  repoName?: string;
 };
 
 export type CoverageJson = {
@@ -38,4 +39,5 @@ export type CoverageJson = {
   branchesFound: number;
   token?: string;
   pullRequest?: number;
+  repoName: string;
 };

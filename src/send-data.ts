@@ -16,6 +16,7 @@ const sendPullRequestData = async (url: string, prData: PullRequestData): Promis
     branchesHit: prData.coverage.branches.hit,
     branchesFound: prData.coverage.branches.found,
     token: prData.token,
+    repoName: 'something',
   };
 
   if (prData.pullRequest) {
