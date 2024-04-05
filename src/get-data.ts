@@ -18,7 +18,6 @@ const getData = async (authToken?: string): Promise<PullRequestData> => {
       branches: { hit: 0, found: 0, percent: 0, diff: 0 },
     },
     token: authToken,
-    repoName: '',
   };
 
   const info = context.payload;
@@ -38,7 +37,6 @@ const getData = async (authToken?: string): Promise<PullRequestData> => {
 
   if (info.repository && info.sender) {
     prData.actor = info.sender.login;
-    prData.repoName = info.repository.full_name;
   } else if (!info.repository && !info.sender) {
     throw new Error('repository and sender are undefined');
   } else if (info.repository) {
