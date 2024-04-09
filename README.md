@@ -56,7 +56,7 @@ If you want to exclude certain authors from running this action update the ignor
   with:
     coverageEndpoint: https://your.endpoint.here
     coverageToken: ${{ secrets.COVERAGE_TOKEN }}
-    ignoredUsers: ['someone', 'someoneElse'] // <--- Update here
+    ignoredUsers: 'dependabot,ignoredUser1,ignoredUser2' // <--- Update here
   ...
 ```
 

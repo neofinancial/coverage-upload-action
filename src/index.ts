@@ -13,8 +13,7 @@ const run = async (): Promise<void> => {
 
     if (ignoredUsers.includes(context.payload.pull_request?.user.login)) {
       console.log(
-        `Skipping the action because the pull request is created by ${context.payload.pull_request?.user.login}`,
-        ignoredUsers
+        `Skipping the action because the pull request is created by ${context.payload.pull_request?.user.login}`
       );
 
       return;
