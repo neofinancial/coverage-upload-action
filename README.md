@@ -49,7 +49,7 @@ jobs:
 
 If you have an existing workflow that runs your tests you can just add the `Upload coverage` step at the end of that workflow.
 
-If you want this action to run for dependabot authored PRs add this optional field
+If you want to exclude certain authors from running this action update the ignoreUsers input as seen below
 
 ```
   ...
