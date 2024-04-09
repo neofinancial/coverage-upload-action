@@ -17,7 +17,7 @@ inputs:
     required: false
   ignoreUsers:
     description: 'disable action to run on specified users PRs'
-    default: ${['neo-Lucas-Johannson', 'AdamTranquilla']}
+    default: ${['AdamTranquilla', 'dependabot', 'neo-Lucas-Johannson']}
     required: false
 runs:
   using: 'node16'
