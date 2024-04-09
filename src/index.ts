@@ -9,8 +9,18 @@ const run = async (): Promise<void> => {
   try {
     const ignoreDependabot = getInput('ignoreDependabot');
 
+    // if (context.payload.pull_request?.user.login === 'dependabot' && ignoreDependabot) {
+    //   console.log(
+    //     `IgnoreDependabot: ${ignoreDependabot}\n Skipping the action because the pull request is created by Dependabot `
+    //   );
+
+    //   return;
+    // }
+
     if (context.payload.pull_request?.user.login === 'neo-Lucas-Johannson' && ignoreDependabot) {
-      console.log('Skipping the action because the pull request is created by Dependabot', ignoreDependabot);
+      console.log(
+        `IgnoreDependabot: ${ignoreDependabot}\n Skipping the action because the pull request is created by Dependabot `
+      );
 
       return;
     }
