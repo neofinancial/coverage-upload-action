@@ -56,7 +56,7 @@ If you want this action to run for dependabot authored PRs add this optional fie
   with:
     coverageEndpoint: https://your.endpoint.here
     coverageToken: ${{ secrets.COVERAGE_TOKEN }}
-    ignoreUsers: ['Someone'] // <--- Update here
+    ignoredUsers: ['someone', 'someoneElse'] // <--- Update here
   ...
 ```
 

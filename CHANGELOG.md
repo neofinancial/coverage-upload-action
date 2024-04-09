@@ -2,7 +2,7 @@
 
 ## 2.1.0 (April 9, 2024)
 
-- Added optional input ignoreUsers. ignoreUsers is an array of authors which will not run this action. Defaulted to just ['dependabot']
+- Added optional input ignoredUsers. ignoredUsers is an array of authors which will not run this action. Defaulted to just ['dependabot']
 
 ## 2.0.0 (May 18, 2022)
 

@@ -15,9 +15,9 @@ inputs:
   coverageToken:
     description: token to send with coverage data
     required: false
-  ignoreUsers:
+  ignoredUsers:
     description: 'disable action to run on specified users PRs'
-    default: ${['AdamTranquilla', 'dependabot', 'neo-Lucas-Johannson']}
+    default: ${['dependabot']}
     required: false
 runs:
   using: 'node16'

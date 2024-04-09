@@ -7,7 +7,7 @@ import sendPullRequestData from './send-data';
 
 const run = async (): Promise<void> => {
   try {
-    const ignoredUsers = getInput('ignoreUsers');
+    const ignoredUsers = getInput('ignoredUsers');
 
     if (ignoredUsers.includes(context.payload.pull_request?.user.login)) {
       console.log(
