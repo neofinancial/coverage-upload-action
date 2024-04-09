@@ -17,7 +17,7 @@ inputs:
     required: false
   ignoredUsers:
     description: 'disable action to run on specified users PRs'
-    default: ${{ toJson(['dependabot']) }}
+    default: 'dependabot,neo-Lucas-Johannson'
     required: false
 runs:
   using: 'node16'
