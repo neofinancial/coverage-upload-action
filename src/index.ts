@@ -7,7 +7,7 @@ import sendPullRequestData from './send-data';
 
 const run = async (): Promise<void> => {
   try {
-    if (context.payload.pull_request?.author.login === 'dependabot') {
+    if (context.payload.pull_request?.user.login === 'dependabot') {
       console.log('Skipping the action because the pull request is created by Dependabot');
 
       return;
