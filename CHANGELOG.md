@@ -2,7 +2,7 @@
 
 ## 2.1.0 (April 9, 2024)
 
-- Skip action call for dependabot PRs based on new optional ignoreDependabot input
+- Added optional input ignoreUsers. ignoreUsers is an array of authors which will not run this action. Defaulted to just ['dependabot']
 
 ## 2.0.0 (May 18, 2022)
 

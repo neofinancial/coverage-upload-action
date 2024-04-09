@@ -7,11 +7,11 @@ import sendPullRequestData from './send-data';
 
 const run = async (): Promise<void> => {
   try {
-    const ignoreDependabot = getInput('ignoreDependabot');
+    const ignoredUsers = getInput('ignoreUsers');
 
-    if (context.payload.pull_request?.user.login === 'dependabot' && ignoreDependabot) {
+    if (ignoredUsers.includes(context.payload.pull_request?.user.login)) {
       console.log(
-        `IgnoreDependabot: ${ignoreDependabot}\nSkipping the action because the pull request is created by Dependabot `
+        `Skipping the action because the pull request is created by ${context.payload.pull_request?.user.login}`
       );
 
       return;
