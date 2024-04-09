@@ -1,6 +1,6 @@
 {
   "name": "coverage-upload-action",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Parses coverage file and uploads to remote endpoint",
   "author": "Neo Financial Engineering",
   "license": "MIT",
