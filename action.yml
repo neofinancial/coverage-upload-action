@@ -15,6 +15,10 @@ inputs:
   coverageToken:
     description: token to send with coverage data
     required: false
+  ignoreDependabot:
+    description: 'disable action to run on dependabot authored PRs'
+    default: true
+    required: false
 runs:
   using: 'node16'
   main: 'build/index.js'
