@@ -49,6 +49,17 @@ jobs:
 
 If you have an existing workflow that runs your tests you can just add the `Upload coverage` step at the end of that workflow.
 
+If you want to exclude certain authors from running this action update the ignoreUsers input as seen below
+
+```
+  ...
+  with:
+    coverageEndpoint: https://your.endpoint.here
+    coverageToken: ${{ secrets.COVERAGE_TOKEN }}
+    ignoredUsers: 'dependabot,ignoredUser1,ignoredUser2' // <--- Update here
+  ...
+```
+
 ## Settings
 
 | Name             | Description                                                            | Default              | Required |
@@ -125,6 +136,7 @@ Whether or not a response is received the action will print out general informat
 "Functions percent": "int"
 "Branches percent": "int"
 ```
+
 These values are the % change in coverage for a particular metric and will be displayed in the `difference` column in the comment posted by the action.
 
 ## Contributing
@@ -144,7 +156,6 @@ These values are the % change in coverage for a particular metric and will be di
 #### Testing Action against another repository
 
 1. In your repository that references this action, change your workflow's code from
- `uses: neofinancial/coverage-upload-action@v1` to `uses: neofinancial/coverage-upload-action@<commit-hash>` where the commit hash is the **full** commit hash you wish to test.
+   `uses: neofinancial/coverage-upload-action@v1` to `uses: neofinancial/coverage-upload-action@<commit-hash>` where the commit hash is the **full** commit hash you wish to test.
 1. If your other repository is running a local server you want to test changes against, make sure you change the `coverageEndpoint` in `build.yml` to an ngrok url that points towards your local server.
 1. Run the workflow that references this action.
-

@@ -7,6 +7,18 @@ import sendPullRequestData from './send-data';
 
 const run = async (): Promise<void> => {
   try {
+    const ignoredUsers = getInput('ignoredUsers')
+      .split(',')
+      .map((user) => user.trim());
+
+    if (ignoredUsers.includes(context.payload.pull_request?.user.login)) {
+      console.log(
+        `Skipping the action because the pull request is created by ${context.payload.pull_request?.user.login}`
+      );
+
+      return;
+    }
+
     const url = getInput('coverageEndpoint');
     const authToken = getInput('coverageToken');
 
