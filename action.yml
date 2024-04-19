@@ -17,7 +17,7 @@ inputs:
     required: false
   ignoredUsers:
     description: 'disable action to run on specified users PRs'
-    default: 'dependabot'
+    default: 'dependabot[bot]'
     required: false
 runs:
   using: 'node16'
