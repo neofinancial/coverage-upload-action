@@ -11,7 +11,7 @@ const run = async (): Promise<void> => {
       .split(',')
       .map((user) => user.trim());
 
-    console.log(ignoredUsers)
+    console.log(ignoredUsers);
 
     const author = context.payload.pull_request?.user.login;
 
