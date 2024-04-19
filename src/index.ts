@@ -11,9 +11,10 @@ const run = async (): Promise<void> => {
       .split(',')
       .map((user) => user.trim());
 
-    console.log(ignoredUsers);
-
     const author = context.payload.pull_request?.user.login;
+
+    console.log(ignoredUsers);
+    console.log(author);
 
     if (author === 'dependabot' || ignoredUsers.includes(author)) {
       console.log(`Skipping the action because the pull request is created by ${author}`);
