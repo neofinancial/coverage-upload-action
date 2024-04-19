@@ -1,8 +1,12 @@
 # Coverage Upload Action Changelog
 
+## 2.1.1 (April 9, 2024)
+
+- Updated handling for ignoredUsers to always ignore 'dependabot'
+
 ## 2.1.0 (April 9, 2024)
 
-- Added optional input ignoredUsers. ignoredUsers is a comma separated string of authors which will not run this action. Defaulted to just 'dependabot'
+- Added optional input ignoredUsers. ignoredUsers is a comma separated string of authors which will not run this action
 
 ## 2.0.0 (May 18, 2022)
 

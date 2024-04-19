@@ -49,14 +49,14 @@ jobs:
 
 If you have an existing workflow that runs your tests you can just add the `Upload coverage` step at the end of that workflow.
 
-If you want to exclude certain authors from running this action update the ignoreUsers input as seen below
+If you want to exclude certain authors from running this action update the ignoreUsers input as seen below. Dependabot is already ignored by default
 
 ```
   ...
   with:
     coverageEndpoint: https://your.endpoint.here
     coverageToken: ${{ secrets.COVERAGE_TOKEN }}
-    ignoredUsers: 'dependabot,ignoredUser1,ignoredUser2' // <--- Update here
+    ignoredUsers: 'ignoredUser1,ignoredUser2' // <--- Update here
   ...
 ```
 
