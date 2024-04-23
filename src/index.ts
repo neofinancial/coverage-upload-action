@@ -13,10 +13,13 @@ const run = async (): Promise<void> => {
       .split(',')
       .map((user) => user.trim());
 
-    if (ignoredUsers.includes(context.payload.pull_request?.user.login)) {
-      console.log(
-        `Skipping the action because the pull request is created by ${context.payload.pull_request?.user.login}`
-      );
+    const author = context.payload.pull_request?.user.login;
+
+    console.log(ignoredUsers);
+    console.log(author);
+
+    if (author === 'dependabot' || ignoredUsers.includes(author)) {
+      console.log(`Skipping the action because the pull request is created by ${author}`);
 
       return;
     }
