@@ -1,25 +1,33 @@
-import { getInput, setFailed, warning } from '@actions/core';
+import { debug as log, getInput, setFailed, warning } from '@actions/core';
 import { context } from '@actions/github';
 
 import { getData } from './get-data';
 import makePullRequestComment from './make-comment';
 import sendPullRequestData from './send-data';
 
+const debug = (label: string, message: string): void => {
+  log('');
+  log(`[${label.toUpperCase()}]`);
+  log(message);
+  log('');
+};
+
 const run = async (): Promise<void> => {
   try {
-    console.log('PR author', context.payload.pull_request?.user.login);
+    const login = context.payload.pull_request?.user.login as string;
+    const payload = context.payload.pull_request;
+    const ignoreBots = getInput('ignoreBots');
 
-    const ignoredUsers = getInput('ignoredUsers')
-      .split(',')
-      .map((user) => user.trim());
+    const senderType = context.payload.pull_request?.user.type as string;
+    const sender: string = senderType === 'Bot' ? login.replace('[bot]', '') : login;
 
-    const author = context.payload.pull_request?.user.login;
+    console.log(payload);
+    debug('sender', sender);
+    debug('senderType', senderType);
+    debug('login', login);
 
-    console.log(ignoredUsers);
-    console.log(author);
-
-    if (author === 'dependabot' || ignoredUsers.includes(author)) {
-      console.log(`Skipping the action because the pull request is created by ${author}`);
+    if (senderType === 'Bot' && ignoreBots === 'true') {
+      console.log(`Skipping the action because the pull request is created by ${sender}`);
 
       return;
     }
