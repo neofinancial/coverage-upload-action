@@ -43,20 +43,21 @@ jobs:
         with:
           coverageEndpoint: https://your.endpoint.here
           coverageToken: ${{ secrets.COVERAGE_TOKEN }}
+          ignoreBots: 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 If you have an existing workflow that runs your tests you can just add the `Upload coverage` step at the end of that workflow.
 
-If you want to exclude certain authors from running this action update the ignoreUsers input as seen below
+If you want to the action to run for pull requests created by bots (dependabot, crowdin etc) set the ignoreBots field to false
 
 ```
   ...
   with:
     coverageEndpoint: https://your.endpoint.here
     coverageToken: ${{ secrets.COVERAGE_TOKEN }}
-    ignoredUsers: 'dependabot,ignoredUser1,ignoredUser2' // <--- Update here
+    ignoredUsers: 'false' // <--- Update here
   ...
 ```
 
