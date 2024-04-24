@@ -14,20 +14,18 @@ const debug = (label: string, message: string): void => {
 
 const run = async (): Promise<void> => {
   try {
-    const login = context.payload.pull_request?.user.login as string;
-    const payload = context.payload.pull_request;
     const ignoreBots = getInput('ignoreBots');
 
-    const senderType = context.payload.pull_request?.user.type as string;
-    const sender: string = senderType === 'Bot' ? login.replace('[bot]', '') : login;
+    const payload = context.payload.pull_request;
 
-    console.log(payload);
-    debug('sender', sender);
+    const senderType = context.payload.pull_request?.user.type as string;
+    const login = payload?.user.login as string;
+
     debug('senderType', senderType);
     debug('login', login);
 
-    if (senderType === 'Bot' && ignoreBots === 'true') {
-      console.log(`Skipping the action because the pull request is created by ${sender}`);
+    if ((senderType === 'Bot' && ignoreBots === 'true') || ignoreBots.includes(login)) {
+      console.log(`Skipping the action because the pull request is created by ${login}`);
 
       return;
     }
