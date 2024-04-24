@@ -20,6 +20,7 @@ const run = async (): Promise<void> => {
       const senderType = context.payload.pull_request?.user.type as string;
 
       debug('senderType', senderType);
+      console.log('senderType log', senderType);
 
       const isBot = (senderType as string) === 'Bot';
 
