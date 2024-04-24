@@ -16,18 +16,18 @@ const run = async (): Promise<void> => {
   try {
     const ignoreBots = getInput('ignoreBots');
 
-    const payload = context.payload.pull_request;
+    if (ignoreBots === 'true') {
+      const senderType = context.payload.pull_request?.user.type as string;
 
-    const senderType = context.payload.pull_request?.user.type as string;
-    const login = payload?.user.login as string;
+      debug('senderType', senderType);
 
-    debug('senderType', senderType);
-    debug('login', login);
+      const isBot = (senderType as string) === 'Bot';
 
-    if ((senderType === 'Bot' && ignoreBots === 'true') || ignoreBots.includes(login)) {
-      console.log(`Skipping the action because the pull request is created by ${login}`);
+      if (isBot) {
+        console.log(`Skipping the action because the pull request is created by bot`);
 
-      return;
+        return;
+      }
     }
 
     const url = getInput('coverageEndpoint');
