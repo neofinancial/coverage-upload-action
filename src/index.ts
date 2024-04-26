@@ -1,22 +1,31 @@
-import { getInput, setFailed, warning } from '@actions/core';
+import { debug as log, getInput, setFailed, warning } from '@actions/core';
 import { context } from '@actions/github';
 
 import { getData } from './get-data';
 import makePullRequestComment from './make-comment';
 import sendPullRequestData from './send-data';
 
+const debug = (label: string, message: string): void => {
+  log('');
+  log(`[${label.toUpperCase()}]`);
+  log(message);
+  log('');
+};
+
 const run = async (): Promise<void> => {
   try {
-    const ignoredUsers = getInput('ignoredUsers')
-      .split(',')
-      .map((user) => user.trim());
+    const ignoreBots = getInput('ignoreBots');
 
-    if (ignoredUsers.includes(context.payload.pull_request?.user.login)) {
-      console.log(
-        `Skipping the action because the pull request is created by ${context.payload.pull_request?.user.login}`
-      );
+    if (ignoreBots === 'true') {
+      const senderType = context.payload.pull_request?.user.type as string;
 
-      return;
+      debug('senderType', senderType);
+
+      if ((senderType as string) === 'Bot') {
+        console.log(`Skipping the action because the pull request is created by bot`);
+
+        return;
+      }
     }
 
     const url = getInput('coverageEndpoint');
