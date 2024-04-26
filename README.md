@@ -57,7 +57,7 @@ If you want to the action to run for pull requests created by bots (dependabot, 
   with:
     coverageEndpoint: https://your.endpoint.here
     coverageToken: ${{ secrets.COVERAGE_TOKEN }}
-    ignoredUsers: 'false' // <--- Update here
+    ignoreBots: 'false' // <--- Update here
   ...
 ```
 
