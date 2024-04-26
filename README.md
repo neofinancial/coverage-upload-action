@@ -50,14 +50,14 @@ jobs:
 
 If you have an existing workflow that runs your tests you can just add the `Upload coverage` step at the end of that workflow.
 
-If you want to the action to run for pull requests created by bots (dependabot, crowdin etc) set the ignoreBots field to false
+If you want the action to run for pull requests created by bots (dependabot, crowdin etc) set the ignoreBots field to false
 
 ```
   ...
   with:
     coverageEndpoint: https://your.endpoint.here
     coverageToken: ${{ secrets.COVERAGE_TOKEN }}
-    ignoreBots: 'false' // <--- Update here
+    ignoreBots: 'false'
   ...
 ```
 

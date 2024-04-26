@@ -16,7 +16,7 @@ inputs:
     description: token to send with coverage data
     required: false
   ignoreBots:
-    description: 'disable action to run on PRs created by bots'
+    description: 'disable action to run on pull requests created by bots'
     default: 'true'
     required: false
 runs:
