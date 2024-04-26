@@ -21,9 +21,7 @@ const run = async (): Promise<void> => {
 
       debug('senderType', senderType);
 
-      const isBot = (senderType as string) === 'Bot';
-
-      if (isBot) {
+      if ((senderType as string) === 'Bot') {
         console.log(`Skipping the action because the pull request is created by bot`);
 
         return;
