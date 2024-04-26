@@ -1,9 +1,9 @@
 # Coverage Upload Action Changelog
 
-## 2.1.1 (April 24, 2024)
+## 2.1.2 (April 26, 2024)
 
 - Replaced ignoredUsers with ignoreBots which is a boolean defaulted to "true".
-- Action will be skipper if ignoreBots is set to true and the senderType is "Bot"
+- Action will be skipped if ignoreBots is set to true and the senderType is "Bot"
 
 ## 2.1.1 (April 19, 2024)
 
