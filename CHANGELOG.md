@@ -1,5 +1,9 @@
 # Coverage Upload Action Changelog
 
+## 2.2.1 (September 25, 2024)
+
+- Vulnerabilities updates
+
 ## 2.2.0 (April 26, 2024)
 
 - Replaced ignoredUsers with ignoreBots which is a boolean defaulted to "true".
